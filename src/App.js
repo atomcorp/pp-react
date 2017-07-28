@@ -20,9 +20,8 @@ class App extends Component {
 
 function FixtureList(props) {
 
-  var myArray = [];
-  props.fixtures.forEach(function(fixture) {
-    myArray.push(<Fixture key={fixture.id} home={fixture.home} away={fixture.away} />);
+  const fixtures = props.fixtures.map((fixture) => {
+    return <Fixture key={fixture.id} home={fixture.home} away={fixture.away} />
   });
 
 
@@ -38,7 +37,7 @@ function FixtureList(props) {
         </tr>
       </thead>
       <tbody> 
-        {myArray}
+        {fixtures}
       </tbody>
     </table>
 
