@@ -11,8 +11,10 @@ class App extends Component {
       // - <FixtureList />
       // --- <Fixture />
       // ----- Home & Away Team 
-      <div className="fixture-list">
-        <FixtureList fixtures={fixtures} />
+      <div className="container">
+        <div className="fixture-list">
+          <FixtureList fixtures={fixtures} />
+        </div>
       </div>
     );
   }
@@ -21,9 +23,8 @@ class App extends Component {
 function FixtureList(props) {
 
   const fixtures = props.fixtures.map((fixture) => {
-    return <Fixture key={fixture.id} home={fixture.home} away={fixture.away} />
+    return <Fixture key={fixture.id} home={fixture.home} away={fixture.away} />;
   });
-
 
   // this will need to print one fixture for length of fixture list
   return (
@@ -40,8 +41,6 @@ function FixtureList(props) {
         {fixtures}
       </tbody>
     </table>
-
-
   );
 }
 
