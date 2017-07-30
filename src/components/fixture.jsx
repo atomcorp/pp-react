@@ -1,24 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 export class Fixture extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      prediction: {
-        home: 0,
-        away: 0
-      }
-    }
-    this.onChange = this.onChange.bind(this);
+    this.onPredictionChange = this.onPredictionChange.bind(this);
   }
 
-  onChange(event, team) {
-    const score = parseInt(event.target.value, 10);
-    // https://stackoverflow.com/a/38779819/2368141
-    this.setState((prevState) => {
-      prevState.prediction[team] = score;
-      return prevState;
-    })
+  onPredictionChange(event, homeOrAway, id) {
+    this.props.onChange(event.target.value, homeOrAway, id);
   }
 
   // props will be fixture
@@ -30,9 +19,9 @@ export class Fixture extends Component {
         <td>{this.props.home}</td>
         <td>
           {/* on change */}
-          <input type="number" value={this.state.prediction.home} onChange={(event) => this.onChange(event, "home")} />
+          <input type="number" value={this.props.homeScore} onChange={(event) => this.onPredictionChange(event, "home", this.props.id)} />
           - 
-          <input type="number" value={this.state.prediction.away} onChange={(event) => this.onChange(event, "away")} />  
+          <input type="number" value={this.props.homeScore} onChange={(event) => this.onPredictionChange(event, "away", this.props.id)} />  
         </td>
         <td>{this.props.away}</td>
       </tr>

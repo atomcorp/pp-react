@@ -1,4 +1,4 @@
-// predictions for the user#s gameweek
+// predictions for the user's gameweek
 // id is the same for everyone
 
 const predictions = {
