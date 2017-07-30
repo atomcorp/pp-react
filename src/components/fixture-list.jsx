@@ -6,7 +6,7 @@ export class FixtureList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      predictions: {}
+      predictions: this.setPredictions()
     }
     this.onChange = this.onChange.bind(this);
     this.setPredictions = this.setPredictions.bind(this);
@@ -14,40 +14,36 @@ export class FixtureList extends Component {
 
   // this turns our array of fixtures into an object
   setPredictions() {
-    let fixturesObject = {}
-    // make an object of the fixtures, with home & away team, and id
-    const fixtures = this.props.fixtures.map(function(element, index) {
-      const prediction = {};
-      prediction.home = element.home;
-      prediction.away = element.away;
-      prediction.homeScore = 0;
-      prediction.awayScore = 0;
-      fixturesObject[element.id] = prediction;
-    })
-    this.setState((prevState) => {
-      predictions: fixturesObject
-    });
+    var fixtures = this.props.fixtures;
+    // https://stackoverflow.com/a/37215730/2368141
+    var result = fixtures.reduce(function(fixtures, fixture){
+      fixtures[fixture.id] = {
+        homeScore: 0,
+        awayScore: 0,
+      };
+      return fixtures;
+    }, {});
+    return result;
   }
 
   onChange(event, homeOrAway, id) {
-    console.log(event, homeOrAway, id)
-
     const score = parseInt(event, 10);
     // https://stackoverflow.com/a/38779819/2368141
     this.setState((prevState) => {
-      prevState.predictions[id] = {[homeOrAway]: score};
+      prevState.predictions[id][homeOrAway] = score;
       return prevState;
-    })
+    });
   }
 
   // this will need to print one fixture for length of fixture list
   render() {
+    console.log(this.state);
     const fixtures = this.props.fixtures.map((fixture) => {
       return <Fixture 
         id={fixture.id} 
         key={fixture.id} 
-        homeScore={fixture.homeScore} 
-        awayScore={fixture.homeScore} 
+        homeScore={this.state.predictions[fixture.id].homeScore} 
+        awayScore={this.state.predictions[fixture.id].awayScore} 
         home={fixture.home} 
         away={fixture.away} 
         onChange={this.onChange} 

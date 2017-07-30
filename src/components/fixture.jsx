@@ -19,9 +19,9 @@ export class Fixture extends Component {
         <td>{this.props.home}</td>
         <td>
           {/* on change */}
-          <input type="number" value={this.props.homeScore} onChange={(event) => this.onPredictionChange(event, "home", this.props.id)} />
-          - 
-          <input type="number" value={this.props.homeScore} onChange={(event) => this.onPredictionChange(event, "away", this.props.id)} />  
+          <input type="number" value={this.props.homeScore} onChange={(event) => this.onPredictionChange(event, "homeScore", this.props.id)} />
+          {' - '} 
+          <input type="number" value={this.props.awayScore} onChange={(event) => this.onPredictionChange(event, "awayScore", this.props.id)} />  
         </td>
         <td>{this.props.away}</td>
       </tr>
