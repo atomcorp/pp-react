@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 
 import {Fixture} from './fixture.jsx';
+import {SubmitPredictions} from './submit-predictions.jsx';
 
+// there should also be a check here somewhere to see 
+// if changes are allowed or not (ie games have been played, or set arbitary cut-off time, say Friday 6PM)
+// if changes not allowed, will auto attempt to calc score using
 export class FixtureList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       predictions: this.setPredictions()
     }
+    this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.setPredictions = this.setPredictions.bind(this);
   }
@@ -16,18 +21,18 @@ export class FixtureList extends Component {
   setPredictions() {
     var fixtures = this.props.fixtures;
     // https://stackoverflow.com/a/37215730/2368141
-    var result = fixtures.reduce(function(fixtures, fixture){
-      fixtures[fixture.id] = {
+    fixtures = fixtures.reduce(function(allFixtures, fixture){
+      allFixtures[fixture.id] = {
         homeScore: 0,
         awayScore: 0,
       };
-      return fixtures;
+      return allFixtures;
     }, {});
-    return result;
+    return fixtures;
   }
 
-  onChange(event, homeOrAway, id) {
-    const score = parseInt(event, 10);
+  onChange(input, homeOrAway, id) {
+    const score = parseInt(input, 10);
     // https://stackoverflow.com/a/38779819/2368141
     this.setState((prevState) => {
       prevState.predictions[id][homeOrAway] = score;
@@ -35,9 +40,14 @@ export class FixtureList extends Component {
     });
   }
 
+  // when someone hits the submit button
+  onPredictionSubmit(event) {
+    event.preventDefault();
+    SubmitPredictions(this.state.predictions);
+  }
+
   // this will need to print one fixture for length of fixture list
   render() {
-    console.log(this.state);
     const fixtures = this.props.fixtures.map((fixture) => {
       return <Fixture 
         id={fixture.id} 
@@ -51,18 +61,24 @@ export class FixtureList extends Component {
     });
 
     return (
-      <table className="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Home</th>
-            <th>Prediction</th>
-            <th>Away</th>
-          </tr>
-        </thead>
-        <tbody> 
-          {fixtures}
-        </tbody>
-      </table>
+      <form action="prediction" onSubmit={this.onPredictionSubmit}>
+        <table className="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Home</th>
+              <th>Prediction</th>
+              <th>Away</th>
+            </tr>
+          </thead>
+          <tbody> 
+            {fixtures}
+          </tbody>
+        </table>
+        <button type="submit">
+          Submit
+        </button>
+
+      </form>
     );
   }
 }
