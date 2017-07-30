@@ -19,16 +19,16 @@ export class FixtureList extends Component {
 
   // this turns our array of fixtures into an object
   setPredictions() {
-    var fixtures = this.props.fixtures;
+    const gameweek = this.props.fixtures;
+    var predictions = {};
     // https://stackoverflow.com/a/37215730/2368141
-    fixtures = fixtures.reduce(function(allFixtures, fixture){
-      allFixtures[fixture.id] = {
-        homeScore: 0,
-        awayScore: 0,
+    for (const game in gameweek) {
+      predictions[game] = {
+        homeScore: gameweek[game].homeScore,
+        awayScore: gameweek[game].awayScore,
       };
-      return allFixtures;
-    }, {});
-    return fixtures;
+    }
+    return predictions;
   }
 
   onChange(input, homeOrAway, id) {
@@ -48,7 +48,9 @@ export class FixtureList extends Component {
 
   // this will need to print one fixture for length of fixture list
   render() {
-    const fixtures = this.props.fixtures.map((fixture) => {
+    // turn out fixtures object into an array so React can enumerate
+    const fixtures = Object.keys(this.props.fixtures).map((id) => {
+      const fixture = this.props.fixtures[id];
       return <Fixture 
         id={fixture.id} 
         key={fixture.id} 

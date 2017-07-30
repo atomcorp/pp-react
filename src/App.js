@@ -18,7 +18,11 @@ class App extends Component {
       // ----- Home & Away Team 
       <div className="container">
         <div className="fixture-list">
-          <FixtureList fixtures={fixtures} />
+          {/*
+            for debugging hardcoding the 1 for gameweek
+            latter on this will be pulled from somewhere else (url or server?) 
+          */}
+          <FixtureList fixtures={fixtures[1]} />
         </div>
       </div>
     );

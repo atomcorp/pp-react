@@ -10,7 +10,7 @@ export function SubmitPredictions(state) {
 function debugCompareScores(predictions) {
   
   var score = 0;
-  for (var prediction in predictions) {
+  for (const prediction in predictions) {
     const id = prediction;
     const scores = predictions[prediction];
     if (scores.homeScore === results[id].homeResult && scores.awayScore === results[id].awayResult) {
