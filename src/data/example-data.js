@@ -1,3 +1,25 @@
+const users = {
+  name: "Tom",
+  gameweekScores: {
+    gameweek1: 5,
+    gameweek2: 12
+  },
+  totals: {
+    gameWeekTotals: 17
+  },
+  teams: {
+    1: "Tom's Gunners"
+  }
+}
+
+const teams = {
+  224324: {
+    name: "Tom's Gunners",
+    user: "Tom",
+    points: 12
+  }
+}
+
 const fixtures = {
   "1": {
     "1": {"home":"Manchester United ","away":"Swansea City","date":"2014-08-16","time":"12:45","id":1,"gameweek":1, "homeScore": 0, "awayScore": 0},
@@ -12,7 +34,3 @@ const fixtures = {
     "10": {"home":"Burnley ","away":"Chelsea","date":"2014-08-18","time":"20:00","id":10,"gameweek":1, "homeScore": 0, "awayScore": 0}
   }
 };
-
-export default fixtures;
-
-
