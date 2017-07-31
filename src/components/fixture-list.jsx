@@ -18,15 +18,19 @@ export class FixtureList extends Component {
 
   // this turns our array of fixtures into an object
   setPredictions() {
-    // https://stackoverflow.com/a/37215730/2368141
-    const result = this.props.fixtures.reduce(function(fixtures, fixture) {
-      fixtures[fixture.id] = {
-        homeScore: fixture.homeScore,
-        awayScore: fixture.awayScore,
-      };
-      return fixtures;
-    }, {});
+    let type = !this.props.predictions ? this.props.fixtures : this.props.predictions;
 
+    // https://stackoverflow.com/a/37215730/2368141
+    const result = type.reduce(function(array, object) {
+      console.log(array, object)
+      array[object.id] = {
+        homeScore: object.homeScore,
+        awayScore: object.awayScore,
+        id: object.id
+      };
+      return array;
+    }, {});
+    
     return result;
   }
 

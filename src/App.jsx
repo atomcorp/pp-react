@@ -15,10 +15,13 @@ class App extends Component {
     super(props);
     // username, season and gameweek will be retrieved form server on load
     this.state = {
-      id: "0",
-      season: "14-15",
-      gameweek: "gameweek1", // this should be a string, otherwise firebase gets upset
-      fixtures: null
+      user: {
+        id: "0",
+        season: "14-15",
+        gameweek: "gameweek1", // this should be a string, otherwise firebase gets upset
+      },
+      fixtures: null,
+      predictions: null
     };
     this.requestFixtures = this.requestFixtures.bind(this);
     this.setFixtures = this.setFixtures.bind(this);
@@ -33,23 +36,20 @@ class App extends Component {
   requestFixtures() {
     // will need to request 
     // user -> season -> week
-    getFixtures('14-15/0', this.setFixtures);
+    getFixtures(this.state.user, this.setFixtures);
   }
 
   setFixtures(fixtures) {
+    console.log(fixtures);
     this.setState({
-      fixtures: fixtures
+      fixtures: fixtures.fixtures,
+      predictions: fixtures.predictions
     });
   }
 
   submitPredictions(predictions) {
-    const userData = {};
-    userData.id = this.state.id;
-    userData.season = this.state.season;
-    userData.gameweek = this.state.gameweek;
-    userData.predictions = predictions;
     console.log(predictions);
-    sendPredictions(userData);
+    sendPredictions(this.state.user, predictions);
   }
 
   render() {
@@ -63,7 +63,7 @@ class App extends Component {
       // ----- Home & Away Team 
       <div className="container">
         <div className="fixture-list">
-          <FixtureList fixtures={this.state.fixtures} submitPredictions={this.submitPredictions} />
+          <FixtureList fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         </div>
       </div>
     );

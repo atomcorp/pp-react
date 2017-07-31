@@ -1,10 +1,10 @@
 // import React, {Component} from 'react';
 import firebase from '../firebase';
 
-export default function sendPredictions(userData) {
+export default function sendPredictions(userData, predictions) {
   const refString = `/users/${userData.id}/${userData.season}/${userData.gameweek}/`;
   const request = firebase.database().ref(refString);
-  const arrayPredictions = Object.keys(userData.predictions).map(key => userData.predictions[key]);
+  const arrayPredictions = Object.keys(predictions).map(key => predictions[key]);
   console.log(arrayPredictions);
   request.set(arrayPredictions);
 }
