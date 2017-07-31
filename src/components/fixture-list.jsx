@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 
 import {Fixture} from './fixture.jsx';
-import {SubmitPredictions} from './submit-predictions.jsx';
 
 // there should also be a check here somewhere to see 
 // if changes are allowed or not (ie games have been played, or set arbitary cut-off time, say Friday 6PM)
@@ -20,7 +19,6 @@ export class FixtureList extends Component {
   // this turns our array of fixtures into an object
   setPredictions() {
     const fixtures = this.props.fixtures;
-    
     // https://stackoverflow.com/a/37215730/2368141
     const result = fixtures.reduce(function(fixtures, fixture){
       fixtures[fixture.id] = {
@@ -45,7 +43,7 @@ export class FixtureList extends Component {
   // when someone hits the submit button
   onPredictionSubmit(event) {
     event.preventDefault();
-    SubmitPredictions(this.state.predictions);
+    this.props.submitPredictions(this.state.predictions);
   }
 
   // this will need to print one fixture for length of fixture list

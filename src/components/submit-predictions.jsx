@@ -4,7 +4,7 @@ import {results} from '../data/result.js';
 
 // On submit this will add predictions 
 export function SubmitPredictions(state) {
-  debugCompareScores(state)
+  debugCompareScores(state);
 }
 
 function debugCompareScores(predictions) {

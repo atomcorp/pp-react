@@ -9,6 +9,17 @@ const users = {
   },
   teams: {
     1: "Tom's Gunners"
+  },
+  "14-15": {
+    "gameweek1": {
+      "0": {
+        awayScore: 2,
+        homeScore: 3
+      },
+      "1": {
+        // etc
+      }
+    }
   }
 }
 
