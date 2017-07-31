@@ -5,7 +5,7 @@ import './App.css';
 // each user will get their own predictions list,
 // that way they can alter them over and again
 import {FixtureList} from './components/fixture-list.jsx';
-import {SubmitPredictions} from './components/submit-predictions.jsx';
+// import {SubmitPredictions} from './components/submit-predictions.jsx';
 // import SetFixtures from './actions/set-fixtures.jsx';
 import getFixtures from './actions/get-fixtures.jsx';
 import sendPredictions from './actions/set-predictions.jsx';
@@ -17,7 +17,7 @@ class App extends Component {
     this.state = {
       id: "0",
       season: "14-15",
-      gameweek: 1,
+      gameweek: "gameweek1", // this should be a string, otherwise firebase gets upset
       fixtures: null
     };
     this.requestFixtures = this.requestFixtures.bind(this);
@@ -43,13 +43,12 @@ class App extends Component {
   }
 
   submitPredictions(predictions) {
-    SubmitPredictions(predictions);
     const userData = {};
     userData.id = this.state.id;
     userData.season = this.state.season;
     userData.gameweek = this.state.gameweek;
     userData.predictions = predictions;
-    console.log(userData)
+    console.log(predictions);
     sendPredictions(userData);
   }
 

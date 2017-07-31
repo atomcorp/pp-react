@@ -18,9 +18,8 @@ export class FixtureList extends Component {
 
   // this turns our array of fixtures into an object
   setPredictions() {
-    const fixtures = this.props.fixtures;
     // https://stackoverflow.com/a/37215730/2368141
-    const result = fixtures.reduce(function(fixtures, fixture){
+    const result = this.props.fixtures.reduce(function(fixtures, fixture) {
       fixtures[fixture.id] = {
         homeScore: fixture.homeScore,
         awayScore: fixture.awayScore,
@@ -48,7 +47,6 @@ export class FixtureList extends Component {
 
   // this will need to print one fixture for length of fixture list
   render() {
-
     const fixtures = this.props.fixtures.map((fixture) => {
       return <Fixture 
         id={fixture.id} 
