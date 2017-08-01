@@ -21,7 +21,8 @@ class App extends Component {
         gameweek: "gameweek1", // this should be a string, otherwise firebase gets upset
       },
       fixtures: null,
-      predictions: null
+      predictions: null,
+      canSubmit: true
     };
     this.requestFixtures = this.requestFixtures.bind(this);
     this.setFixtures = this.setFixtures.bind(this);

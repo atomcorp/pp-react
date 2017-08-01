@@ -16,10 +16,12 @@ export class FixtureList extends Component {
     this.setPredictions = this.setPredictions.bind(this);
   }
 
-  // this turns our array of fixtures into an object
+  // this sets up what's diplayed in the score boxes
+  // if user has made predictions before will show those
+  // if not just defaults to the predictions 0-0
   setPredictions() {
     let type = !this.props.predictions ? this.props.fixtures : this.props.predictions;
-
+    // this turns our array of fixtures into an object
     // https://stackoverflow.com/a/37215730/2368141
     const result = type.reduce(function(array, object) {
       console.log(array, object)
@@ -34,6 +36,7 @@ export class FixtureList extends Component {
     return result;
   }
 
+  // when users changes the scores
   onChange(input, homeOrAway, id) {
     const score = parseInt(input, 10);
     // https://stackoverflow.com/a/38779819/2368141
