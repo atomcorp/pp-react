@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import PropTypes from 'prop-types';
 import {Fixture} from './fixture.jsx';
 
 // there should also be a check here somewhere to see 
@@ -88,3 +88,9 @@ export class FixtureList extends Component {
     );
   }
 }
+
+Fixture.propTypes = {
+  fixtures: PropTypes.array,
+  predictions: PropTypes.array,
+  submitPredictions: PropTypes.func,
+};

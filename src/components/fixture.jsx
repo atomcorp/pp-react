@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 export class Fixture extends Component {
   constructor(props) {
@@ -28,4 +29,13 @@ export class Fixture extends Component {
     );
   }
 }
+
+Fixture.propTypes = {
+  homeScore: PropTypes.number,
+  awayScore: PropTypes.number,
+  id: PropTypes.number,
+  home: PropTypes.string,
+  away: PropTypes.string,
+  onChange: PropTypes.func
+};
 

@@ -7,8 +7,8 @@ import './App.css';
 import {FixtureList} from './components/fixture-list.jsx';
 // import {SubmitPredictions} from './components/submit-predictions.jsx';
 // import SetFixtures from './actions/set-fixtures.jsx';
-import getFixtures from './actions/get-fixtures.jsx';
-import sendPredictions from './actions/set-predictions.jsx';
+import getFixtures from './xhr-requests/get-fixtures.jsx';
+import sendPredictions from './xhr-requests/set-predictions.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -70,5 +70,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;
