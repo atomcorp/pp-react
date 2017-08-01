@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Fixture} from './fixture.jsx';
+
+import {Fixture} from '../components/fixture.jsx';
 
 // there should also be a check here somewhere to see 
 // if changes are allowed or not (ie games have been played, or set arbitary cut-off time, say Friday 6PM)
@@ -20,19 +21,20 @@ export default class FixtureList extends Component {
   // if user has made predictions before will show those
   // if not just defaults to the predictions 0-0
   setPredictions() {
-    let type = !this.props.predictions ? this.props.fixtures : this.props.predictions;
-    // this turns our array of fixtures into an object
-    // https://stackoverflow.com/a/37215730/2368141
-    const result = type.reduce(function(array, object) {
-      console.log(array, object)
-      array[object.id] = {
-        homeScore: object.homeScore,
-        awayScore: object.awayScore,
-        id: object.id
+    if (this.props.predictions) {
+      return this.props.predictions;
+    } 
+
+    const fixtures = this.props.fixtures;
+    const result = {};
+    for (const fixture in fixtures) { 
+      const fixture = fixtures[fixture];
+      result[fixture.id] = {
+        homeScore: fixture.homeScore,
+        awayScore: fixture.awayScore,
+        id: fixture.id
       };
-      return array;
-    }, {});
-    
+    }    
     return result;
   }
 
@@ -54,14 +56,15 @@ export default class FixtureList extends Component {
 
   // this will need to print one fixture for length of fixture list
   render() {
-    const fixtures = this.props.fixtures.map((fixture) => {
+    const fixtures = this.props.fixtures;
+    const fixtureElements = Object.keys(fixtures).map((id, index) => {
       return <Fixture 
-        id={fixture.id} 
-        key={fixture.id} 
-        homeScore={this.state.predictions[fixture.id].homeScore} 
-        awayScore={this.state.predictions[fixture.id].awayScore} 
-        home={fixture.home} 
-        away={fixture.away} 
+        id={fixtures[id].id} 
+        key={fixtures[id].id} 
+        homeScore={this.state.predictions[id].homeScore} 
+        awayScore={this.state.predictions[id].awayScore} 
+        home={fixtures[id].home} 
+        away={fixtures[id].away} 
         onChange={this.onChange} 
         />;
     });
@@ -77,7 +80,7 @@ export default class FixtureList extends Component {
             </tr>
           </thead>
           <tbody> 
-            {fixtures}
+            {fixtureElements}
           </tbody>
         </table>
         <button type="submit">

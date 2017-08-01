@@ -1,15 +1,16 @@
+// Component
+
 // import React from 'react';
 
-import {results} from '../data/result.js';
-
 // On submit this will add predictions 
-export function SubmitPredictions(state) {
-  debugCompareScores(state);
+export function calculateResult(state) {
+  console.log(state);
+
+  // debugCompareScores(state.predictions, state.fixtures);
 }
 
-function debugCompareScores(predictions) {
-  
-  var score = 0;
+function debugCompareScores(predictions, results) {
+  let score = 0;
   for (const prediction in predictions) {
     const id = prediction;
     const scores = predictions[prediction];

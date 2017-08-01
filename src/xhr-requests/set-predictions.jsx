@@ -5,6 +5,5 @@ export default function sendPredictions(userData, predictions) {
   const refString = `/users/${userData.id}/${userData.season}/${userData.gameweek}/`;
   const request = firebase.database().ref(refString);
   const arrayPredictions = Object.keys(predictions).map(key => predictions[key]);
-  console.log(arrayPredictions);
-  request.set(arrayPredictions);
+  request.set(predictions);
 }

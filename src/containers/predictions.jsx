@@ -1,16 +1,22 @@
+// container
+
 import React, {Component} from 'react';
 
-import FixtureList from '../components/fixture-list.jsx';
+import FixtureList from './fixture-list.jsx';
+
+import PredictionsResult from '../components/predictions-result.jsx';
 
 import getFixtures from '../xhr-requests/get-fixtures.jsx';
 import sendPredictions from '../xhr-requests/set-predictions.jsx';
 
+// import {SubmitPredictions} from './components/submit-predictions.jsx';
 
 export default class Predictions extends Component {
 
   constructor(props) {
     super(props);
     // username, season and gameweek will be retrieved form server on load
+    // will move this back up to app or something later
     this.state = {
       user: {
         id: "0",
@@ -21,27 +27,30 @@ export default class Predictions extends Component {
       predictions: null,
       canSubmit: true
     };
-    this.requestFixtures = this.requestFixtures.bind(this);
-    this.setFixtures = this.setFixtures.bind(this);
+    this.requestPredictions = this.requestPredictions.bind(this);
+    this.setRequest = this.setRequest.bind(this);
     this.submitPredictions = this.submitPredictions.bind(this);
   }
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
-    this.requestFixtures();
+    this.requestPredictions();
   }
 
-  requestFixtures() {
-    // will need to request 
-    // user -> season -> week
-    getFixtures(this.state.user, this.setFixtures);
+  // send an xhr to firebase for fixtures
+  // requests 2 data, fixtures (has teams, times etc)
+  // and predictions (if exists)
+  requestPredictions() {
+    getFixtures(this.state.user, this.setRequest);
   }
 
-  setFixtures(fixtures) {
-    console.log(fixtures);
+  // receives data returned from xhr firebase
+  // and sets the apps state
+  setRequest(returnedRequest) {
+    console.log(returnedRequest);
     this.setState({
-      fixtures: fixtures.fixtures,
-      predictions: fixtures.predictions
+      fixtures: returnedRequest.fixtures,
+      predictions: returnedRequest.predictions
     });
   }
 
@@ -54,8 +63,14 @@ export default class Predictions extends Component {
     if (!this.state.fixtures) {
       return <div>Loading...</div>;
     }
+    
     return(
-      <FixtureList fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
+      <div>
+        <FixtureList fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
+        {this.state.predictions ? (
+        <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions}/>
+        ) : (<div>No results yet</div>)}
+      </div>
     );
   }
 
