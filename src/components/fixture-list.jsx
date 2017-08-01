@@ -5,7 +5,7 @@ import {Fixture} from './fixture.jsx';
 // there should also be a check here somewhere to see 
 // if changes are allowed or not (ie games have been played, or set arbitary cut-off time, say Friday 6PM)
 // if changes not allowed, will auto attempt to calc score using
-export class FixtureList extends Component {
+export default class FixtureList extends Component {
   constructor(props) {
     super(props);
     this.state = {
