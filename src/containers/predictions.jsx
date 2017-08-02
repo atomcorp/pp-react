@@ -6,8 +6,8 @@ import FixtureList from './fixture-list.jsx';
 
 import PredictionsResult from '../components/predictions-result.jsx';
 
-import getFixtures from '../xhr-requests/get-fixtures.jsx';
-import sendPredictions from '../xhr-requests/set-predictions.jsx';
+import getFixtures from '../xhr-requests/get-fixtures.js';
+import sendPredictions from '../xhr-requests/set-predictions.js';
 
 // import {SubmitPredictions} from './components/submit-predictions.jsx';
 
@@ -18,11 +18,6 @@ export default class Predictions extends Component {
     // username, season and gameweek will be retrieved form server on load
     // will move this back up to app or something later
     this.state = {
-      user: {
-        id: "testGuy",
-        season: "14-15",
-        gameweek: "gameweek1", // this should be a string, otherwise firebase gets upset
-      },
       fixtures: null,
       predictions: null,
       canSubmit: true
@@ -42,7 +37,7 @@ export default class Predictions extends Component {
   // requests 2 data, fixtures (has teams, times etc)
   // and predictions (if exists)
   requestPredictions() {
-    getFixtures(this.state.user, this.setRequest);
+    getFixtures(this.props.user, this.props.gameData, this.setRequest);
   }
 
   // receives data returned from xhr firebase
@@ -56,7 +51,7 @@ export default class Predictions extends Component {
   }
 
   submitPredictions(predictions) {
-    sendPredictions(this.state.user, predictions);
+    sendPredictions(this.props.user, this.props.gameData, predictions);
   }
 
   button() {
@@ -68,9 +63,11 @@ export default class Predictions extends Component {
       return <div>Loading...</div>;
     }
     
-    return(
+    return (
       <div>
-        <FixtureList user={this.state.user} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
+        <h2>{this.props.user.team}</h2>
+        <h4>User: {this.props.user.name}</h4>
+        <FixtureList user={this.props.user} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         {this.state.predictions ? (
           <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions} />
         ) : (<div>No results yet</div>)}

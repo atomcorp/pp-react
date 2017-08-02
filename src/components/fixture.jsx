@@ -17,7 +17,6 @@ export class Fixture extends Component {
   // and print the tds 
   render() {
     let colour = '';
-    console.log(this.props.points);
     if (this.props.points === 3) {
       colour = 'green';
     } else if (this.props.points === 1) {
@@ -70,7 +69,6 @@ function formatDate(day, time) {
 // but this isn't carried over to DB
 function ensurePositiveNumber(input) {
   let score = parseInt(input);
-  console.log(score);
   if (score < 0) {
     score = Math.abs(score);
   }

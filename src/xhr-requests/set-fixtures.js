@@ -1,3 +1,9 @@
+// Eventually turn this into a page all of it's own
+// that only admin can access
+// and upload data
+
+// also need one for doing scores
+
 import firebase from '../firebase';
 
 export default function SetFixtures() {

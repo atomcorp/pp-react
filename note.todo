@@ -1,7 +1,16 @@
+App structure:
+   App.jsx (get-user.js)
+     ~ Predictions: prediction-results (get-fixtures.js)
+       ~ Fixture list
+         ~ Fixture
+
+
 Tasks:
   ☐ Colour in results depending on prediction
   ☐ Bring up user state to top level of app
-  ☐ then, Pass down props with user data like username and team name
+    ☐ then, Pass down props with user data like username and team name
+  ✔ In userPredictions put predictions in their own object @done (17-08-02 23:57)
+    ☐ add booleans for hasSubmittedPredictions and resultTotalled and actual points score
 
 Todo:
   ☐ Get how many 3s, 1s and 0s
@@ -22,11 +31,14 @@ Todo:
     ☐ Team page (public)
     ☐ League page (public)
   
-Thoughs: 
+Thoughts: 
   Can only change the team name once a season
+  Add a one offs prediction game (you just do one gameweek)
+  You pick a favourite team - get double points for those results
 
 Notes:
    React folder structure = https://daveceddia.com/react-project-structure/
    Routing = https://medium.freecodecamp.org/you-might-not-need-react-router-38673620f3d
      library for parsing :typeurls https://github.com/pillarjs/path-to-regexp
      or history api https://github.com/reacttraining/history
+

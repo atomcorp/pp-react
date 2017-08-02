@@ -10,7 +10,7 @@ export default class FixtureList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      predictions: this.props.predictions ? this.props.predictions : this.props.fixtures
+      predictions: this.setPredictions()
     }
     this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
