@@ -72,6 +72,8 @@ export default class FixtureList extends Component {
         key={fixtures[id].id} 
         homeScore={this.state.predictions[id].homeScore} 
         awayScore={this.state.predictions[id].awayScore} 
+        homeResult={fixtures[id].homeScore} 
+        awayResult={fixtures[id].awayScore} 
         home={fixtures[id].home} 
         away={fixtures[id].away} 
         time={fixtures[id].time}

@@ -30,10 +30,11 @@ export class Fixture extends Component {
           <td>{formatDate(this.props.date, this.props.time)}</td>
           <td>{this.props.home}</td>
           <td>
-            {/* on change */}
+            {this.props.homeResult}
             <input type="number" value={this.props.homeScore} onChange={(event) => this.onChange(event, "homeScore", this.props.id)} />
             {' - '} 
             <input type="number" value={this.props.awayScore} onChange={(event) => this.onChange(event, "awayScore", this.props.id)} />  
+            {this.props.awayResult}
           </td>
           <td>{this.props.away}</td>
         </tr>

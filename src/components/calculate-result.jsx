@@ -19,7 +19,7 @@ function compareScores(predictions, results) {
     } else if (calculateWinType(scores.homeScore, scores.awayScore) === calculateWinType(results[id].homeScore, results[id].awayScore)) {
       score = 1;
     }
-    cumulativeScore + score;
+    cumulativeScore += score;
     predictions[id].points = score;
   }
   return cumulativeScore;
