@@ -18,18 +18,43 @@ export class Fixture extends Component {
   // and print the tds 
   render() {
     return (
-      <tr>
-        <td>{this.props.home}</td>
-        <td>
-          {/* on change */}
-          <input type="number" value={this.props.homeScore} onChange={(event) => this.onChange(event, "homeScore", this.props.id)} />
-          {' - '} 
-          <input type="number" value={this.props.awayScore} onChange={(event) => this.onChange(event, "awayScore", this.props.id)} />  
-        </td>
-        <td>{this.props.away}</td>
-      </tr>
+        <tr>
+          <td>{formatDate(this.props.date, this.props.time)}</td>
+          <td>{this.props.home}</td>
+          <td>
+            {/* on change */}
+            <input type="number" value={this.props.homeScore} onChange={(event) => this.onChange(event, "homeScore", this.props.id)} />
+            {' - '} 
+            <input type="number" value={this.props.awayScore} onChange={(event) => this.onChange(event, "awayScore", this.props.id)} />  
+          </td>
+          <td>{this.props.away}</td>
+        </tr>
     );
   }
+}
+
+var weekday = new Array(7);
+weekday[0] =  "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+
+let isUnique = true;
+
+
+function formatDate(day, time) {
+  let formattedTime = Date.parse(`${day} ${time}`)/1000;
+  formattedTime = new Date(formattedTime * 1000);
+  const dayOfTheWeek = weekday[formattedTime.getDay()];
+  const date = formattedTime.getDate();
+  const formattedDate = `${dayOfTheWeek} ${date} ${time}`;
+  if (isUnique && isUnique !== formattedDate) {
+    isUnique = formattedDate;
+    return formattedDate;
+  } 
 }
 
 // todo: user can still input a dot (.) after a number

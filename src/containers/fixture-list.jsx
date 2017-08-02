@@ -57,7 +57,15 @@ export default class FixtureList extends Component {
   // this will need to print one fixture for length of fixture list
   render() {
     const fixtures = this.props.fixtures;
-    const fixtureElements = Object.keys(fixtures).map((id, index) => {
+    const sortFixtures = Object.keys(fixtures).sort(function(a,b) {
+      let first = Date.parse(`${fixtures[a].date} ${fixtures[a].time}`)/1000;
+      let second = Date.parse(`${fixtures[b].date} ${fixtures[b].time}`)/1000;
+      return (
+        first - second
+      );
+    })
+
+    const fixtureElements = sortFixtures.map((id, index) => {
       return <Fixture 
         id={fixtures[id].id} 
         key={fixtures[id].id} 
@@ -65,6 +73,8 @@ export default class FixtureList extends Component {
         awayScore={this.state.predictions[id].awayScore} 
         home={fixtures[id].home} 
         away={fixtures[id].away} 
+        time={fixtures[id].time}
+        date={fixtures[id].date}
         onChange={this.onChange} 
         />;
     });
@@ -74,6 +84,7 @@ export default class FixtureList extends Component {
         <table className="table table-striped table-bordered">
           <thead>
             <tr>
+              <th>Date</th>
               <th>Home</th>
               <th>Prediction</th>
               <th>Away</th>
@@ -91,6 +102,7 @@ export default class FixtureList extends Component {
     );
   }
 }
+
 
 Fixture.propTypes = {
   fixtures: PropTypes.array,
