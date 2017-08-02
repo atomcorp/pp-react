@@ -9,7 +9,6 @@ export class Fixture extends Component {
 
   onChange(event, homeOrAway, id) {
     const score = ensurePositiveNumber(event.target.value);
-    console.log(score);
     this.props.onChange(score, homeOrAway, id);
   }
 
@@ -17,8 +16,17 @@ export class Fixture extends Component {
   // take 2 team names
   // and print the tds 
   render() {
+    let colour = '';
+    console.log(this.props.points);
+    if (this.props.points === 3) {
+      colour = 'green';
+    } else if (this.props.points === 1) {
+      colour = 'yellow';
+    } else {
+      colour = 'red';
+    }
     return (
-        <tr>
+        <tr style={{backgroundColor:colour}}>
           <td>{formatDate(this.props.date, this.props.time)}</td>
           <td>{this.props.home}</td>
           <td>
@@ -44,7 +52,7 @@ weekday[6] = "Saturday";
 
 let isUnique = true;
 
-
+// should probablt do all this on submit
 function formatDate(day, time) {
   let formattedTime = Date.parse(`${day} ${time}`)/1000;
   formattedTime = new Date(formattedTime * 1000);

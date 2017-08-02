@@ -3,9 +3,11 @@ import firebase from '../firebase';
 export default function getFixturesFromFirebase(userData, callback) {
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const fixturesRefString = `/${userData.season}/${userData.gameweek}/`;
-  const predictionsRefString = `/users/${userData.id}/${userData.season}/${userData.gameweek}/`;;
+  const predictionsRefString = `/usersPredictions/${userData.id}/${userData.season}/${userData.gameweek}/`;
+  const userRefString = `/users/${userData.id}/`;
   const fixtures = firebase.database().ref(fixturesRefString);
   const predictions = firebase.database().ref(predictionsRefString);
+  const user = firebase.database().ref(userRefString);
 
   const getData = Promise.all([
     new Promise((resolve, reject) => {
@@ -17,6 +19,11 @@ export default function getFixturesFromFirebase(userData, callback) {
       predictions.on('value', (snapshot) => {
         resolve(snapshot.val());
       })
+    }),
+    new Promise((resolve, reject) => {
+      user.on('value', (snapshot) => {
+        resolve(snapshot.val());
+      })
     })
   ]);
 
@@ -24,7 +31,8 @@ export default function getFixturesFromFirebase(userData, callback) {
   getData.then((data) => {
     const dataObject = {
       fixtures: data[0],
-      predictions: data[1]
+      predictions: data[1],
+      user: data[2]
     }
     callback(dataObject);
   })

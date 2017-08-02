@@ -1,0 +1,624 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"home",
+				"homeScore"
+			],
+			[
+				"gameweek",
+				"gameweek1"
+			],
+			[
+				"resu",
+				"results"
+			],
+			[
+				"Pos",
+				"PostsNew"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"Spa",
+				"SparklinesLine"
+			],
+			[
+				"data",
+				"newData"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"pad",
+				"padding"
+			],
+			[
+				"add",
+				"addClass\t.addClass()"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"text",
+				"text-transform"
+			],
+			[
+				"marign",
+				"margin-bottom"
+			],
+			[
+				"padding",
+				"padding"
+			],
+			[
+				"backgorun",
+				"background-color"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"a",
+				"anim-\tanimation: ${1:name} ${2:duration} ${3:timing-function} ${4:delay} ${5:iteration-count} ${6:direction} ${7:fill-mode};"
+			],
+			[
+				"for",
+				"for\tfor (…) {…}"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 333.0,
+		"last_filter": "json",
+		"selected_items":
+		[
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"ba",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"tasks",
+				"Set Syntax: Tasks"
+			],
+			[
+				"plain",
+				"Set Syntax: Plain Text"
+			],
+			[
+				"todo",
+				"Set Syntax: Todo"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"bab",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"bble",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"babl",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"bable",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"b",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ht",
+				"Set Syntax: HTML"
+			],
+			[
+				"scss",
+				"Set Syntax: SCSS"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"copy",
+				"File: Copy Path"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"forma",
+				"CodeFormatter: Format Code"
+			]
+		],
+		"width": 440.0
+	},
+	"console":
+	{
+		"height": 162.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/atom/sites/tutorials"
+	],
+	"file_history":
+	[
+		"/C/Users/atom/sites/test/test-react-pp/src/containers/fixture-list.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/components/fixture.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/components/calculate-result.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/components/predictions-result.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/containers/predictions.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/App.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/xhr-requests/set-fixtures.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/xhr-requests/get-fixtures.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/xhr-requests/set-predictions.jsx",
+		"/F/Users/Tom/Downloads/pp-react-export (10).json",
+		"/F/Users/Tom/Downloads/pp-react-export (12).json",
+		"/F/Users/Tom/Downloads/pp-react-export (9).json",
+		"/F/Users/Tom/Downloads/pp-react-export (11).json",
+		"/C/Users/atom/sites/test/test-react-pp/src/components/fixture-list.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/note.todo",
+		"/C/Users/atom/sites/test/test-react-pp/src/index.js",
+		"/C/Users/atom/AppData/Roaming/Sublime Text 3/Packages/PlainTasks/messages/Tutorial.todo",
+		"/C/Users/atom/AppData/Roaming/Sublime Text 3/Packages/Flow/Flow.sublime-settings",
+		"/C/Users/atom/sites/test/test-react-pp/package.json",
+		"/C/Users/atom/sites/test/test-react-pp/src/actions/get-fixtures.jsx",
+		"/C/Users/atom/AppData/Roaming/Sublime Text 3/Packages/PlainTasks/PlainTasks (Windows).sublime-settings",
+		"/C/Users/atom/AppData/Roaming/Sublime Text 3/Packages/User/PlainTasks.sublime-settings",
+		"/C/Users/atom/sites/test/test-react-pp/nodes.todo",
+		"/C/Users/atom/AppData/Roaming/Sublime Text 3/Packages/PlainNotes/Notes.sublime-settings",
+		"/C/Users/atom/sites/test/test-react-pp/src/actions/set-fixtures.jsx",
+		"/C/Users/atom/sites/test/test-react-pp/src/actions/set-predictions.jsx",
+		"/F/Users/Tom/Downloads/pp-react-export (5).json",
+		"/F/Users/Tom/Downloads/pp-react-export (3).json",
+		"/F/Users/Tom/Downloads/pp-react-export (8).json",
+		"/F/Users/Tom/Downloads/pp-react-export (7).json",
+		"/F/Users/Tom/Downloads/pp-react-export (6).json",
+		"/F/Users/Tom/Downloads/pp-react-export (4).json",
+		"/C/Users/atom/sites/test/test-react-pp/src/components/submit-predictions.jsx",
+		"/F/Users/Tom/Downloads/pp-react-export (2).json",
+		"/C/Users/atom/sites/test/test-react-pp/src/data/example-data.js",
+		"/C/Users/atom/sites/test/test-react-pp/src/App.js",
+		"/F/Users/Tom/Downloads/pp-react-export.json",
+		"/F/Users/Tom/Downloads/pp-react-export (1).json",
+		"/C/Users/atom/sites/test/test-react-pp/.gitignore",
+		"/C/Users/atom/sites/test/test-react-pp/src/api.js",
+		"/C/Users/atom/sites/test/test-react-pp/src/firebase.js",
+		"/C/Users/atom/sites/test/test-react-pp/src/data/fixtures.js",
+		"/C/Users/atom/sites/test/test-react-pp/src/data/result.js",
+		"/C/Users/atom/sites/test/test-react-pp/src/components/debug-compare-scores.js",
+		"/C/Users/atom/sites/test/test-react-pp/src/data/prediction.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter3/src/containers/book-list.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter3/src/containers/book-detail.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/index.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/components/posts-new.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/components/posts-index.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/actions/index.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/reducers/index.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/reducers/reducer-posts.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/components/google-map.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/containers/weather-list.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/reducers/reducer-weather.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/style/style.css",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/components/chart.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/components/app.js",
+		"/C/Users/atom/sites/ReduxSimpleStarter/src/containers/search-bar.js",
+		"/C/Users/atom/Site Prep/old stuff/premier-predictions/app/app.js",
+		"/C/Users/atom/Site Prep/stackable/stacktable.js",
+		"/C/Users/atom/Site Prep/osandxs/js.js",
+		"/C/Users/atom/Life/Work/CV/SUMMARY.todo",
+		"/C/Users/atom/Site Prep/pp/app/app.js",
+		"/C/Users/atom/Site Prep/pp/app/results/resultsFactory.js",
+		"/C/Users/atom/Site Prep/pp/app/results/resultsService.js",
+		"/C/Users/atom/Site Prep/pp/index.html",
+		"/C/Users/atom/Site Prep/pp/app/fixtures/fixturesService.js",
+		"/C/Users/atom/Site Prep/pp/app/tasks/tasksFactory.js",
+		"/C/Users/atom/Site Prep/pp/gulpfile.js",
+		"/C/Users/atom/Site Prep/pp/app/fixtures/fixturesFactory.js",
+		"/C/Users/atom/AppData/Roaming/Sublime Text 3/Packages/TodoReview/TodoReview.sublime-settings",
+		"/C/Users/atom/AppData/Roaming/Sublime Text 3/Packages/User/TodoReview.sublime-settings",
+		"/C/Users/atom/Site Prep/pp/app/fixtures/fixturesFactories.js",
+		"/C/Users/atom/Site Prep/pp/app/results/resultsServices.js",
+		"/C/Users/atom/Site Prep/pp/app/tasks/tasksService.js",
+		"/C/Users/atom/Site Prep/pp/app/fixtures/fixturesServices.js",
+		"/C/Users/atom/Site Prep/pp/assets/css/_predictions.scss",
+		"/C/Users/atom/Site Prep/pp/assets/css/main.scss",
+		"/C/Users/atom/Site Prep/pp/assets/css/_global.scss",
+		"/C/Users/atom/Site Prep/pp/app/example-data/fixtures.json",
+		"/C/Users/atom/Site Prep/pp/app/example-data/simple-object.json",
+		"/C/Users/atom/work/ca-prototype/gulpfile.js",
+		"/C/Users/atom/Site Prep/pp/.gitignore",
+		"/C/Users/atom/Site Prep/pp/premier-predictions.sublime-project",
+		"/C/Users/atom/Site Prep/pp/app/example-data/results.json",
+		"/C/Users/atom/Life/Work/web/Active Projects/prem_predictions/footy.js",
+		"/C/Users/atom/Life/Work/web/experiments/table-tests/data.php",
+		"/C/Users/atom/Site Prep/pp/app/example-data/teams.json",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/sass/_type.scss",
+		"/C/xampp/htdocs/constellations/includes/database/database.inc",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/sass/_front-page.scss",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/.gitignore",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/themes/views-view--gallery.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/themes/views-view-unformatted--gallery.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/js/plugins/lightbox.js",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/themes/views-view--hire-us-background-image--block-3.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/themes/views-view-unformatted--hire-us-background-image--block-3.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/css/style.css",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/templates/page--contact.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/templates/page--front-page.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/templates/page.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/sass/_whats-on.scss",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/js/effects.js",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/constellations.info",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/sass/_gallery.scss",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/sass/_global.scss",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/sass/all.scss",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/constellations.todo",
+		"/C/Users/atom/Life/Finance/2666-laptop/2015/to-do.todo",
+		"/C/Users/atom/Site Prep/Experiments/angular/js/main.js",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/sass/_lightbox.scss",
+		"/C/Users/atom/AppData/Local/Temp/Temp1_Chocolat-0.4.10.zip/Chocolat-0.4.10/dist/css/chocolat.css",
+		"/C/Users/atom/AppData/Local/Temp/Temp1_Chocolat-0.4.10.zip/Chocolat-0.4.10/dist/js/jquery.chocolat.min.js",
+		"/E/Users/Tom/Downloads/fancyapps-fancyBox-v2.1.5-0-ge2248f4/fancyapps-fancyBox-18d1712/source/helpers/jquery.fancybox-buttons.css",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/gulpfile.js",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/templates/html.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/themes/views-view-unformatted--what-s-on--past-events.tpl.php",
+		"/C/xampp/htdocs/constellations/sites/all/themes/constellations/sass/_food-drink.scss",
+		"/C/Users/atom/Documents/My Games/Fallout4/Fallout4.ini",
+		"/C/Users/atom/AppData/Roaming/Spotify/prefs",
+		"/C/Users/atom/Site Prep/whosampled/gradient",
+		"/C/Users/atom/AppData/Local/Temp/Temp1_bootstrap-4.0.0-alpha.zip/bootstrap-4.0.0-alpha/dist/js/bootstrap.js",
+		"/C/Users/atom/AppData/Local/Temp/Temp1_bootstrap-4.0.0-alpha.zip/bootstrap-4.0.0-alpha/scss/bootstrap.scss",
+		"/C/Users/atom/AppData/Local/Temp/Temp1_bootstrap-4.0.0-alpha.zip/bootstrap-4.0.0-alpha/dist/css/bootstrap.css",
+		"/E/Users/Tom/Downloads/htaccess",
+		"/C/Users/atom/AppData/Local/Temp/fz3temp-1/page--front-page.tpl.php"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			"C:\\Users\\atom\\sites\\test\\test-react-pp\\src\\components",
+			"C:\\Users\\atom\\sites\\test\\test-react-pp\\src",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\themes\\constellations\\sass",
+			"C:\\xampp\\htdocs\\constellations",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\themes\\constellations\\sass",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\themes\\constellations/sass",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\themes\\constellations",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\libraries\\ckeditor",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\themes\\constellations",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\themes",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\modules\\ds",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\modules\\ds\\layouts",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\themes\\bootstrap\\theme",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all",
+			"C:\\xampp\\htdocs\\constellations\\sites\\all\\themes\\bootstrap"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"<div>Result</div>",
+			"awayResult",
+			"homeResult",
+			"\"id\"",
+			"\"id\" : \"wiggle",
+			"\"wiggle",
+			"\"wiggle10",
+			"{\"wiggly",
+			"{\"wiggly2\"",
+			"\"wiggly2\"",
+			"\"id\" : ",
+			"PredictionsResult",
+			"div",
+			"requestFixtures",
+			"setFixtures",
+			"props",
+			"fixture",
+			"fixtures",
+			"refString",
+			"homeResult",
+			"setPredictionsToFirebase",
+			"getFixturesFromFirebase",
+			"props",
+			"fetch",
+			"div",
+			"// ",
+			"fixture",
+			"homeScore",
+			"\"game",
+			"game",
+			"\"id\"",
+			"},",
+			":1}",
+			":1",
+			"\"gameweek\":1}",
+			":1}",
+			":1},",
+			"calcWinType",
+			"prediction.",
+			"prediction",
+			"home",
+			"  1: {",
+			"homeScore",
+			"onChange",
+			"predictions",
+			"0",
+			"cityData.city.name",
+			"th",
+			"Team",
+			"fixturesProvider",
+			"console.log",
+			"data.fixtures[i]",
+			"CalculatePointsService",
+			"calculatePointsService",
+			"test.",
+			"vertical-align",
+			"\t\t\t\t\t\t\t\t\n",
+			"self",
+			"postcss",
+			"self.",
+			"returnFixtures",
+			"list",
+			"\"gameweek\": 1",
+			".whats-on__image",
+			"2666",
+			".front-page__main-image",
+			"1.400",
+			".background-img--greeting-img",
+			"front-page__screen-width-wrapper",
+			"all-events-link__wrapper",
+			"whats-on__image",
+			"ackground-img--greeting-im",
+			"40px",
+			"carousel",
+			"front-page__intro-text--content",
+			".front-page__intro-text--content",
+			"front-page__intro-text--content",
+			"logo",
+			"uInterior",
+			"buffer]",
+			"2666",
+			"constellations/",
+			"Contact",
+			"margin",
+			"navi",
+			"logo",
+			"position: absolute;\n\ttop: 0;\n\tleft: -24px;\n\ttop: 50%;\n\tmargin-top: -20px;\n\tcursor: pointer;",
+			"owl-carousel",
+			"slider__details",
+			"tickets",
+			"ticket",
+			"tickets",
+			"event",
+			"width",
+			"h1",
+			"owl.carousel",
+			"nav__links",
+			"max",
+			"all-events-link",
+			"show",
+			"$this",
+			"li",
+			":first-child {\n\t\t\t\t",
+			".body",
+			"front-page__intro-text",
+			"version",
+			"nt-page__lo",
+			".front-page__main-image",
+			"ront-page__log",
+			"ont-page__l",
+			"front-page__logo",
+			".front-page__main-image",
+			"margin-top: (254px / 3);",
+			"163px",
+			"front-page__intro-text",
+			"welcome",
+			".whats-on__image",
+			".front-page__main-image",
+			"glyphicons-halflings-regular.woff2",
+			"glyphicons-halflings-regular.woff2 ",
+			"520px",
+			"70vh",
+			"60vh",
+			"height",
+			"100vh",
+			"front-page__screen-width-text",
+			"0",
+			"background-img__event--small"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 128.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "tutorials.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"red",
+				"C:\\Users\\atom\\sites\\ReduxSimpleStarter\\ReduxSimpleStarter.sublime-workspace"
+			],
+			[
+				"",
+				"C:\\Users\\atom\\Site Prep\\Experiments\\albums2016\\albums2016.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 350.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

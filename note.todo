@@ -1,4 +1,32 @@
+Tasks:
+  ☐ Colour in results depending on prediction
+  ☐ Bring up user state to top level of app
+  ☐ then, Pass down props with user data like username and team name
+
+Todo:
+  ☐ Get how many 3s, 1s and 0s
+    ☐ Use to order the league
+  League:
+    ☐ Make one
+  Login:
+    ☐ Browser state
+  Routing:
+  ☐ add routing
+  Attach route to state
+  When change route update state
+    ☐ Home / Predictions page
+    Check if a user is logged in
+      ~ yes - put path as /:user
+      ~ no - put path to / 
+    ☐ User page (private)
+    ☐ Team page (public)
+    ☐ League page (public)
+  
+Thoughs: 
+  Can only change the team name once a season
 
 Notes:
    React folder structure = https://daveceddia.com/react-project-structure/
-
+   Routing = https://medium.freecodecamp.org/you-might-not-need-react-router-38673620f3d
+     library for parsing :typeurls https://github.com/pillarjs/path-to-regexp
+     or history api https://github.com/reacttraining/history

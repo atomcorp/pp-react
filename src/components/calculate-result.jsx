@@ -9,17 +9,20 @@ export function calculateResult(props) {
 
 function compareScores(predictions, results) {
   
-  let score = 0;
+  let cumulativeScore = 0;
   for (const prediction in predictions) {
+    let score = 0;
     const id = prediction;
     const scores = predictions[id];
     if (scores.homeScore === results[id].homeScore && scores.awayScore === results[id].awayScore) {
-      score += 3;
+      score = 3;
     } else if (calculateWinType(scores.homeScore, scores.awayScore) === calculateWinType(results[id].homeScore, results[id].awayScore)) {
-      score += 1;
+      score = 1;
     }
+    cumulativeScore + score;
+    predictions[id].points = score;
   }
-  return score;
+  return cumulativeScore;
 }
 
 function calculateWinType(home, away) {

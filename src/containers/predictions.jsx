@@ -19,7 +19,7 @@ export default class Predictions extends Component {
     // will move this back up to app or something later
     this.state = {
       user: {
-        id: "0",
+        id: "testGuy",
         season: "14-15",
         gameweek: "gameweek1", // this should be a string, otherwise firebase gets upset
       },
@@ -30,6 +30,7 @@ export default class Predictions extends Component {
     this.requestPredictions = this.requestPredictions.bind(this);
     this.setRequest = this.setRequest.bind(this);
     this.submitPredictions = this.submitPredictions.bind(this);
+    this.button = this.button.bind(this);
   }
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
@@ -55,8 +56,11 @@ export default class Predictions extends Component {
   }
 
   submitPredictions(predictions) {
-    console.log(predictions);
     sendPredictions(this.state.user, predictions);
+  }
+
+  button() {
+    this.props.route('users/');
   }
 
   render() {
@@ -66,10 +70,13 @@ export default class Predictions extends Component {
     
     return(
       <div>
-        <FixtureList fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
+        <FixtureList user={this.state.user} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         {this.state.predictions ? (
           <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions} />
         ) : (<div>No results yet</div>)}
+        <div>
+          <button onClick={this.button}>Click</button>
+        </div>
       </div>
     );
   }

@@ -10,13 +10,16 @@ export default class FixtureList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      predictions: this.setPredictions()
+      predictions: this.props.predictions ? this.props.predictions : this.props.fixtures
     }
     this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.setPredictions = this.setPredictions.bind(this);
   }
 
+  // NOT USED  
+  // Not if necessary to init state as i used conditional props
+  // 
   // this sets up what's diplayed in the score boxes
   // if user has made predictions before will show those
   // if not just defaults to the predictions 0-0
@@ -24,7 +27,6 @@ export default class FixtureList extends Component {
     if (this.props.predictions) {
       return this.props.predictions;
     } 
-
     const fixtures = this.props.fixtures;
     const result = {};
     for (const fixture in fixtures) { 
@@ -63,8 +65,7 @@ export default class FixtureList extends Component {
       return (
         first - second
       );
-    })
-
+    });
     const fixtureElements = sortFixtures.map((id, index) => {
       return <Fixture 
         id={fixtures[id].id} 
@@ -75,6 +76,7 @@ export default class FixtureList extends Component {
         away={fixtures[id].away} 
         time={fixtures[id].time}
         date={fixtures[id].date}
+        points={this.state.predictions[id].points}
         onChange={this.onChange} 
         />;
     });
