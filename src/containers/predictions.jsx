@@ -68,7 +68,7 @@ export default class Predictions extends Component {
       <div>
         <FixtureList fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         {this.state.predictions ? (
-        <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions}/>
+          <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions} />
         ) : (<div>No results yet</div>)}
       </div>
     );

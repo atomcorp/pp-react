@@ -9,9 +9,9 @@ export default function PredictionsResult(props) {
   // compare them
   // print out result
 
-  calculateResult(props);
+  const result = calculateResult(props);
 
   return (
-    <div>Result</div>
+    <div>Result: {result}</div>
   );
 }

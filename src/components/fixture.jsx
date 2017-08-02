@@ -32,6 +32,8 @@ export class Fixture extends Component {
   }
 }
 
+// todo: user can still input a dot (.) after a number
+// but this isn't carried over to DB
 function ensurePositiveNumber(input) {
   let score = parseInt(input);
   console.log(score);

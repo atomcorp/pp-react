@@ -1,27 +1,25 @@
 // Component
 
-// import React from 'react';
+import React from 'react';
 
-// On submit this will add predictions 
-export function calculateResult(state) {
-  console.log(state);
-
-  // debugCompareScores(state.predictions, state.fixtures);
+export function calculateResult(props) {
+  const score = compareScores(props.predictions, props.fixtures);
+  return score;
 }
 
-function debugCompareScores(predictions, results) {
+function compareScores(predictions, results) {
+  
   let score = 0;
   for (const prediction in predictions) {
     const id = prediction;
-    const scores = predictions[prediction];
-    if (scores.homeScore === results[id].homeResult && scores.awayScore === results[id].awayResult) {
+    const scores = predictions[id];
+    if (scores.homeScore === results[id].homeScore && scores.awayScore === results[id].awayScore) {
       score += 3;
-    } else if (calculateWinType(scores.homeScore, scores.awayScore) === calculateWinType(results[id].homeResult, results[id].awayResult)) {
+    } else if (calculateWinType(scores.homeScore, scores.awayScore) === calculateWinType(results[id].homeScore, results[id].awayScore)) {
       score += 1;
     }
-    console.log(`Prediction: ${scores.homeScore} - ${scores.awayScore}. Result ${results[id].homeResult} - ${results[id].awayResult}`);
   }
-  console.log(score);
+  return score;
 }
 
 function calculateWinType(home, away) {
