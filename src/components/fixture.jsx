@@ -8,7 +8,9 @@ export class Fixture extends Component {
   }
 
   onChange(event, homeOrAway, id) {
-    this.props.onChange(event.target.value, homeOrAway, id);
+    const score = ensurePositiveNumber(event.target.value);
+    console.log(score);
+    this.props.onChange(score, homeOrAway, id);
   }
 
   // props will be fixture
@@ -28,6 +30,18 @@ export class Fixture extends Component {
       </tr>
     );
   }
+}
+
+function ensurePositiveNumber(input) {
+  let score = parseInt(input);
+  console.log(score);
+  if (score < 0) {
+    score = Math.abs(score);
+  }
+  if (isNaN(score)) {
+    score = 0;
+  }
+  return score;
 }
 
 Fixture.propTypes = {
