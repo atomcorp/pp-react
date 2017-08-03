@@ -1,7 +1,5 @@
 // Component
 
-import React from 'react';
-
 export function calculateResult(props) {
   const score = compareScores(props.predictions, props.fixtures);
   return score;
@@ -20,6 +18,7 @@ function compareScores(predictions, results) {
       score = 1;
     }
     cumulativeScore += score;
+    // const test = `${results[id].home} v ${results[id].away}: ${results[id].homeScore}:${scores.awayScore} | ${scores.homeScore}:${results[id].awayScore}`;
     predictions[id].points = score;
   }
   return cumulativeScore;

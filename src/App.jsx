@@ -3,6 +3,8 @@ import './App.css';
 
 import Predictions from './containers/predictions.jsx';
 
+import UserPage from './components/user-page.jsx';
+
 import getUser from './xhr-requests/get-user.js';
 // import SetFixtures from './xhr-requests/set-fixtures';
 // SetFixtures();
@@ -10,7 +12,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      route: '/',
+      route: 'user',
       game: {
         season: "14-15",
         gameweek: "gameweek1",
@@ -45,19 +47,23 @@ class App extends Component {
   }
 
   render() {
+
+    const pages ={
+      home: <Predictions user={this.state.user} gameData={this.state.game} route={this.changeRoute} />,
+      user: <UserPage user={this.state.user} />
+    }
+
+
     return (
       // we will return 
       // - <FixtureList />
       // --- <Fixture />
       // ----- Home & Away Team 
       <div className="container">
-        <div className="fixture-list">
-          {this.state.loggedIn ? 
-            <Predictions user={this.state.user} gameData={this.state.game} route={this.changeRoute} /> :
-            <div>Please log in</div>}
-          
-          { this.state.route === '/' ? '/' : 'users/'}
-        </div>
+        {this.state.loggedIn && this.state.route === '/' ? pages.home : null}
+
+        {this.state.loggedIn && this.state.route === 'user' ? pages.user : <div>User loggin in...</div>}
+        
       </div>
     );
   }

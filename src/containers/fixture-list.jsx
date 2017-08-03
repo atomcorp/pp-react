@@ -29,8 +29,8 @@ export default class FixtureList extends Component {
     } 
     const fixtures = this.props.fixtures;
     const result = {};
-    for (const fixture in fixtures) { 
-      const fixture = fixtures[fixture];
+    for (const id in fixtures) { 
+      const fixture = fixtures[id];
       result[fixture.id] = {
         homeScore: fixture.homeScore,
         awayScore: fixture.awayScore,
@@ -84,25 +84,27 @@ export default class FixtureList extends Component {
     });
 
     return (
-      <form action="prediction" onSubmit={this.onPredictionSubmit}>
-        <table className="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Home</th>
-              <th>Prediction</th>
-              <th>Away</th>
-            </tr>
-          </thead>
-          <tbody> 
-            {fixtureElements}
-          </tbody>
-        </table>
-        <button type="submit">
-          Submit
-        </button>
+      <div className="fixture-list">
+        <form action="prediction" onSubmit={this.onPredictionSubmit}>
+          <table className="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Home</th>
+                <th>Prediction</th>
+                <th>Away</th>
+              </tr>
+            </thead>
+            <tbody> 
+              {fixtureElements}
+            </tbody>
+          </table>
+          <button type="submit">
+            Submit
+          </button>
 
-      </form>
+        </form>
+      </div>
     );
   }
 }

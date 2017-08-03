@@ -68,7 +68,7 @@ function formatDate(day, time) {
 // todo: user can still input a dot (.) after a number
 // but this isn't carried over to DB
 function ensurePositiveNumber(input) {
-  let score = parseInt(input);
+  let score = parseInt(input, 10);
   if (score < 0) {
     score = Math.abs(score);
   }
