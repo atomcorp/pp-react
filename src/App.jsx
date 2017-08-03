@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import page from 'page';
 import './App.css';
 
 import Predictions from './containers/predictions.jsx';
@@ -12,7 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      route: 'user',
+      route: '/',
       game: {
         season: "14-15",
         gameweek: "gameweek1",
@@ -22,14 +23,25 @@ class App extends Component {
     this.changeRoute = this.changeRoute.bind(this);
     this.requestUser = this.requestUser.bind(this);
     this.setRequest = this.setRequest.bind(this);
+    this.getPage = this.getPage.bind(this);
+    this.getRoute = this.getRoute.bind(this);
   }
 
   componentDidMount() {
     this.requestUser();
   }
 
+  getPage(ctx) {
+    console.log(ctx);
+  }
+
   requestUser() {
     getUser("tomisgreat", this.setRequest);
+  }
+
+  getRoute(event, route) {
+    event.preventDefault();
+    this.setState({route: route})
   }
 
   setRequest(returnedRequest) {
@@ -60,10 +72,10 @@ class App extends Component {
       // --- <Fixture />
       // ----- Home & Away Team 
       <div className="container">
+        <a href="/" onClick={(event) => this.getRoute(event, "/")}>Home</a>&nbsp;
+        <a href="/user" onClick={(event) => this.getRoute(event, "user")}>List</a>
         {this.state.loggedIn && this.state.route === '/' ? pages.home : null}
-
         {this.state.loggedIn && this.state.route === 'user' ? pages.user : <div>User loggin in...</div>}
-        
       </div>
     );
   }
