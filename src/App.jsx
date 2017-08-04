@@ -3,9 +3,11 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import './App.css';
 
 import Predictions from './containers/predictions.jsx';
+import SignUp from './containers/sign-up.jsx';
+import LogOut from './containers/log-out.jsx';
+import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
-import LogIn from './components/log-in.jsx';
 
 import {auth, storageKey} from './firebase-connect.js';
 
@@ -45,12 +47,12 @@ class App extends Component {
   render() {
 
     if (!this.state.loggedIn) {
-      return <div>Loading...</div>
+      return <SignIn />
     }
     const pages ={
       home: <Predictions user={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
       profile: <Profile user={this.state.uid} />,
-      logIn: <LogIn />
+      signUp: <SignUp />
     }
 
     return (
@@ -60,15 +62,18 @@ class App extends Component {
       // ----- Home & Away Team 
       <Router>
         <div className="container">
+          <LogOut />
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/profile">Profile</Link></li>
-            <li><Link to="/login">Log in</Link></li>
+            <li><Link to="/sign-up">Sign up</Link></li>
+            <li><Link to="/sign-in">Sign in</Link></li>
           </ul>
           
           <Route exact path="/" component={() => pages.home}/>
-          <Route exact path="/login" component={() => pages.logIn}/>
+          <Route exact path="/sign-up" component={() => pages.signUp}/>
           <Route exact path="/profile" component={() => pages.profile}/>
+          <li><Link to="/sign-in">Log in</Link></li>
         </div>
       </Router>
       

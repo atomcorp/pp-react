@@ -1,14 +1,18 @@
 import React, {Component} from 'react';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom'
 
-export default class LogIn extends Component {
+import {auth} from '../firebase-connect.js';
+
+export default class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      email: '',
       password: '',
       errors: {
         tooShort: false
-      }
+      },
+      redirect: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,7 +30,15 @@ export default class LogIn extends Component {
 
   canSubmit() {
     if (!this.state.errors.tooShort) {
-      console.log('Submit!');
+      const error = {};
+      auth.signInWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
+        console.log(error, Object.keys(error).length);
+        error = error;
+      }).then((response) => {
+        console.log(response);
+        this.setState({redirect: true});
+        
+      });
     }
   }
 
@@ -41,14 +53,15 @@ export default class LogIn extends Component {
 
   render() {
     const errors = this.state.errors.tooShort ? 'Password too short' : 'No errors';
-    console.log(this.state);
+    const redirect = this.state.redirect;
     return (
       <div>
-        <h1>Log in</h1>
+        {redirect ? <Router><Redirect to="/"/></Router> : null}
+        <h1>Sign in</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
             User name:
-            <input name="username" type="text" value={this.state.username} onChange={this.handleChange} />
+            <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
           </label>
           <label>
             User name:
