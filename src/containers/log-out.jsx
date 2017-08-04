@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router'
 
 import {auth} from '../firebase-connect.js';
 
