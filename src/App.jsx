@@ -5,6 +5,7 @@ import './App.css';
 import Predictions from './containers/predictions.jsx';
 
 import Profile from './components/profile.jsx';
+import LogIn from './components/log-in.jsx';
 
 import {auth, storageKey} from './firebase-connect.js';
 
@@ -43,13 +44,13 @@ class App extends Component {
 
   render() {
 
-
     if (!this.state.loggedIn) {
       return <div>Loading...</div>
     }
     const pages ={
       home: <Predictions user={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
-      profile: <Profile user={this.state.uid} />
+      profile: <Profile user={this.state.uid} />,
+      logIn: <LogIn />
     }
 
     return (
@@ -62,8 +63,11 @@ class App extends Component {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/login">Log in</Link></li>
           </ul>
+          
           <Route exact path="/" component={() => pages.home}/>
+          <Route exact path="/login" component={() => pages.logIn}/>
           <Route exact path="/profile" component={() => pages.profile}/>
         </div>
       </Router>

@@ -46,4 +46,5 @@ Notes:
      library for parsing :typeurls https://github.com/pillarjs/path-to-regexp
      or history api https://github.com/reacttraining/history
    Using Firebase and React Router: http://bodiddlie.github.io/firebase-auth-with-react-router/
+   Setting state on properties of objects: https://stackoverflow.com/a/43639228/2368141
 
