@@ -1,9 +1,9 @@
-import firebase from '../firebase';
+import {db} from '../firebase-connect';
 
 export default function getFixturesFromFirebase(id, callback) {
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const userRefString = `/users/${id}/`;
-  const user = firebase.database().ref(userRefString);
+  const user = db.ref(userRefString);
 
   const getData = Promise.all([
     new Promise((resolve, reject) => {

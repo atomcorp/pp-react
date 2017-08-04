@@ -1,12 +1,12 @@
-import firebase from '../firebase';
+import {db} from '../firebase-connect';
 
-export default function getFixturesFromFirebase(userData, gameData, callback) {
+export default function getFixturesFromFirebase(uid, gameData, callback) {
 
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const fixturesRefString = `/${gameData.season}/${gameData.gameweek}/`;
-  const predictionsRefString = `/usersPredictions/${userData.id}/${gameData.season}/${gameData.gameweek}/predictions`;
-  const fixtures = firebase.database().ref(fixturesRefString);
-  const predictions = firebase.database().ref(predictionsRefString);
+  const predictionsRefString = `/usersPredictions/${uid}/${gameData.season}/${gameData.gameweek}/predictions`;
+  const fixtures = db.ref(fixturesRefString);
+  const predictions = db.ref(predictionsRefString);
 
   const getData = Promise.all([
     new Promise((resolve, reject) => {

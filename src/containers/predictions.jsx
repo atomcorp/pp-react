@@ -25,7 +25,6 @@ export default class Predictions extends Component {
     this.requestPredictions = this.requestPredictions.bind(this);
     this.setRequest = this.setRequest.bind(this);
     this.submitPredictions = this.submitPredictions.bind(this);
-    this.button = this.button.bind(this);
   }
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
@@ -54,10 +53,6 @@ export default class Predictions extends Component {
     sendPredictions(this.props.user, this.props.gameData, predictions);
   }
 
-  button() {
-    this.props.route('users/');
-  }
-
   render() {
     if (!this.state.fixtures) {
       return <div>Loading...</div>;
@@ -65,15 +60,12 @@ export default class Predictions extends Component {
     
     return (
       <div>
-        <h2>{this.props.user.team}</h2>
-        <h4>User: {this.props.user.name}</h4>
+        <h2>{this.props.user}</h2>
+        <h4>User: {this.props.user}</h4>
         <FixtureList user={this.props.user} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         {this.state.predictions ? (
           <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions} />
         ) : (<div>No results yet</div>)}
-        <div>
-          <button onClick={this.button}>Click</button>
-        </div>
       </div>
     );
   }

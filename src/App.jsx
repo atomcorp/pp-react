@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import page from 'page';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'; 
 import './App.css';
 
 import Predictions from './containers/predictions.jsx';
 
-import UserPage from './components/user-page.jsx';
+import Profile from './components/profile.jsx';
 
-import getUser from './xhr-requests/get-user.js';
+import {auth, storageKey} from './firebase-connect.js';
+
 // import SetFixtures from './xhr-requests/set-fixtures';
 // SetFixtures();
 class App extends Component {
@@ -19,64 +20,54 @@ class App extends Component {
         gameweek: "gameweek1",
       },
       loggedIn: false
-    }
-    this.changeRoute = this.changeRoute.bind(this);
-    this.requestUser = this.requestUser.bind(this);
-    this.setRequest = this.setRequest.bind(this);
-    this.getPage = this.getPage.bind(this);
-    this.getRoute = this.getRoute.bind(this);
+    };
   }
 
   componentDidMount() {
-    this.requestUser();
-  }
-
-  getPage(ctx) {
-    console.log(ctx);
-  }
-
-  requestUser() {
-    getUser("tomisgreat", this.setRequest);
-  }
-
-  getRoute(event, route) {
-    event.preventDefault();
-    this.setState({route: route})
-  }
-
-  setRequest(returnedRequest) {
-    console.log(returnedRequest);
-    this.setState((prevState) => {
-      prevState = returnedRequest;
-      returnedRequest.user ? prevState.loggedIn = true : prevState.loggedIn = false;
-      return prevState;
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        window.localStorage.setItem(storageKey, user.uid);
+        this.setState({
+          uid: user.uid,
+          loggedIn: true
+        });
+      } else {
+        window.localStorage.removeItem(storageKey);
+        this.setState({
+          uid: null,
+          loggedIn: false
+        });
+      }
     });
-    console.log(this.state);
-  }
-
-  changeRoute(route) {
-    this.setState({route: route});
   }
 
   render() {
 
-    const pages ={
-      home: <Predictions user={this.state.user} gameData={this.state.game} route={this.changeRoute} />,
-      user: <UserPage user={this.state.user} />
-    }
 
+    if (!this.state.loggedIn) {
+      return <div>Loading...</div>
+    }
+    const pages ={
+      home: <Predictions user={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
+      profile: <Profile user={this.state.uid} />
+    }
 
     return (
       // we will return 
       // - <FixtureList />
       // --- <Fixture />
       // ----- Home & Away Team 
-      <div className="container">
-        <a href="/" onClick={(event) => this.getRoute(event, "/")}>Home</a>&nbsp;
-        <a href="/user" onClick={(event) => this.getRoute(event, "user")}>List</a>
-        {this.state.loggedIn && this.state.route === '/' ? pages.home : null}
-        {this.state.loggedIn && this.state.route === 'user' ? pages.user : <div>User loggin in...</div>}
-      </div>
+      <Router>
+        <div className="container">
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/profile">Profile</Link></li>
+          </ul>
+          <Route exact path="/" component={() => pages.home}/>
+          <Route exact path="/profile" component={() => pages.profile}/>
+        </div>
+      </Router>
+      
     );
   }
 }

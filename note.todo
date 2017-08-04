@@ -11,6 +11,10 @@ Tasks:
     ✔ then, Pass down props with user data like username and team name @done (17-08-03 19:09)
   ✔ In userPredictions put predictions in their own object @done (17-08-02 23:57)
     ☐ add booleans for hasSubmittedPredictions and resultTotalled and actual points score
+  ☐ Add sign up/login/logout pages and functions
+  ☐ Use logged in ID from aut to grab user data from Firebase 
+  ☐ Add team data to DB
+  ☐ Add state info to DB eg current season and gameweek
 
 Todo:
   ☐ Get how many 3s, 1s and 0s
@@ -27,7 +31,7 @@ Todo:
     Check if a user is logged in
       ~ yes - put path as /:user
       ~ no - put path to / 
-    ☐ User page (private)
+    ☐ Profile (private)
     ☐ Team page (public)
     ☐ League page (public)
   
@@ -41,4 +45,5 @@ Notes:
    Routing = https://medium.freecodecamp.org/you-might-not-need-react-router-38673620f3d
      library for parsing :typeurls https://github.com/pillarjs/path-to-regexp
      or history api https://github.com/reacttraining/history
+   Using Firebase and React Router: http://bodiddlie.github.io/firebase-auth-with-react-router/
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 
 import {Fixture} from '../components/fixture.jsx';
 
@@ -17,9 +16,6 @@ export default class FixtureList extends Component {
     this.setPredictions = this.setPredictions.bind(this);
   }
 
-  // NOT USED  
-  // Not if necessary to init state as i used conditional props
-  // 
   // this sets up what's diplayed in the score boxes
   // if user has made predictions before will show those
   // if not just defaults to the predictions 0-0
@@ -59,6 +55,8 @@ export default class FixtureList extends Component {
   // this will need to print one fixture for length of fixture list
   render() {
     const fixtures = this.props.fixtures;
+    // order the fixtures by date, so we can add the dates
+    // may just remove this later, not really important what time fixture is for game
     const sortFixtures = Object.keys(fixtures).sort(function(a,b) {
       let first = Date.parse(`${fixtures[a].date} ${fixtures[a].time}`)/1000;
       let second = Date.parse(`${fixtures[b].date} ${fixtures[b].time}`)/1000;
@@ -108,10 +106,3 @@ export default class FixtureList extends Component {
     );
   }
 }
-
-
-Fixture.propTypes = {
-  fixtures: PropTypes.array,
-  predictions: PropTypes.array,
-  submitPredictions: PropTypes.func,
-};
