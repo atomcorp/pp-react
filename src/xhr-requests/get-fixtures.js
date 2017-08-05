@@ -8,26 +8,56 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
   const fixtures = db.ref(fixturesRefString);
   const predictions = db.ref(predictionsRefString);
 
-  const getData = Promise.all([
-    new Promise((resolve, reject) => {
-      fixtures.on('value', (snapshot) => {
-        resolve(snapshot.val());
-      })
-    }),
-    new Promise((resolve, reject) => {
-      predictions.on('value', (snapshot) => {
-        resolve(snapshot.val());
-      })
-    }),
+  const cancelablePromise = makeCancelable(
+    Promise.all([
+        new Promise((resolve, reject) => {
+          fixtures.on('value', (snapshot) => {
+            resolve(snapshot.val());
+          })
+        }),
+        new Promise((resolve, reject) => {
+          predictions.on('value', (snapshot) => {
+            resolve(snapshot.val());
+          })
+        }),
+      ]).then((data) => {
+      // arrays return in order
+      const dataObject = {
+        fixtures: data[0],
+        predictions: data[1]
+      }
+      callback(dataObject);
+    })
+  );
 
-  ]);
+  cancelablePromise
+    .promise
+    .then(() => console.log('resolved'))
+    .catch((reason) => console.log('isCanceled', reason.isCanceled));
 
-  // arrays return in order
-  getData.then((data) => {
-    const dataObject = {
-      fixtures: data[0],
-      predictions: data[1]
-    }
-    callback(dataObject);
-  })
+  cancelablePromise.cancel(); // Cancel the promise
+
 }
+
+// Fix for warning:
+// "Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. 
+// This is a no-op. Please check the code for the <ComponentName> component.""
+// https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html
+const makeCancelable = (promise) => {
+  let hasCanceled_ = false;
+
+  const wrappedPromise = new Promise((resolve, reject) => {
+    promise.then(
+      val => hasCanceled_ ? reject({isCanceled: true}) : resolve(val),
+      error => hasCanceled_ ? reject({isCanceled: true}) : reject(error)
+    );
+  });
+
+  return {
+    promise: wrappedPromise,
+    cancel() {
+      hasCanceled_ = true;
+    },
+  };
+};
+

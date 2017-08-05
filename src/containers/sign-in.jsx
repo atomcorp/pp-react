@@ -30,10 +30,8 @@ export default class SignIn extends Component {
 
   canSubmit() {
     if (!this.state.errors.tooShort) {
-      const error = {};
       auth.signInWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
         console.log(error, Object.keys(error).length);
-        error = error;
       }).then((response) => {
         console.log(response);
         this.setState({redirect: true});

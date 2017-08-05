@@ -11,10 +11,11 @@ Tasks:
     ✔ then, Pass down props with user data like username and team name @done (17-08-03 19:09)
   ✔ In userPredictions put predictions in their own object @done (17-08-02 23:57)
     ☐ add booleans for hasSubmittedPredictions and resultTotalled and actual points score
-  ☐ Add sign up/login/logout pages and functions
+  ✔ Add sign up/login/logout pages and functions @done (17-08-04 22:43)
   ☐ Use logged in ID from aut to grab user data from Firebase 
   ☐ Add team data to DB
   ☐ Add state info to DB eg current season and gameweek
+  ☐ Add 
 
 Todo:
   ☐ Get how many 3s, 1s and 0s
@@ -47,4 +48,5 @@ Notes:
      or history api https://github.com/reacttraining/history
    Using Firebase and React Router: http://bodiddlie.github.io/firebase-auth-with-react-router/
    Setting state on properties of objects: https://stackoverflow.com/a/43639228/2368141
+   Fooball api, has matchdays/gameweeks: http://api.football-data.org
 

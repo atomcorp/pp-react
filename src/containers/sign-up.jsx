@@ -30,10 +30,8 @@ export default class SignUp extends Component {
 
   canSubmit() {
     if (!this.state.errors.tooShort) {
-      const error = {};
       auth.createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-        console.log(error, Object.keys(error).length);
-        error = error;
+        console.log(error);
       }).then((response) => {
         console.log(response);
         if(response) {

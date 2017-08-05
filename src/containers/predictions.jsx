@@ -22,20 +22,13 @@ export default class Predictions extends Component {
       predictions: null,
       canSubmit: true
     };
-    this.requestPredictions = this.requestPredictions.bind(this);
+
     this.setRequest = this.setRequest.bind(this);
     this.submitPredictions = this.submitPredictions.bind(this);
   }
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
-    this.requestPredictions();
-  }
-
-  // send an xhr to firebase for fixtures
-  // requests 2 data, fixtures (has teams, times etc)
-  // and predictions (if exists)
-  requestPredictions() {
     getFixtures(this.props.user, this.props.gameData, this.setRequest);
   }
 

@@ -52,7 +52,8 @@ class App extends Component {
     const pages ={
       home: <Predictions user={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
       profile: <Profile user={this.state.uid} />,
-      signUp: <SignUp />
+      signUp: <SignUp />,
+      logIn: <LogOut />
     }
 
     return (
@@ -62,18 +63,19 @@ class App extends Component {
       // ----- Home & Away Team 
       <Router>
         <div className="container">
-          <LogOut />
+          {this.state.loggedIn ? <LogOut /> : null}
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/profile">Profile</Link></li>
-            <li><Link to="/sign-up">Sign up</Link></li>
-            <li><Link to="/sign-in">Sign in</Link></li>
+            {this.state.loggedIn ? null : <li><Link to="/sign-up">Sign up</Link></li>}
+            {this.state.loggedIn ? null : <li><Link to="/log-in">Log in</Link></li>}
+
           </ul>
           
           <Route exact path="/" component={() => pages.home}/>
           <Route exact path="/sign-up" component={() => pages.signUp}/>
           <Route exact path="/profile" component={() => pages.profile}/>
-          <li><Link to="/sign-in">Log in</Link></li>
+          <Route exact path="/log-in" component={() => pages.logIn}/>
         </div>
       </Router>
       
