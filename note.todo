@@ -50,3 +50,14 @@ Notes:
    Setting state on properties of objects: https://stackoverflow.com/a/43639228/2368141
    Fooball api, has matchdays/gameweeks: http://api.football-data.org
 
+Userflow:
+   Is logged out:
+     - Nav = sitename + login / sign up
+     - Show predictions - user can input scores, on submit prompted to signup
+
+   Is logged in:
+      - User can enter predictions
+      - Can submit predictions
+      - Can logout
+      - Can view user page
+      - Can viewe league

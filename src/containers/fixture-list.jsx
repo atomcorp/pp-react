@@ -60,14 +60,13 @@ export default class FixtureList extends Component {
     const sortFixtures = Object.keys(fixtures).sort(function(a,b) {
       let first = Date.parse(`${fixtures[a].date} ${fixtures[a].time}`)/1000;
       let second = Date.parse(`${fixtures[b].date} ${fixtures[b].time}`)/1000;
-      return (
-        first - second
-      );
+      return first - second;
     });
     const fixtureElements = sortFixtures.map((id, index) => {
       return <Fixture 
         id={fixtures[id].id} 
         key={fixtures[id].id} 
+        points={this.state.predictions[id].points}
         homeScore={this.state.predictions[id].homeScore} 
         awayScore={this.state.predictions[id].awayScore} 
         homeResult={fixtures[id].homeScore} 
@@ -76,7 +75,6 @@ export default class FixtureList extends Component {
         away={fixtures[id].away} 
         time={fixtures[id].time}
         date={fixtures[id].date}
-        points={this.state.predictions[id].points}
         onChange={this.onChange} 
         />;
     });

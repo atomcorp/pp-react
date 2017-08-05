@@ -4,6 +4,23 @@ export class Fixture extends Component {
   constructor(props) {
     super(props);
     this.onChange = this.onChange.bind(this);
+    this.colour = this.colour.bind(this);
+  }
+
+  componentDidMount() {
+
+  }
+
+  colour(points) {
+    let colour = '';
+    if (points === 3) {
+      colour = 'green';
+    } else if (points === 1) {
+      colour = 'yellow';
+    } else if (points === 0) {
+      colour = 'red';
+    }
+    return colour;
   }
 
   onChange(event, homeOrAway, id) {
@@ -15,16 +32,8 @@ export class Fixture extends Component {
   // take 2 team names
   // and print the tds 
   render() {
-    let colour = '';
-    if (this.props.points === 3) {
-      colour = 'green';
-    } else if (this.props.points === 1) {
-      colour = 'yellow';
-    } else {
-      colour = 'red';
-    }
     return (
-        <tr style={{backgroundColor:colour}}>
+        <tr style={{backgroundColor: this.colour(this.props.points)}}>
           <td>{formatDate(this.props.date, this.props.time)}</td>
           <td>{this.props.home}</td>
           <td>

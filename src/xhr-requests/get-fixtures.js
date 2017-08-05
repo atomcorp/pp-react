@@ -1,6 +1,20 @@
 import {db} from '../firebase-connect';
 
+import {footballDataOrg} from '../api.js';
+
 export default function getFixturesFromFirebase(uid, gameData, callback) {
+  var myInit = { 
+    headers: { 'X-Auth-Token': footballDataOrg }
+  };
+  fetch('http://api.football-data.org/v1/competitions/445/fixtures/?matchday=1', myInit).then(function(response) {
+    if (response.status === 200) {
+      return response.json();
+    }
+    else throw new Error('Something went wrong on api server!');
+  })
+  .then(function(response) {
+      console.log(response);
+  });
 
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const fixturesRefString = `/${gameData.season}/${gameData.gameweek}/`;
