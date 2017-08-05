@@ -33,7 +33,7 @@ export class Fixture extends Component {
   // and print the tds 
   render() {
     return (
-        <tr style={{backgroundColor: this.colour(this.props.points)}}>
+        <tr>
           <td>{formatDate(this.props.date, this.props.time)}</td>
           <td>{this.props.home}</td>
           <td>
@@ -48,6 +48,8 @@ export class Fixture extends Component {
     );
   }
 }
+
+// helpers
 
 var weekday = new Array(7);
 weekday[0] =  "Sunday";

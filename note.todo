@@ -16,6 +16,10 @@ Tasks:
   ☐ Add team data to DB
   ☐ Add state info to DB eg current season and gameweek
   ☐ Add a check for getting correct gameweek
+  ☐ Add on load request, gte:
+    ☐ Weeks fixtures
+    ☐ Predictions (if any)
+    ☐ User data
 
 Todo:
   ☐ Get how many 3s, 1s and 0s

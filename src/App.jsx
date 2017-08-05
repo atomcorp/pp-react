@@ -47,7 +47,12 @@ class App extends Component {
   render() {
 
     if (!this.state.loggedIn) {
-      return <SignIn />
+      return (
+        <div>
+          <SignIn />
+          <SignUp />
+        </div>
+      );
     }
     const pages ={
       home: <Predictions user={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,

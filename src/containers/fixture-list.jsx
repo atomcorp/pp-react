@@ -38,7 +38,6 @@ export default class FixtureList extends Component {
 
   // when users changes the scores
   onChange(input, homeOrAway, id) {
-    console.log(input, homeOrAway, id)
     const score = parseInt(input, 10);
     // https://stackoverflow.com/a/38779819/2368141
     this.setState((prevState) => {
