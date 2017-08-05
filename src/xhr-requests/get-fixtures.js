@@ -3,18 +3,27 @@ import {db} from '../firebase-connect';
 import {footballDataOrg} from '../api.js';
 
 export default function getFixturesFromFirebase(uid, gameData, callback) {
-  var myInit = { 
+  const header = { 
     headers: { 'X-Auth-Token': footballDataOrg }
   };
-  fetch('http://api.football-data.org/v1/competitions/445/fixtures/?matchday=1', myInit).then(function(response) {
-    if (response.status === 200) {
-      return response.json();
-    }
-    else throw new Error('Something went wrong on api server!');
-  })
-  .then(function(response) {
-      console.log(response);
-  });
+  const cancelablePromise = makeCancelable(
+  fetch('http://api.football-data.org/v1/competitions/445/fixtures/?matchday=1', header)
+    .then(function(response) {
+      // send request to the api for browser to check we're allowed
+      if (response.status === 200) {
+        return response.json();
+      }
+      else throw new Error('Something went wrong on api server!');
+    })
+    .then(function(response) {
+      // if succesful we get data!
+      const dataObject = {
+        fixtures: response,
+        predictions: null
+      }
+      callback(dataObject);
+    })
+  );
 
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const fixturesRefString = `/${gameData.season}/${gameData.gameweek}/`;
@@ -22,27 +31,27 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
   const fixtures = db.ref(fixturesRefString);
   const predictions = db.ref(predictionsRefString);
 
-  const cancelablePromise = makeCancelable(
-    Promise.all([
-        new Promise((resolve, reject) => {
-          fixtures.on('value', (snapshot) => {
-            resolve(snapshot.val());
-          })
-        }),
-        new Promise((resolve, reject) => {
-          predictions.on('value', (snapshot) => {
-            resolve(snapshot.val());
-          })
-        }),
-      ]).then((data) => {
-      // arrays return in order
-      const dataObject = {
-        fixtures: data[0],
-        predictions: data[1]
-      }
-      callback(dataObject);
-    })
-  );
+  // const cancelablePromise = makeCancelable(
+  //   Promise.all([
+  //       new Promise((resolve, reject) => {
+  //         fixtures.on('value', (snapshot) => {
+  //           resolve(snapshot.val());
+  //         })
+  //       }),
+  //       new Promise((resolve, reject) => {
+  //         predictions.on('value', (snapshot) => {
+  //           resolve(snapshot.val());
+  //         })
+  //       }),
+  //     ]).then((data) => {
+  //     // arrays return in order
+  //     const dataObject = {
+  //       fixtures: data[0],
+  //       predictions: data[1]
+  //     }
+  //     callback(dataObject);
+  //   })
+  // );
 
   cancelablePromise
     .promise
