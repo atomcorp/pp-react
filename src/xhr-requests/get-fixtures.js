@@ -17,8 +17,15 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
     })
     .then(function(response) {
       // if succesful we get data!
+      console.log(response);
+      const fixtures = response.fixtures.reduce(function(obj, item, index) {
+        // obj is the {} at the end of reduce
+        // each loop adds a new obj
+        obj = Object.assign(obj, {[`fixture${index}`]: item})
+        return obj;
+      }, {});
       const dataObject = {
-        fixtures: response,
+        fixtures: fixtures,
         predictions: null
       }
       callback(dataObject);

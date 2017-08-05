@@ -37,7 +37,7 @@ export default class Predictions extends Component {
   setRequest(returnedRequest) {
     console.log(returnedRequest);
     this.setState({
-      fixtures: returnedRequest.fixtures.fixtures,
+      fixtures: returnedRequest.fixtures,
       predictions: returnedRequest.predictions
     });
   }

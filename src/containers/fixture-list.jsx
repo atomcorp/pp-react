@@ -24,29 +24,21 @@ export default class FixtureList extends Component {
       return this.props.predictions;
     } 
     const fixtures = this.props.fixtures;
-    let predictionResult = {};
-    // https://stackoverflow.com/a/4215753/2368141
-    predictionResult = fixtures.reduce(function(result, currentValue, currentIndex, array) {
-      result[`fixture${currentIndex}`] = {
-        homeScore: array[currentIndex].result.goalsHomeTeam ? array[currentIndex].result.goalsHomeTeam : 0,
-        awayScore: array[currentIndex].result.goalsAwayTeam ? array[currentIndex].result.goalsAwayTeam : 0,
-        id: `fixture${currentIndex}`
+    let result = {};
+    for (const id in fixtures) { 
+      const fixture = fixtures[id];
+      result[id] = {
+        homeScore: fixture.result.goalsHomeTeam ? fixture.result.goalsHomeTeam : 0,
+        awayScore: fixture.result.goalsAwayTeam ? fixture.result.goalsAwayTeam : 0,
+        id: id
       };
-      return result;
-    }, {});
-    // for (const id in fixtures) { 
-    //   const fixture = fixtures[id];
-    //   result[fixture.id] = {
-    //     homeScore: fixture.homeScore,
-    //     awayScore: fixture.awayScore,
-    //     id: fixture.id
-    //   };
-    // }    
-    return predictionResult;
+    }    
+    return result;
   }
 
   // when users changes the scores
   onChange(input, homeOrAway, id) {
+    console.log(input, homeOrAway, id)
     const score = parseInt(input, 10);
     // https://stackoverflow.com/a/38779819/2368141
     this.setState((prevState) => {
@@ -63,14 +55,9 @@ export default class FixtureList extends Component {
 
   // this will need to print one fixture for length of fixture list
   render() {
-    const fixtures = this.props.fixtures.reduce(function(obj, item, index) {
-      obj = Object.assign(obj, {[`fixture${index}`]: item})
-      console.log(obj)
-      return obj;
-    }, {});
+    const fixtures = this.props.fixtures;
     // order the fixtures by date, so we can add the dates
     // may just remove this later, not really important what time fixture is for game
-    console.log(fixtures);
     const sortFixtures = Object.keys(fixtures).sort(function(a,b) {
       let first = Date.parse(`${fixtures[a].date} ${fixtures[a].time}`)/1000;
       let second = Date.parse(`${fixtures[b].date} ${fixtures[b].time}`)/1000;
@@ -78,8 +65,8 @@ export default class FixtureList extends Component {
     });
     const fixtureElements = sortFixtures.map((id, index) => {
       return <Fixture 
-        id={fixtures[id].id} 
-        key={fixtures[id].id} 
+        id={id} 
+        key={index} 
         points={this.state.predictions[id].points}
         homeScore={this.state.predictions[id].homeScore} 
         awayScore={this.state.predictions[id].awayScore} 
