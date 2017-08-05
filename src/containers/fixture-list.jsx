@@ -59,8 +59,8 @@ export default class FixtureList extends Component {
     // order the fixtures by date, so we can add the dates
     // may just remove this later, not really important what time fixture is for game
     const sortFixtures = Object.keys(fixtures).sort(function(a,b) {
-      let first = Date.parse(`${fixtures[a].date} ${fixtures[a].time}`)/1000;
-      let second = Date.parse(`${fixtures[b].date} ${fixtures[b].time}`)/1000;
+      let first = Date.parse(`${fixtures[a].date}`)/1000;
+      let second = Date.parse(`${fixtures[b].date}`)/1000;
       return first - second;
     });
     const fixtureElements = sortFixtures.map((id, index) => {
@@ -74,7 +74,6 @@ export default class FixtureList extends Component {
         awayResult={fixtures[id].awayScore} 
         home={fixtures[id].homeTeamName} 
         away={fixtures[id].awayTeamName} 
-        time={fixtures[id].time}
         date={fixtures[id].date}
         onChange={this.onChange} 
         />;

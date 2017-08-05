@@ -7,7 +7,6 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
     headers: { 'X-Auth-Token': footballDataOrg }
   };
 
-
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const predictionsRefString = `/usersPredictions/${uid}/${gameData.season}/${gameData.gameweek}/predictions`;
   const predictions = db.ref(predictionsRefString);

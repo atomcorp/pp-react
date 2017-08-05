@@ -61,16 +61,25 @@ weekday[6] = "Saturday";
 let isUnique = true;
 
 // should probablt do all this on submit
-function formatDate(day, time) {
-  let formattedTime = Date.parse(`${day} ${time}`)/1000;
+function formatDate(day) {
+  let formattedTime = Date.parse(`${day}`)/1000;
   formattedTime = new Date(formattedTime * 1000);
   const dayOfTheWeek = weekday[formattedTime.getDay()];
   const date = formattedTime.getDate();
-  const formattedDate = `${dayOfTheWeek} ${date} ${time}`;
+  const minutes = formatMinutes(formattedTime);
+  const formattedDate = `${dayOfTheWeek} ${date} ${formattedTime.getHours()}:${minutes}`;
   if (isUnique && isUnique !== formattedDate) {
     isUnique = formattedDate;
     return formattedDate;
   } 
+}
+
+function formatMinutes(time) {
+  let minutes = time.getMinutes();
+  if (minutes < 9) {
+    minutes = '0' + minutes;
+  }
+  return minutes;
 }
 
 // todo: user can still input a dot (.) after a number
