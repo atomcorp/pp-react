@@ -13,10 +13,11 @@ Tasks:
     ☐ add booleans for hasSubmittedPredictions and resultTotalled and actual points score
   ✔ Add sign up/login/logout pages and functions @done (17-08-04 22:43)
   ☐ Use logged in ID from aut to grab user data from Firebase 
+  ☐ Sign up form, fields to add: username, teamname, and upload them to server on create
   ☐ Add team data to DB
   ☐ Add state info to DB eg current season and gameweek
   ☐ Add a check for getting correct gameweek
-  ☐ Add on load request, gte:
+  ☐ Add on load request, get:
     ☐ Weeks fixtures
     ☐ Predictions (if any)
     ☐ User data
@@ -43,7 +44,8 @@ Todo:
 Thoughts: 
   Can only change the team name once a season
   Add a one offs prediction game (you just do one gameweek)
-  You pick a favourite team - get double points for those results
+  You pick a favourite team - get double points for those results = bad
+  Star a prediction each week
 
 Notes:
    React folder structure = https://daveceddia.com/react-project-structure/
@@ -53,13 +55,17 @@ Notes:
    Using Firebase and React Router: http://bodiddlie.github.io/firebase-auth-with-react-router/
    Setting state on properties of objects: https://stackoverflow.com/a/43639228/2368141
    Fooball api, has matchdays/gameweeks: http://api.football-data.org
+   // react router help: https://css-tricks.com/react-router-4/]
+   I can set up a cron job to run a page that checks stuff like game week and in play
+     (eg https://github.com/firebase/functions-samples/tree/master/delete-unused-accounts-cron)
 
 Userflow:
    Is logged out:
      - Nav = sitename + login / sign up
      - Show predictions - user can input scores, on submit prompted to signup
 
-   Is logged in:
+ Is logged in:
+    - we auto get their id
       - get users name and team
       - Get current gameweek
         - check gameweek on football-data api
@@ -70,3 +76,16 @@ Userflow:
         - check if user has made predictions
           - if not use fixtures data
           - if so pull from firebase and use that instead or fixtures data
+        - check if games have been played and therefore we show results
+
+Key data:
+  - if logged in get user id
+    - get data fb-db api, then update firebase
+      - gameweek
+      - set server time
+    - get fixture data from fb-db api
+      - compare date of last game with server time
+    - get users personal data
+      - name
+      - team
+ 

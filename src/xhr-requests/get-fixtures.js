@@ -10,42 +10,53 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const predictionsRefString = `/usersPredictions/${uid}/${gameData.season}/${gameData.gameweek}/predictions`;
   const predictions = db.ref(predictionsRefString);
+  const userRefString = `/users/${uid}/`;
+  const user = db.ref(userRefString);
+  const premierLeagueData = 'http://api.football-data.org/v1/competitions/445';
 
   const cancelablePromise = makeCancelable(
     // this all mighty mess makes 
     // 1. call to football-data for fixtures
     // 2. call to firebase for predictions (if available)
+
     Promise.all([
-      fetch('http://api.football-data.org/v1/competitions/445/fixtures/?matchday=1', header)
-        .then(function(response) {
-          // send request to the api for browser to check we're allowed
-          if (response.status === 200) {
-            return response.json();
-          }
-          else throw new Error('Something went wrong on api server!');
-        })
-        .then(function(response) {
-          // if succesful we get data!
-          // convert the array we receive into an object
-          // and assign an id
-          const fixtures = response.fixtures.reduce(function(obj, item, index) {
-            // obj is the {} at the end of reduce
-            // each loop adds a new obj
-            obj = Object.assign(obj, {[`fixture${index}`]: item})
-            return obj;
-          }, {});
-          return fixtures;
-        }),
+      fetch(`${premierLeagueData}/fixtures/?matchday=1`, header).then(function(response) {
+        // send request to the api for browser to check we're allowed
+        if (response.status === 200) {
+          return response.json();
+        }
+        else throw new Error('Something went wrong on api server!');
+      }).then(function(response) {
+        // if succesful we get data!
+        // convert the array we receive into an object
+        // and assign an id
+        const fixtures = response.fixtures.reduce(function(obj, item, index) {
+          // obj is the {} at the end of reduce
+          // each loop adds a new obj
+          obj = Object.assign(obj, {[`fixture${index}`]: item})
+          return obj;
+        }, {});
+        return fixtures;
+      }),
       new Promise((resolve, reject) => {
         predictions.on('value', (snapshot) => {
+          console.log(snapshot);
           resolve(snapshot.val());
         })
       }),
+      new Promise((resolve, reject) => {
+        user.on('value', (snapshot) => {
+          console.log(snapshot);
+          resolve(snapshot.val());
+        })
+      })
     ]).then((data) => {
-    // arrays return in order
+      // arrays return in order
+      console.log(data);
       const dataObject = {
         fixtures: data[0],
-        predictions: data[1]
+        predictions: data[1],
+        user: data[2],
       }
       callback(dataObject);
     })

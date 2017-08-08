@@ -1,4 +1,4 @@
-// container
+// This container sets up the game
 
 import React, {Component} from 'react';
 
@@ -9,9 +9,7 @@ import PredictionsResult from '../components/predictions-result.jsx';
 import getFixtures from '../xhr-requests/get-fixtures.js';
 import sendPredictions from '../xhr-requests/set-predictions.js';
 
-// import {SubmitPredictions} from './components/submit-predictions.jsx';
-
-export default class Predictions extends Component {
+export default class Game extends Component {
 
   constructor(props) {
     super(props);
@@ -20,7 +18,12 @@ export default class Predictions extends Component {
     this.state = {
       fixtures: null,
       predictions: null,
-      canSubmit: true
+      player: null,
+      canSubmit: true,
+      settings: {
+        season: "season2017",
+        gameweek: "gameweek1",
+      },
     };
 
     this.setRequest = this.setRequest.bind(this);
@@ -29,36 +32,39 @@ export default class Predictions extends Component {
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
-    getFixtures(this.props.user, this.props.gameData, this.setRequest);
+    getFixtures(this.props.uid, this.state.settings, this.setRequest);
   }
 
   // receives data returned from xhr firebase
   // and sets the apps state
   setRequest(returnedRequest) {
-    console.log(returnedRequest);
+    console.log(returnedRequest)
     this.setState({
       fixtures: returnedRequest.fixtures,
-      predictions: returnedRequest.predictions
+      predictions: returnedRequest.predictions,
+      player: returnedRequest.player
     });
   }
 
   submitPredictions(predictions) {
-    sendPredictions(this.props.user, this.props.gameData, predictions);
+    sendPredictions(this.props.uid, this.state.settings, predictions);
   }
 
   render() {
+
     if (!this.state.fixtures) {
       return <div>Loading...</div>;
     }
     
     return (
       <div>
-        <h2>{this.props.user}</h2>
-        <h4>User: {this.props.user}</h4>
-        <FixtureList user={this.props.user} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
-        {this.state.predictions ? (
-          <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions} />
-        ) : (<div>No results yet</div>)}
+        <h2>{this.state.player.team}</h2>
+        <h4>Managed by {this.state.player.name}</h4>
+        <FixtureList uid={this.props.uid} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
+        {this.state.predictions 
+          ?  <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions} />
+          : (<div>No results yet</div>)
+        }
       </div>
     );
   }

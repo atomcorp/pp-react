@@ -68,8 +68,9 @@ function formatDate(day) {
   formattedTime = new Date(formattedTime * 1000);
   const dayOfTheWeek = weekday[formattedTime.getDay()];
   const date = formattedTime.getDate();
+  const month = formattedTime.getMonth();
   const minutes = formatMinutes(formattedTime);
-  const formattedDate = `${dayOfTheWeek} ${date} ${formattedTime.getHours()}:${minutes}`;
+  const formattedDate = `${dayOfTheWeek} ${date}/${month} ${formattedTime.getHours()}:${minutes}`;
   if (isUnique && isUnique !== formattedDate) {
     isUnique = formattedDate;
     return formattedDate;

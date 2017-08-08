@@ -9,3 +9,4 @@ export const storageKey = 'KEY_FOR_LOCAL_STORAGE';
 export const isAuthenticated = () => {
   return !!auth.currentUser || !!localStorage.getItem(storageKey);
 }
+
