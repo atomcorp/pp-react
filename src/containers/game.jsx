@@ -34,7 +34,7 @@ export default class Game extends Component {
   componentDidMount() {
     getFixtures(this.props.uid, this.state.settings, this.setRequest);
   }
-
+ 
   // receives data returned from xhr firebase
   // and sets the apps state
   setRequest(returnedRequest) {
