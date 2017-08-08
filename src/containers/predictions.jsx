@@ -31,7 +31,7 @@ export default class Predictions extends Component {
   componentDidMount() {
     getFixtures(this.props.user, this.props.gameData, this.setRequest);
   }
-
+ 
   // receives data returned from xhr firebase
   // and sets the apps state
   setRequest(returnedRequest) {
