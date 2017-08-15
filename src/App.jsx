@@ -20,19 +20,20 @@ class App extends Component {
     this.state = {
       route: '/',
       game: {
-        season: "14-15",
-        gameweek: "gameweek1",
+        season: "",
+        gameweek: "",
       },
-      loggedIn: false
+      loggedIn: false,
+      bootstrappedGame: false
     };
+
+    this.handleGameBootstrap = this.handleGameBootstrap.bind(this);
   }
 
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
-        bootstrapGame.then((result) => {
-          console.log(result);
-        })
+        this.handleGameBootstrap();
         window.localStorage.setItem(storageKey, user.uid);
         this.setState({
           uid: user.uid,
@@ -40,15 +41,35 @@ class App extends Component {
         });
       } else {
         window.localStorage.removeItem(storageKey);
-        this.setState({
-          uid: null,
-          loggedIn: false
-        });
+        this.setState();
       }
     });
   }
 
+  handleGameBootstrap() {
+
+    bootstrapGame.then((result) => {
+      this.setState({
+        ...this.state, game: {
+          season: result.year,
+          gameweek: result.currentMatchday,
+        },
+        bootstrappedGame: true
+      });
+    }).then(() => {
+      console.log(this.state);
+    })
+  }
+
   render() {
+
+    if (!this.state.bootstrappedGame) {
+      return(
+        <div>
+          Loading...
+        </div>
+      );
+    }
 
     if (!this.state.loggedIn) {
       return (

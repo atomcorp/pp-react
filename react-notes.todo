@@ -1,0 +1,10 @@
+Setting state:
+  - Using Object Spread Operator
+  this.setState({
+    ...this.state, newObject: {
+      season: result.year,
+      gameweek: result.currentMatchday,
+    }
+  });
+  // http://redux.js.org/docs/recipes/UsingObjectSpreadOperator.html
+  // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator
