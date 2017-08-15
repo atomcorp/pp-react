@@ -47,7 +47,6 @@ class App extends Component {
   }
 
   handleGameBootstrap() {
-
     bootstrapGame.then((result) => {
       this.setState({
         ...this.state, game: {
@@ -56,9 +55,7 @@ class App extends Component {
         },
         bootstrappedGame: true
       });
-    }).then(() => {
-      console.log(this.state);
-    })
+    });
   }
 
   render() {
