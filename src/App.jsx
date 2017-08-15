@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'; 
 import './App.css';
 
-import Predictions from './containers/predictions.jsx';
+import Game from './containers/game.jsx';
 import SignUp from './containers/sign-up.jsx';
 import LogOut from './containers/log-out.jsx';
 import SignIn from './containers/sign-in.jsx';
@@ -55,7 +55,7 @@ class App extends Component {
       );
     }
     const pages ={
-      home: <Predictions user={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
+      home: <Game user={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
       profile: <Profile user={this.state.uid} />,
       signUp: <SignUp />,
       logIn: <LogOut />
