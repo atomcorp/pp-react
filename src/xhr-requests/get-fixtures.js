@@ -1,10 +1,10 @@
 import {db} from '../firebase-connect';
 
-import {footballDataOrg} from '../api.js';
+import {FB_DATA_API} from '../api.js';
 
 export default function getFixturesFromFirebase(uid, gameData, callback) {
   const header = { 
-    headers: { 'X-Auth-Token': footballDataOrg }
+    headers: { 'X-Auth-Token': FB_DATA_API }
   };
 
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request

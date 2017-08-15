@@ -83,9 +83,9 @@ Key data:
     - get data fb-db api, then update firebase
       - gameweek
       - set server time
-    - get fixture data from fb-db api
-      - compare date of last game with server time
-    - get users personal data
-      - name
-      - team
+      - get fixture data from fb-db api
+        - compare date of last game with server time
+      - get users personal data
+        - name
+        - team
  

@@ -9,6 +9,7 @@ import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
 
+import {bootstrapGame} from './xhr-requests';
 import {auth, storageKey} from './firebase-connect.js';
 
 // import SetFixtures from './xhr-requests/set-fixtures';
@@ -29,6 +30,9 @@ class App extends Component {
   componentDidMount() {
     auth.onAuthStateChanged(user => {
       if (user) {
+        bootstrapGame.then((result) => {
+          console.log(result);
+        })
         window.localStorage.setItem(storageKey, user.uid);
         this.setState({
           uid: user.uid,
