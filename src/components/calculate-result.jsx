@@ -12,13 +12,13 @@ function compareScores(predictions, results) {
     let score = 0;
     const id = prediction;
     const scores = predictions[id];
-    if (scores.homeScore === results[id].homeScore && scores.awayScore === results[id].awayScore) {
+    if (scores.homeScore === results[id].result.goalsHomeTeam && scores.awayScore === results[id].result.goalsAwayTeam) {
       score = 3;
-    } else if (calculateWinType(scores.homeScore, scores.awayScore) === calculateWinType(results[id].homeScore, results[id].awayScore)) {
+    } else if (calculateWinType(scores.homeScore, scores.awayScore) === calculateWinType(results[id].result.goalsHomeTeam, results[id].result.goalsAwayTeam)) {
       score = 1;
     }
     cumulativeScore += score;
-    // const test = `${results[id].home} v ${results[id].away}: ${results[id].homeScore}:${scores.awayScore} | ${scores.homeScore}:${results[id].awayScore}`;
+    // const test = `${results[id].home} v ${results[id].away}: ${results[id].result.goalsHomeTeam}:${scores.awayScore} | ${scores.homeScore}:${results[id].result.goalsAwayTeam}`;
     predictions[id].points = score;
   }
   return cumulativeScore;

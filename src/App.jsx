@@ -7,10 +7,10 @@ import SignUp from './containers/sign-up.jsx';
 import LogOut from './containers/log-out.jsx';
 import SignIn from './containers/sign-in.jsx';
 
-import getUser from './xhr-requests/get-user';
 import Profile from './components/profile.jsx';
 
-import {auth, storageKey, db} from './firebase-connect.js';
+import {bootstrapGame} from './xhr-requests';
+import {auth, storageKey} from './firebase-connect.js';
 
 // import SetFixtures from './xhr-requests/set-fixtures';
 // SetFixtures();
@@ -19,8 +19,15 @@ class App extends Component {
     super(props);
     this.state = {
       route: '/',
-      loggedIn: false
+      game: {
+        season: "",
+        gameweek: "",
+      },
+      loggedIn: false,
+      bootstrappedGame: false
     };
+
+    this.handleGameBootstrap = this.handleGameBootstrap.bind(this);
   }
 
   componentDidMount() {
@@ -28,6 +35,7 @@ class App extends Component {
     // if user logs out will update app
     auth.onAuthStateChanged(user => {
       if (user) {
+        this.handleGameBootstrap();
         window.localStorage.setItem(storageKey, user.uid);
         this.setState({
           uid: user.uid,
@@ -35,19 +43,32 @@ class App extends Component {
         });
       } else {
         window.localStorage.removeItem(storageKey);
-        this.setState({
-          uid: null,
-          loggedIn: false
-        });
+        this.setState();
       }
     });
   }
 
-  componentWillUnmount() {
-    console.log('unmounted');
+  handleGameBootstrap() {
+    bootstrapGame.then((result) => {
+      this.setState({
+        ...this.state, game: {
+          season: result.year,
+          gameweek: result.currentMatchday,
+        },
+        bootstrappedGame: true
+      });
+    });
   }
 
   render() {
+
+    if (!this.state.bootstrappedGame) {
+      return(
+        <div>
+          Loading game...
+        </div>
+      );
+    }
 
     if (!this.state.loggedIn) {
       return (
@@ -58,8 +79,8 @@ class App extends Component {
       );
     }
     const pages ={
-      home: <Game uid={this.state.uid} route={this.changeRoute} />,
-      profile: <Profile uid={this.state.uid} />,
+      home: <Game uid={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
+      profile: <Profile user={this.state.uid} />,
       signUp: <SignUp />,
       logIn: <LogOut />
     }

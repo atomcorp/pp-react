@@ -20,10 +20,6 @@ export default class Game extends Component {
       predictions: null,
       player: null,
       canSubmit: true,
-      settings: {
-        season: "season2017",
-        gameweek: "gameweek1",
-      },
     };
 
     this.setRequest = this.setRequest.bind(this);
@@ -32,9 +28,9 @@ export default class Game extends Component {
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
-    getFixtures(this.props.uid, this.state.settings, this.setRequest);
+    getFixtures(this.props.uid, this.props.gameData, this.setRequest);
   }
-
+ 
   // receives data returned from xhr firebase
   // and sets the apps state
   setRequest(returnedRequest) {
@@ -42,20 +38,18 @@ export default class Game extends Component {
     this.setState({
       fixtures: returnedRequest.fixtures,
       predictions: returnedRequest.predictions,
-      player: returnedRequest.player
+      player: returnedRequest.user
     });
   }
 
   submitPredictions(predictions) {
-    sendPredictions(this.props.uid, this.state.settings, predictions);
+    sendPredictions(this.props.uid, this.props.gameData, predictions);
   }
 
   render() {
-
     if (!this.state.fixtures) {
-      return <div>Loading...</div>;
+      return <div>Loading fixtures...</div>;
     }
-    
     return (
       <div>
         <h2>{this.state.player.team}</h2>

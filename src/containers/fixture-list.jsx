@@ -69,8 +69,8 @@ export default class FixtureList extends Component {
         points={this.state.predictions[id].points}
         homeScore={this.state.predictions[id].homeScore} 
         awayScore={this.state.predictions[id].awayScore} 
-        homeResult={fixtures[id].homeScore} 
-        awayResult={fixtures[id].awayScore} 
+        homeResult={fixtures[id].result.goalsHomeTeam} 
+        awayResult={fixtures[id].result.goalsAwayTeam} 
         home={fixtures[id].homeTeamName} 
         away={fixtures[id].awayTeamName} 
         date={fixtures[id].date}

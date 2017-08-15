@@ -1,14 +1,14 @@
 import {db} from '../firebase-connect';
 
-import {footballDataOrg} from '../api.js';
+import {FB_DATA_API} from '../api.js';
 
 export default function getFixturesFromFirebase(uid, gameData, callback) {
   const header = { 
-    headers: { 'X-Auth-Token': footballDataOrg }
+    headers: { 'X-Auth-Token': FB_DATA_API }
   };
-
+  
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
-  const predictionsRefString = `/usersPredictions/${uid}/${gameData.season}/${gameData.gameweek}/predictions`;
+  const predictionsRefString = `/usersPredictions/${uid}/season${gameData.season}/gameweek${gameData.gameweek}/predictions`;
   const predictions = db.ref(predictionsRefString);
   const userRefString = `/users/${uid}/`;
   const user = db.ref(userRefString);
@@ -20,7 +20,7 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
     // 2. call to firebase for predictions (if available)
 
     Promise.all([
-      fetch(`${premierLeagueData}/fixtures/?matchday=1`, header).then(function(response) {
+      fetch(`${premierLeagueData}/fixtures/?matchday=${gameData.gameweek}`, header).then(function(response) {
         // send request to the api for browser to check we're allowed
         if (response.status === 200) {
           return response.json();
@@ -34,19 +34,17 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
           // obj is the {} at the end of reduce
           // each loop adds a new obj
           obj = Object.assign(obj, {[`fixture${index}`]: item})
-          return obj;
-        }, {});
+            return obj;
+          }, {});
         return fixtures;
       }),
       new Promise((resolve, reject) => {
         predictions.on('value', (snapshot) => {
-          console.log(snapshot);
           resolve(snapshot.val());
         })
       }),
       new Promise((resolve, reject) => {
         user.on('value', (snapshot) => {
-          console.log(snapshot);
           resolve(snapshot.val());
         })
       })
