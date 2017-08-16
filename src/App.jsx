@@ -14,6 +14,7 @@ import {auth, storageKey} from './firebase-connect.js';
 
 // import SetFixtures from './xhr-requests/set-fixtures';
 // SetFixtures();
+
 class App extends Component {
   constructor(props) {
     super(props);
