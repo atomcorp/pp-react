@@ -61,11 +61,11 @@ export default class SignUp extends Component {
         <h1>Sign up</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
-            User name:
+            Email:
             <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
           </label>
           <label>
-            User name:
+            Password:
             <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />

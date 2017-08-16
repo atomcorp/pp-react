@@ -12,15 +12,15 @@ Tasks:
   ✔ In userPredictions put predictions in their own object @done (17-08-02 23:57)
     ☐ add booleans for hasSubmittedPredictions and resultTotalled and actual points score
   ✔ Add sign up/login/logout pages and functions @done (17-08-04 22:43)
-  ☐ Use logged in ID from aut to grab user data from Firebase 
+  ✔ Use logged in ID from aut to grab user data from Firebase @done (17-08-15 22:40)
   ☐ Sign up form, fields to add: username, teamname, and upload them to server on create
   ☐ Add team data to DB
   ☐ Add state info to DB eg current season and gameweek
   ☐ Add a check for getting correct gameweek
-  ☐ Add on load request, get:
-    ☐ Weeks fixtures
-    ☐ Predictions (if any)
-    ☐ User data
+  ✔ Add on load request, get: @done (17-08-15 22:56)
+    ✔ Weeks fixtures @done (17-08-15 22:56)
+    ✔ Predictions (if any) @done (17-08-15 22:56)
+    ✔ User data @done (17-08-15 22:56)
 
 Todo:
   ☐ Get how many 3s, 1s and 0s
@@ -28,7 +28,7 @@ Todo:
   League:
     ☐ Make one
   Login:
-    ☐ Browser state
+    ✔ Browser state @done (17-08-15 22:56)
   Routing:
   ☐ add routing
   Attach route to state
@@ -69,7 +69,7 @@ Userflow:
       - get users name and team
       - Get current gameweek
         - check gameweek on football-data api
-          - compare with db
+          -? compare with db
         - get fixtures for gameweek
           - check if fixtures are on the firebase db, if so grab
           - if not link up to football-data api and add the, to firebase

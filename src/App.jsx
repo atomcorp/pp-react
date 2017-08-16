@@ -62,7 +62,7 @@ class App extends Component {
 
   render() {
 
-    if (!this.state.bootstrappedGame) {
+    if (!this.state.bootstrappedGame && this.state.loggedIn) {
       return(
         <div>
           Loading game...
