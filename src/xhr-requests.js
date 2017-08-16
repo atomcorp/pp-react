@@ -17,11 +17,12 @@ export const bootstrapGame = fetch(`${leagueData}`, header).then(function(respon
   else throw new Error('Something went wrong on api server!');
 });
 
-export const updateGame = function(gameweek, season) {
+export const updateGame = function(result) {
   db.ref('game').set({
     time: firebase.database.ServerValue.TIMESTAMP,
-    gameweek: gameweek,
-    season: season
+    gameweek: result.currentMatchday,
+    season: result.year,
+    totalGameweeks: result.numberOfMatchdays
   });
 }
 

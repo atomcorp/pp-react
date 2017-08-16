@@ -22,7 +22,7 @@ class App extends Component {
       game: {
         season: "",
         gameweek: "",
-        matchdays: ""
+        totalGameweeks: ""
       },
       loggedIn: false,
       bootstrappedGame: false
@@ -56,12 +56,12 @@ class App extends Component {
         ...this.state, game: {
           season: result.year,
           gameweek: result.currentMatchday,
-          matchdays: result.numberOfMatchdays
+          totalGameweeks: result.numberOfMatchdays
         },
         bootstrappedGame: true
       });
       // then we send that data to the firebase for storage
-      updateGame(result.currentMatchday, result.year);
+      updateGame(result);
     });
     
   }
