@@ -25,5 +25,12 @@ export const updateGame = function(gameweek, season) {
   });
 }
 
+export function checkUserResults(uid, gameweek) {
+  const userRefString = `/2017-gameweek1/jl0WOxfgipe0IiavUyfbdjBOPmp1/predicted`;
+  db.ref(userRefString).on('value', (snapshot) => {
+    console.log(snapshot.exists());
+  })
+}
+
 
 

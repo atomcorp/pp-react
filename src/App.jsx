@@ -9,7 +9,7 @@ import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
 
-import {bootstrapGame, updateGame} from './xhr-requests';
+import {bootstrapGame, updateGame, checkUserResults} from './xhr-requests';
 import {auth, storageKey} from './firebase-connect.js';
 
 // import SetFixtures from './xhr-requests/set-fixtures';
@@ -22,6 +22,7 @@ class App extends Component {
       game: {
         season: "",
         gameweek: "",
+        matchdays: ""
       },
       loggedIn: false,
       bootstrappedGame: false
@@ -46,6 +47,7 @@ class App extends Component {
         this.setState();
       }
     });
+    checkUserResults();
   }
 
   handleGameBootstrap() {
@@ -54,6 +56,7 @@ class App extends Component {
         ...this.state, game: {
           season: result.year,
           gameweek: result.currentMatchday,
+          matchdays: result.numberOfMatchdays
         },
         bootstrappedGame: true
       });

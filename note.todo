@@ -58,6 +58,7 @@ Notes:
    // react router help: https://css-tricks.com/react-router-4/]
    I can set up a cron job to run a page that checks stuff like game week and in play
      (eg https://github.com/firebase/functions-samples/tree/master/delete-unused-accounts-cron)
+   Firebase deep-quering: https://firebase.googleblog.com/2015/09/introducing-multi-location-updates-and_86.html
 
 Userflow:
    Is logged out:
