@@ -54,6 +54,7 @@ export default class Game extends Component {
       <div>
         <h2>{this.state.player.team}</h2>
         <h4>Managed by {this.state.player.name}</h4>
+        <h4>Points: {this.state.player.points}</h4>
         <FixtureList uid={this.props.uid} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         {this.state.predictions 
           ?  <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions} />

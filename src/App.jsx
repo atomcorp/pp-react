@@ -9,7 +9,7 @@ import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
 
-import {bootstrapGame} from './xhr-requests';
+import {bootstrapGame, updateGame} from './xhr-requests';
 import {auth, storageKey} from './firebase-connect.js';
 
 // import SetFixtures from './xhr-requests/set-fixtures';
@@ -57,7 +57,10 @@ class App extends Component {
         },
         bootstrappedGame: true
       });
+      // then we send that data to the firebase for storage
+      updateGame(result.currentMatchday, result.year);
     });
+    
   }
 
   render() {

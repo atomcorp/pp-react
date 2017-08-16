@@ -50,7 +50,6 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
       })
     ]).then((data) => {
       // arrays return in order
-      console.log(data);
       const dataObject = {
         fixtures: data[0],
         predictions: data[1],
