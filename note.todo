@@ -9,6 +9,7 @@ Tasks:
   ✔ Colour in results depending on prediction @done (17-08-03 19:09)
   ✔ Bring up user state to top level of app @done (17-08-03 19:09)
     ✔ then, Pass down props with user data like username and team name @done (17-08-03 19:09)
+  ☐ Move all xhr-request into file
   ✔ In userPredictions put predictions in their own object @done (17-08-02 23:57)
     ☐ add booleans for hasSubmittedPredictions and resultTotalled and actual points score
   ✔ Add sign up/login/logout pages and functions @done (17-08-04 22:43)

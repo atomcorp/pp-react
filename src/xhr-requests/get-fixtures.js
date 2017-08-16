@@ -8,8 +8,10 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
   };
   
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
-  const predictionsRefString = `/usersPredictions/${uid}/season${gameData.season}/gameweek${gameData.gameweek}/predictions`;
+  const predictionsRefString = `/${gameData.season}-gameweek${gameData.gameweek}/${uid}`;
   const predictions = db.ref(predictionsRefString);
+  const fixturesRefString = `/${gameData.season}fixtures/gameweek${gameData.gameweek}`;
+  const fixtures = db.ref(fixturesRefString);
   const userRefString = `/users/${uid}/`;
   const user = db.ref(userRefString);
   const premierLeagueData = 'http://api.football-data.org/v1/competitions/445';
@@ -20,33 +22,20 @@ export default function getFixturesFromFirebase(uid, gameData, callback) {
     // 2. call to firebase for predictions (if available)
 
     Promise.all([
-      fetch(`${premierLeagueData}/fixtures/?matchday=${gameData.gameweek}`, header).then(function(response) {
-        // send request to the api for browser to check we're allowed
-        if (response.status === 200) {
-          return response.json();
-        }
-        else throw new Error('Something went wrong on api server!');
-      }).then(function(response) {
-        // if succesful we get data!
-        // convert the array we receive into an object
-        // and assign an id
-        const fixtures = response.fixtures.reduce(function(obj, item, index) {
-          // obj is the {} at the end of reduce
-          // each loop adds a new obj
-          obj = Object.assign(obj, {[`fixture${index}`]: item})
-            return obj;
-          }, {});
-        return fixtures;
+      new Promise((resolve, reject) => {
+        fixtures.once('value').then((snapshot) => {
+          resolve(snapshot.val());
+        });
       }),
       new Promise((resolve, reject) => {
-        predictions.on('value', (snapshot) => {
+        predictions.once('value').then((snapshot) => {
           resolve(snapshot.val());
-        })
+        });
       }),
       new Promise((resolve, reject) => {
-        user.on('value', (snapshot) => {
+        user.once('value').then((snapshot) => {
           resolve(snapshot.val());
-        })
+        });
       })
     ]).then((data) => {
       // arrays return in order

@@ -9,11 +9,15 @@ export default class FixtureList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      predictions: this.setPredictions()
+      predictions: null
     }
     this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.setPredictions = this.setPredictions.bind(this);
+  }
+
+  componentDidMount() {
+    this.setPredictions();
   }
 
   // this sets up what's diplayed in the score boxes
@@ -24,16 +28,18 @@ export default class FixtureList extends Component {
       return this.props.predictions;
     } 
     const fixtures = this.props.fixtures;
-    let result = {};
+    const predictions = {};
     for (const id in fixtures) { 
       const fixture = fixtures[id];
-      result[id] = {
-        homeScore: fixture.result.goalsHomeTeam ? fixture.result.goalsHomeTeam : 0,
-        awayScore: fixture.result.goalsAwayTeam ? fixture.result.goalsAwayTeam : 0,
+      predictions[id] = {
+        homeScore: 0,
+        awayScore: 0,
         id: id
-      };
+      }
     }    
-    return result;
+    this.setState({
+      predictions: predictions
+    })
   }
 
   // when users changes the scores
@@ -54,7 +60,11 @@ export default class FixtureList extends Component {
 
   // this will need to print one fixture for length of fixture list
   render() {
+    if (!this.state.predictions) {
+      return <div>Loading fixture list</div>;
+    }
     const fixtures = this.props.fixtures;
+    
     // order the fixtures by date, so we can add the dates
     // may just remove this later, not really important what time fixture is for game
     const sortFixtures = Object.keys(fixtures).sort(function(a,b) {
@@ -62,6 +72,7 @@ export default class FixtureList extends Component {
       let second = Date.parse(`${fixtures[b].date}`)/1000;
       return first - second;
     });
+
     const fixtureElements = sortFixtures.map((id, index) => {
       return <Fixture 
         id={id} 
@@ -69,8 +80,8 @@ export default class FixtureList extends Component {
         points={this.state.predictions[id].points}
         homeScore={this.state.predictions[id].homeScore} 
         awayScore={this.state.predictions[id].awayScore} 
-        homeResult={fixtures[id].result.goalsHomeTeam} 
-        awayResult={fixtures[id].result.goalsAwayTeam} 
+        homeResult={fixtures[id].status === 'FINISHED' ? fixtures[id].result.goalsHomeTeam: null} 
+        awayResult={fixtures[id].status === 'FINISHED' ? fixtures[id].result.goalsAwayTeam: null} 
         home={fixtures[id].homeTeamName} 
         away={fixtures[id].awayTeamName} 
         date={fixtures[id].date}

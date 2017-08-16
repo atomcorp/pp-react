@@ -7,15 +7,24 @@ const header = {
   headers: { 'X-Auth-Token': FB_DATA_API }
 };
 
+const gameRefString = `/game`;
+const game = db.ref(gameRefString);
+
 // grab the game setting data we need,
 // gets current gameweek and season
-export const bootstrapGame = fetch(`${leagueData}`, header).then(function(response) {
-  // send request to the api for browser to check we're allowed
-  if (response.status === 200) {
-    return response.json();
-  }
-  else throw new Error('Something went wrong on api server!');
+export const bootstrapGame = new Promise((resolve, reject) => {
+  game.once('value').then((snapshot) => {
+    resolve(snapshot.val());
+  });
 });
+
+// export const bootstrapGame = fetch(`${leagueData}`, header).then(function(response) {
+//   // send request to the api for browser to check we're allowed
+//   if (response.status === 200) {
+//     return response.json();
+//   }
+//   else throw new Error('Something went wrong on api server!');
+// });
 
 export const updateGame = function(result) {
   db.ref('game').set({

@@ -50,6 +50,7 @@ export default class Game extends Component {
     if (!this.state.fixtures) {
       return <div>Loading fixtures...</div>;
     }
+    console.log(this.state)
     return (
       <div>
         <h2>{this.state.player.team}</h2>
