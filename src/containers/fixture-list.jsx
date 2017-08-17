@@ -30,7 +30,6 @@ export default class FixtureList extends Component {
     const fixtures = this.props.fixtures;
     const predictions = {};
     for (const id in fixtures) { 
-      const fixture = fixtures[id];
       predictions[id] = {
         homeScore: 0,
         awayScore: 0,

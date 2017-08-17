@@ -13,6 +13,6 @@
 // if any true, ignore
 // update users score (req)
 
-export default function Results() {
-
+export default function TotalPoints() {
+  
 }

@@ -1,21 +1,13 @@
 import {db} from '../firebase-connect';
 
-import {FB_DATA_API} from '../api.js';
-
 export default function getFixturesFromFirebase(uid, gameData, callback) {
-  const header = { 
-    headers: { 'X-Auth-Token': FB_DATA_API }
-  };
-  
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
-  const predictionsRefString = `/${gameData.season}-gameweek${gameData.gameweek}/${uid}`;
+  const predictionsRefString = `/${gameData.season}gameweek${gameData.gameweek}/${uid}`;
   const predictions = db.ref(predictionsRefString);
   const fixturesRefString = `/${gameData.season}fixtures/gameweek${gameData.gameweek}`;
   const fixtures = db.ref(fixturesRefString);
   const userRefString = `/users/${uid}/`;
   const user = db.ref(userRefString);
-  const premierLeagueData = 'http://api.football-data.org/v1/competitions/445';
-
   const cancelablePromise = makeCancelable(
     // this all mighty mess makes 
     // 1. call to football-data for fixtures

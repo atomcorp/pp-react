@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import FixtureList from './fixture-list.jsx';
 
 import PredictionsResult from '../components/predictions-result.jsx';
+import TotalPoints from '../components/total-points.js';
 
 import getFixtures from '../xhr-requests/get-fixtures.js';
 import sendPredictions from '../xhr-requests/set-predictions.js';
@@ -24,6 +25,7 @@ export default class Game extends Component {
 
     this.setRequest = this.setRequest.bind(this);
     this.submitPredictions = this.submitPredictions.bind(this);
+    this.handlePoints = this.handlePoints.bind(this);
   }
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
@@ -42,6 +44,10 @@ export default class Game extends Component {
     });
   }
 
+  handlePoints() {
+    TotalPoints()
+  }
+
   submitPredictions(predictions) {
     sendPredictions(this.props.uid, this.props.gameData, predictions);
   }
@@ -50,7 +56,6 @@ export default class Game extends Component {
     if (!this.state.fixtures) {
       return <div>Loading fixtures...</div>;
     }
-    console.log(this.state)
     return (
       <div>
         <h2>{this.state.player.team}</h2>
