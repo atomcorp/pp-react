@@ -25,27 +25,23 @@ export default class Game extends Component {
 
     this.setRequest = this.setRequest.bind(this);
     this.submitPredictions = this.submitPredictions.bind(this);
-    this.handlePoints = this.handlePoints.bind(this);
   }
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
     getFixtures(this.props.uid, this.props.gameData, this.setRequest);
+    TotalPoints(this.props.uid);
   }
  
   // receives data returned from xhr firebase
   // and sets the apps state
   setRequest(returnedRequest) {
-    console.log(returnedRequest)
+    console.log(returnedRequest);
     this.setState({
       fixtures: returnedRequest.fixtures,
       predictions: returnedRequest.predictions,
       player: returnedRequest.user
     });
-  }
-
-  handlePoints() {
-    TotalPoints()
   }
 
   submitPredictions(predictions) {
@@ -57,13 +53,13 @@ export default class Game extends Component {
       return <div>Loading fixtures...</div>;
     }
     return (
-      <div>
+      <div className="game">
         <h2>{this.state.player.team}</h2>
         <h4>Managed by {this.state.player.name}</h4>
         <h4>Points: {this.state.player.points}</h4>
         <FixtureList uid={this.props.uid} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         {this.state.predictions 
-          ?  <PredictionsResult fixtures={this.state.fixtures} predictions={this.state.predictions} />
+          ?  <PredictionsResult />
           : (<div>No results yet</div>)
         }
       </div>

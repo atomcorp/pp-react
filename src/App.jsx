@@ -9,7 +9,7 @@ import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
 
-import {bootstrapGame, checkUserResults} from './xhr-requests';
+import {bootstrapGame} from './xhr-requests';
 import {auth, storageKey} from './firebase-connect.js';
 
 // import SetFixtures from './xhr-requests/set-fixtures';
@@ -48,7 +48,6 @@ class App extends Component {
         this.setState();
       }
     });
-    checkUserResults();
   }
 
   handleGameBootstrap() {

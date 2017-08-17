@@ -7,10 +7,6 @@ export class Fixture extends Component {
     this.colour = this.colour.bind(this);
   }
 
-  componentDidMount() {
-
-  }
-
   colour(points) {
     let colour = '';
     if (points === 3) {
@@ -33,18 +29,18 @@ export class Fixture extends Component {
   // and print the tds 
   render() {
     return (
-        <tr>
-          <td>{formatDate(this.props.date, this.props.time)}</td>
-          <td>{this.props.home}</td>
-          <td>
-            {this.props.homeResult}
-            <input type="number" value={this.props.homeScore} onChange={(event) => this.onChange(event, "homeScore", this.props.id)} />
-            {' - '} 
-            <input type="number" value={this.props.awayScore} onChange={(event) => this.onChange(event, "awayScore", this.props.id)} />  
-            {this.props.awayResult}
-          </td>
-          <td>{this.props.away}</td>
-        </tr>
+      <tr>
+        <td>{formatDate(this.props.date)}</td>
+        <td>{this.props.home}</td>
+        <td>
+          {this.props.homeResult}
+          <input type="number" value={this.props.homeScore} onChange={(event) => this.onChange(event, "homeScore", this.props.id)} />
+          {' - '} 
+          <input type="number" value={this.props.awayScore} onChange={(event) => this.onChange(event, "awayScore", this.props.id)} />  
+          {this.props.awayResult}
+        </td>
+        <td>{this.props.away}</td>
+      </tr>
     );
   }
 }

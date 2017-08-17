@@ -13,6 +13,6 @@
 // if any true, ignore
 // update users score (req)
 
-export default function TotalPoints() {
-  
+export default function TotalPoints(uid) {
+  console.log('Alive', uid);
 }

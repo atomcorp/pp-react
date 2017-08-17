@@ -25,7 +25,10 @@ export default class FixtureList extends Component {
   // if not just defaults to the predictions 0-0
   setPredictions() {
     if (this.props.predictions) {
-      return this.props.predictions;
+      this.setState({
+        predictions: this.props.predictions
+      });
+      return;
     } 
     const fixtures = this.props.fixtures;
     const predictions = {};
@@ -62,6 +65,7 @@ export default class FixtureList extends Component {
     if (!this.state.predictions) {
       return <div>Loading fixture list</div>;
     }
+    
     const fixtures = this.props.fixtures;
     
     // order the fixtures by date, so we can add the dates
