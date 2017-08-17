@@ -10,8 +10,8 @@ import {db} from '../firebase-connect';
 
 export default function sendPredictions(uid, gameData, predictions) {
   const refs = {};
-  refs[`${gameData.season}gameweek${gameData.gameweek}/${uid}`] = predictions;
-  refs[`${gameData.season}predictions/${uid}/gameweek${gameData.gameweek}`] = true;
+  // refs[`${gameData.season}gameweek${gameData.gameweek}/${uid}`] = predictions;
+  refs[`${gameData.season}predictions/${uid}/gameweek${gameData.gameweek}`] = predictions;
   db.ref().update(refs, function(error) {
     if (error) {
       console.log("Error updating data:", error);

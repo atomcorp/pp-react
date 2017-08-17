@@ -30,7 +30,7 @@ export default class Game extends Component {
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
     getFixtures(this.props.uid, this.props.gameData, this.setRequest);
-    TotalPoints(this.props.uid);
+    TotalPoints(this.props);
   }
  
   // receives data returned from xhr firebase

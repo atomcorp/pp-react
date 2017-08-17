@@ -12,7 +12,72 @@
 //      else pull in
 // if any true, ignore
 // update users score (req)
+import {compareScores} from './calculate-result.jsx';
+import {
+  checkResultsComputed,
+   getFixtures,
+   getPredictions,
+   updateComputedResults,
+   updateComputedPoints,
+   updateComputedPredictions
+ } from '../xhr-requests.js';
 
-export default function TotalPoints(uid) {
-  console.log('Alive', uid);
+export default function TotalPoints(props) {
+  const season = props.gameData.season;
+  const uid = props.uid;
+  const gameweeksToCheck = props.gameData.gameweek - 1;
+  checkResultsComputed(season, uid).then((computedResult) => {
+    console.log(computedResult);
+    if (computedResult === null) {
+      // literally nothing,
+      // get all fixtures and results
+      return Promise.all([
+        getFixtures(season).then((fixtureResults) => {
+          return fixtureResults;
+        }),
+        getPredictions(uid, season).then((predictionsResults) => {
+          return predictionsResults;
+        })
+      ]).then((promises) => {
+        return checkAllPredictions(promises[0], promises[1]);
+      });
+    } else {
+      // we need to check each game week and find the ones that aren't true,
+      // or, we pass 
+    }
+  }).then((computedScores) => {
+    if (!computedScores) {
+      return;
+    }
+    const predictions = {};
+    const scores = {};
+    const updated = {};
+    for (const id in computedScores) {
+      if (computedScores[id]) {
+        predictions[id] = computedScores[id].predictions;
+        scores[id] = computedScores[id].score;
+        updated[id] = true;
+      }
+    }
+    updateComputedResults(uid, season, updated);
+    updateComputedPoints(uid, season, scores);
+    updateComputedPredictions(uid, season, predictions);
+  });
+}
+
+
+/*
+* @param {Object} fixtures
+* @param {Object} predictions
+* @returns {Object} score and updated predictions for each gameweek
+* note: the returned predictions object has had scores added to it
+*/
+function checkAllPredictions(fixtures, predictions) {
+  const resultsToUpload = {};
+  // go through the predictions
+  for (const gameweek in predictions) {
+    resultsToUpload[gameweek] = compareScores(predictions[gameweek], fixtures[gameweek]);
+  }
+  // this has 
+  return resultsToUpload;
 }

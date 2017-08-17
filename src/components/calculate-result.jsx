@@ -5,12 +5,14 @@ export function calculateResult(props) {
   return score;
 }
 
-function compareScores(predictions, results) {
-  
+export function compareScores(predictions, results) {
   let cumulativeScore = 0;
-  for (const prediction in predictions) {
+  for (const id in predictions) {
+    // ensure there are actuall results, otherwise quit
+    if (results[id].status !== "FINISHED") {
+      return null;
+    }
     let score = 0;
-    const id = prediction;
     const scores = predictions[id];
     if (scores.homeScore === results[id].result.goalsHomeTeam && scores.awayScore === results[id].result.goalsAwayTeam) {
       score = 3;
@@ -21,7 +23,11 @@ function compareScores(predictions, results) {
     // const test = `${results[id].home} v ${results[id].away}: ${results[id].result.goalsHomeTeam}:${scores.awayScore} | ${scores.homeScore}:${results[id].result.goalsAwayTeam}`;
     predictions[id].points = score;
   }
-  return cumulativeScore;
+  const outcome = {
+    predictions: predictions,
+    score: cumulativeScore
+  };
+  return outcome;
 }
 
 function calculateWinType(home, away) {

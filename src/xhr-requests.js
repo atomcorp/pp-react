@@ -28,5 +28,77 @@ export function checkUserResults(uid, gameweek) {
   })
 }
 
+/*
+* @params: uid [String]
+* Return an object with {gameweek*: true/false}
+*/
+
+export function checkResultsComputed(season, uid) {
+  const computedResultURL = `/${season}computed/${uid}/`;
+  const computedResultsRef = db.ref(computedResultURL); 
+  return computedResultsRef.once('value').then((snapshot) => {
+    return snapshot.val();
+  });
+} 
+
+// todo: gameweek should be able to recieve an array of weeks
+export function getFixtures(season, gameweek) {
+  let fixturesURL = `/${season}fixtures/`;
+  (gameweek) ? `${fixturesURL}gameweek${gameweek}` : null;
+  const fixturesRef = db.ref(fixturesURL); 
+  return fixturesRef.once('value').then((snapshot) => {
+    return snapshot.val();
+  });
+}
+
+// todo: gameweek should be able to recieve an array of weeks
+export function getPredictions(uid, season, gameweek) {
+  let predictionsURL = `/${season}predictions/${uid}/`;
+  (gameweek) ? `${predictionsURL}gameweek${gameweek}` : null;
+  const predictionsRef = db.ref(predictionsURL); 
+  return predictionsRef.once('value').then((snapshot) => {
+    return snapshot.val();
+  });
+}
+
+/*
+* @param {string} uid
+* @param {Number} season
+* @param {Boolean} points
+* @returns {Object} score and updated predictions for each gameweek
+* note: the returned predictions object has had scores added to it
+*/
+export const updateComputedResults = function(uid, season, boolean) {
+  const updateComputedRef = {};
+  updateComputedRef[`/${season}computed/${uid}/`] = boolean;
+  db.ref().update(updateComputedRef);
+}
+
+/*
+* @param {string} uid
+* @param {Number} season
+* @param {Object} points
+* @returns {Object} score and updated predictions for each gameweek
+* note: the returned predictions object has had scores added to it
+*/
+export const updateComputedPoints = function(uid, season, points) {
+  const updateComputedRef = {};
+  updateComputedRef[`/${season}points/${uid}/`] = points;
+  db.ref().update(updateComputedRef);
+}
+
+/*
+* @param {string} uid
+* @param {Number} season
+* @param {Object} predictions
+* @returns {Object} score and updated predictions for each gameweek
+* note: the returned predictions object has had scores added to it
+*/
+export const updateComputedPredictions = function(uid, season, predictions) {
+  const updateComputedRef = {};
+  updateComputedRef[`/${season}predictions/${uid}/`] = predictions;
+  db.ref().update(updateComputedRef);
+}
+
 
 
