@@ -19,7 +19,8 @@ import {
    getPredictions,
    updateComputedResults,
    updateComputedPoints,
-   updateComputedPredictions
+   updateComputedPredictions,
+   updateUsersPoints
  } from '../xhr-requests.js';
 
 export default function TotalPoints(props) {
@@ -42,8 +43,8 @@ export default function TotalPoints(props) {
         return checkAllPredictions(promises[0], promises[1]);
       });
     } else {
-      // we need to check each game week and find the ones that aren't true,
-      // or, we pass 
+      // loop through this, grab all the ids that are true and compare with whats missing
+      console.log(computedResult);
     }
   }).then((computedScores) => {
     if (!computedScores) {
@@ -62,6 +63,9 @@ export default function TotalPoints(props) {
     updateComputedResults(uid, season, updated);
     updateComputedPoints(uid, season, scores);
     updateComputedPredictions(uid, season, predictions);
+    
+  }).then(() => {
+    updateUsersPoints(uid, season);
   });
 }
 

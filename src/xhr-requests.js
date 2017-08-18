@@ -100,5 +100,29 @@ export const updateComputedPredictions = function(uid, season, predictions) {
   db.ref().update(updateComputedRef);
 }
 
+/*
+* @param {string} uid
+* @param {Number} points
+* @returns {Object} score and updated predictions for each gameweek
+*/
+export const updateUsersPoints = function(uid, season) {
+  // first get current user points
+  // then update 
+  const usersPointsURL = `/${season}points/${uid}`;
+  const usersURL = `/users/${uid}/points`;
+  db.ref(usersPointsURL).once('value').then((snapshot) => {
+    const request = snapshot.val();
+    let score = 0;
+    for (const result in request) {
+      score += request[result];
+    }
+    return score;
+  }).then((points) => {
+    const updateUsersPointsRef ={};
+    updateUsersPointsRef[usersURL] = points;
+    db.ref().update(updateUsersPointsRef);
+  });
+}
+
 
 
