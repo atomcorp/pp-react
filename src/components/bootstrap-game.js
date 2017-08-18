@@ -1,7 +1,7 @@
 import {db} from '../firebase-connect';
 import TotalPoints from '../components/total-points.js';
 
-export default function getFixturesFromFirebase(uid, gameData, callback) {
+export default function bootstrapGame(uid, gameData, callback) {
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const predictionsRefString = `/${gameData.season}predictions/${uid}/gameweek${gameData.gameweek}/`;
   const predictions = db.ref(predictionsRefString);

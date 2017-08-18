@@ -8,6 +8,6 @@ export default function PredictionsResult(props) {
   // print out result
 
   return (
-    <div>PredictionsResult does nothing yet</div>
+    <div>This should show last weeks results (or if finished week the weeks results)</div>
   );
 }

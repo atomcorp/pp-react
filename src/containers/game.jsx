@@ -5,9 +5,8 @@ import React, {Component} from 'react';
 import FixtureList from './fixture-list.jsx';
 
 import PredictionsResult from '../components/predictions-result.jsx';
-import TotalPoints from '../components/total-points.js';
+import bootstrapGame from '../components/bootstrap-game.js';
 
-import getFixtures from '../xhr-requests/get-fixtures.js';
 import sendPredictions from '../xhr-requests/set-predictions.js';
 
 export default class Game extends Component {
@@ -29,8 +28,7 @@ export default class Game extends Component {
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
-    getFixtures(this.props.uid, this.props.gameData, this.setRequest);
-    // TotalPoints(this.props);
+    bootstrapGame(this.props.uid, this.props.gameData, this.setRequest);
   }
  
   // receives data returned from xhr firebase

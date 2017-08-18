@@ -6,32 +6,37 @@ App structure:
 
 
 Tasks:
+  ☐ total-results to look up absent computations properly (atm, only checks if none made at all)
+  ☐ Move all xhr-request into file
+    will probably need to redo xhr requests to take 1-X gameweeks
+  ☐ Sign up form, fields to add: username, teamname, and upload them to server on create
+  ☐ allow users to check previous weeks
+  ☐ add check to stop people submitting predictions once inPlay
+    this will also need to make predictions inputs into 
   ✔ Colour in results depending on prediction @done (17-08-03 19:09)
   ✔ Bring up user state to top level of app @done (17-08-03 19:09)
     ✔ then, Pass down props with user data like username and team name @done (17-08-03 19:09)
-  ☐ Move all xhr-request into file
   ✔ In userPredictions put predictions in their own object @done (17-08-02 23:57)
-    ☐ add booleans for hasSubmittedPredictions and resultTotalled and actual points score
+    ✔ add booleans for hasSubmittedPredictions and resultTotalled and actual points score @done (17-08-18 22:59)
   ✔ Add sign up/login/logout pages and functions @done (17-08-04 22:43)
   ✔ Use logged in ID from aut to grab user data from Firebase @done (17-08-15 22:40)
-  ☐ Sign up form, fields to add: username, teamname, and upload them to server on create
-  ☐ Add team data to DB
-  ☐ Add state info to DB eg current season and gameweek
-  ☐ Add a check for getting correct gameweek
+  ✔ Add team data to DB @done (17-08-18 22:59)
+  ✔ Add state info to DB eg current season and gameweek @done (17-08-18 22:59)
+  ✔ Add a check for getting correct gameweek @done (17-08-18 22:59)
   ✔ Add on load request, get: @done (17-08-15 22:56)
     ✔ Weeks fixtures @done (17-08-15 22:56)
     ✔ Predictions (if any) @done (17-08-15 22:56)
     ✔ User data @done (17-08-15 22:56)
 
 Todo:
-  ☐ Get how many 3s, 1s and 0s
+  ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)
     ☐ Use to order the league
   League:
     ☐ Make one
   Login:
     ✔ Browser state @done (17-08-15 22:56)
   Routing:
-  ☐ add routing
+  ✔ add routing @done (17-08-18 22:59)
   Attach route to state
   When change route update state
     ☐ Home / Predictions page
@@ -63,31 +68,31 @@ Notes:
 
 Userflow:
    Is logged out:
-     - Nav = sitename + login / sign up
-     - Show predictions - user can input scores, on submit prompted to signup
+     ~ Nav = sitename + login / sign up
+     ~ Show predictions - user can input scores, on submit prompted to signup
 
  Is logged in:
-    - we auto get their id
-      - get users name and team
-      - Get current gameweek
-        - check gameweek on football-data api
-          -? compare with db
-        - get fixtures for gameweek
-          - check if fixtures are on the firebase db, if so grab
-          - if not link up to football-data api and add the, to firebase
-        - check if user has made predictions
-          - if not use fixtures data
-          - if so pull from firebase and use that instead or fixtures data
-        - check if games have been played and therefore we show results
+    ~ we auto get their id
+      ~ get users name and team
+      ~ Get current gameweek
+        ~ check gameweek on football-data api
+          ~? compare with db
+        ~ get fixtures for gameweek
+          ~ check if fixtures are on the firebase db, if so grab
+          ~ if not link up to football-data api and add the, to firebase
+        ~ check if user has made predictions
+          ~ if not use fixtures data
+          ~ if so pull from firebase and use that instead or fixtures data
+        ~ check if games have been played and therefore we show results
 
 Key data:
-  - if logged in get user id
-    - get data fb-db api, then update firebase
-      - gameweek
-      - set server time
-      - get fixture data from fb-db api
-        - compare date of last game with server time
-      - get users personal data
-        - name
-        - team
+  ~ if logged in get user id
+    ~ get data fb-db api, then update firebase
+      ~ gameweek
+      ~ set server time
+      ~ get fixture data from fb-db api
+        ~ compare date of last game with server time
+      ~ get users personal data
+        ~ name
+        ~ team
  

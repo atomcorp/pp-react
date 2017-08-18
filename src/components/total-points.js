@@ -25,9 +25,8 @@ import {
 
 export default function TotalPoints(uid, gameData) {
   const season = gameData.season;
-  const gameweeksToCheck = gameData.gameweek - 1;
+  const gameweeksToCheck = gameData.gameweek;
   return checkResultsComputed(season, uid).then((computedResult) => {
-    console.log(computedResult);
     if (computedResult === null) {
       // literally nothing,
       // get all fixtures and results
@@ -42,8 +41,15 @@ export default function TotalPoints(uid, gameData) {
         return checkAllPredictions(promises[0], promises[1]);
       });
     } else {
-      // loop through this, grab all the ids that are true and compare with whats missing
-      console.log(computedResult);
+      // grab any weeks that are missing, push into array
+      const weeksToCalculate = [];
+      for (var i = 1; i <= gameweeksToCheck; i++) {
+        if (!computedResult[`gameweek${i}`]) {
+          weeksToCalculate.push(`gameweek${i}`);
+        }
+      }
+      // with array
+      console.log(weeksToCalculate);
     }
   }).then((computedScores) => {
     if (!computedScores) {
