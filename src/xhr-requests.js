@@ -102,7 +102,7 @@ export const updateComputedPredictions = function(uid, season, predictions) {
 
 /*
 * @param {string} uid
-* @param {Number} points
+* @param {Number} season
 * @returns {Object} score and updated predictions for each gameweek
 */
 export const updateUsersPoints = function(uid, season) {

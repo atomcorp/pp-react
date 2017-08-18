@@ -15,19 +15,18 @@
 import {compareScores} from './calculate-result.jsx';
 import {
   checkResultsComputed,
-   getFixtures,
-   getPredictions,
-   updateComputedResults,
-   updateComputedPoints,
-   updateComputedPredictions,
-   updateUsersPoints
- } from '../xhr-requests.js';
+  getFixtures,
+  getPredictions,
+  updateComputedResults,
+  updateComputedPoints,
+  updateComputedPredictions,
+  updateUsersPoints
+} from '../xhr-requests.js';
 
-export default function TotalPoints(props) {
-  const season = props.gameData.season;
-  const uid = props.uid;
-  const gameweeksToCheck = props.gameData.gameweek - 1;
-  checkResultsComputed(season, uid).then((computedResult) => {
+export default function TotalPoints(uid, gameData) {
+  const season = gameData.season;
+  const gameweeksToCheck = gameData.gameweek - 1;
+  return checkResultsComputed(season, uid).then((computedResult) => {
     console.log(computedResult);
     if (computedResult === null) {
       // literally nothing,
@@ -63,9 +62,9 @@ export default function TotalPoints(props) {
     updateComputedResults(uid, season, updated);
     updateComputedPoints(uid, season, scores);
     updateComputedPredictions(uid, season, predictions);
-    
   }).then(() => {
     updateUsersPoints(uid, season);
+    return true;
   });
 }
 
