@@ -45,7 +45,10 @@ class App extends Component {
         });
       } else {
         window.localStorage.removeItem(storageKey);
-        this.setState();
+        this.setState({
+          uid: null,
+          loggedIn: false
+        });
       }
     });
   }
@@ -61,7 +64,6 @@ class App extends Component {
         bootstrappedGame: true
       });
     });
-    
   }
 
   render() {
