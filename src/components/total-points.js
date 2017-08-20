@@ -20,7 +20,8 @@ import {
   updateComputedResults,
   updateComputedPoints,
   updateComputedPredictions,
-  updateUsersPoints
+  updateUsersPoints,
+  getFixturesTest
 } from '../xhr-requests.js';
 
 export default function TotalPoints(uid, gameData) {
@@ -48,8 +49,8 @@ export default function TotalPoints(uid, gameData) {
           weeksToCalculate.push(`gameweek${i}`);
         }
       }
-      // with array
-      console.log(weeksToCalculate);
+      // get fixtures for that week
+      getFixtures(season, weeksToCalculate);
     }
   }).then((computedScores) => {
     if (!computedScores) {

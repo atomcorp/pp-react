@@ -42,16 +42,6 @@ export function checkResultsComputed(season, uid) {
 } 
 
 // todo: gameweek should be able to recieve an array of weeks
-export function getFixtures(season, gameweek) {
-  let fixturesURL = `/${season}fixtures/`;
-  (gameweek) ? `${fixturesURL}gameweek${gameweek}` : null;
-  const fixturesRef = db.ref(fixturesURL); 
-  return fixturesRef.once('value').then((snapshot) => {
-    return snapshot.val();
-  });
-}
-
-// todo: gameweek should be able to recieve an array of weeks
 export function getPredictions(uid, season, gameweek) {
   let predictionsURL = `/${season}predictions/${uid}/`;
   (gameweek) ? `${predictionsURL}gameweek${gameweek}` : null;
@@ -124,5 +114,26 @@ export const updateUsersPoints = function(uid, season) {
   });
 }
 
+/**
+ * @param  {Number} 2017
+ * @param  {Array} optional ['gameweek1', gameweek2']
+ * @return {Promise} Object of fixtures, 
+ * Either a selection or all
+ * see: https://stackoverflow.com/a/38193091/2368141
+ */
+export function getFixtures(season, gameweeks) {
+  const fixturesRef = db.ref(`/${season}fixtures/`);
+  const fixtures = {};
+  return fixturesRef.once('value').then((snapshot) => {
+    const request = snapshot.val();
+    if (gameweeks) {
+      for (var i = 0; i < gameweeks.length; i++) {
+        fixtures[gameweeks[i]] = request[gameweeks[i]];
+      }
+      return fixtures;
+    }
+    return request;
+  });
+}
 
 
