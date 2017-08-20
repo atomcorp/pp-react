@@ -9,7 +9,7 @@ import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
 import {makeCancelable} from './make-cancelable.js';
-import {bootstrapGame} from './xhr-requests';
+import {bootstrapApp} from './xhr-requests';
 import {auth, storageKey} from './firebase-connect.js';
 
 // import SetFixtures from './xhr-requests/set-fixtures';
@@ -55,7 +55,7 @@ class App extends Component {
 
   handleGameBootstrap() {
     const cancelablePromise = makeCancelable(
-      bootstrapGame.then((result) => {
+      bootstrapApp.then((result) => {
         this.setState({
           ...this.state, game: {
             season: result.season,

@@ -6,7 +6,7 @@ const game = db.ref(gameRefString);
 
 // grab the game setting data we need,
 // gets current gameweek and season
-export const bootstrapGame = new Promise((resolve, reject) => {
+export const bootstrapApp = new Promise((resolve, reject) => {
   game.once('value').then((snapshot) => {
     resolve(snapshot.val());
   });
@@ -117,13 +117,16 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
   const predictionsRef = db.ref(`/${season}predictions/${uid}/`);
   const ref = (dataType === 'fixtures') ? fixturesRef : predictionsRef;
   const matchData = {};
+
   return ref.once('value').then((snapshot) => {
     const request = snapshot.val();
     if (gameweeks) {
+      (!Array.isArray(gameweeks)) ? console.log('Gameweeks must be array') : null;
       for (var i = 0; i < gameweeks.length; i++) {
         matchData[gameweeks[i]] = request[gameweeks[i]];
       }
       // send down selection of games
+      console.log(matchData)
       return matchData;
     }
     // send all the games
