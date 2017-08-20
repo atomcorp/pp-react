@@ -20,6 +20,7 @@ export default class Game extends Component {
       predictions: null,
       player: null,
       canSubmit: true,
+      loadFixtureList: false
     };
 
     this.submitPredictions = this.submitPredictions.bind(this);
@@ -32,7 +33,8 @@ export default class Game extends Component {
         this.setState({
           fixtures: returnedRequest.fixtures,
           predictions: returnedRequest.predictions,
-          player: returnedRequest.user
+          player: returnedRequest.user,
+          loadFixtureList: true
         });
       })
     );
@@ -50,7 +52,7 @@ export default class Game extends Component {
   }
 
   render() {
-    if (!this.state.fixtures) {
+    if (!this.state.loadFixtureList) {
       return <div>Loading fixtures...</div>;
     }
     return (
@@ -59,7 +61,7 @@ export default class Game extends Component {
         <h4>Managed by {this.state.player.name}</h4>
         <h4>Points: {this.state.player.points}</h4>
         <h4>Gameweek {this.props.gameData.gameweek}</h4>
-        <FixtureList uid={this.props.uid} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
+        <FixtureList gameData={this.props.gameData} player={this.state.player} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         {this.state.predictions 
           ?  <PredictionsResult />
           : (<div>No results yet</div>)

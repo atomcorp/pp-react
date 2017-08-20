@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {Fixture} from '../components/fixture.jsx';
-
+import {getMatchData} from '../xhr-requests.js';
 // there should also be a check here somewhere to see 
 // if changes are allowed or not (ie games have been played, or set arbitary cut-off time, say Friday 6PM)
 // if changes not allowed, will auto attempt to calc score using
@@ -9,11 +9,14 @@ export default class FixtureList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      predictions: null
+      fixtures: this.props.fixtures,
+      predictions: null,
+      gameweekInView: this.props.gameData.gameweek
     }
     this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.setPredictions = this.setPredictions.bind(this);
+    this.handleWeekChange = this.handleWeekChange.bind(this);
   }
 
   componentDidMount() {
@@ -60,13 +63,35 @@ export default class FixtureList extends Component {
     this.props.submitPredictions(this.state.predictions);
   }
 
+  /**
+   * @param  {Event}
+   * @param  {Number} gameweek
+   * Will set new state
+   */
+  handleWeekChange(event, gameweek) {
+    event.preventDefault();
+    // get the previous weeks fixtures and predictions, and set state
+    console.log(gameweek); 
+    if (gameweek) {
+      Promise.all([
+        getMatchData(this.props.gameData.season, 'fixtures', null, [`gameweek${gameweek}`]),
+        getMatchData(this.props.gameData.season, 'predictions', this.props.player.id, [`gameweek${gameweek}`])
+      ]).then((data) => {
+        this.setState({
+          fixtures: data[0][`gameweek${gameweek}`],
+          predictions: data[1][`gameweek${gameweek}`],
+          gameweekInView: gameweek
+        })
+      })
+    }
+  }
+
   // this will need to print one fixture for length of fixture list
   render() {
     if (!this.state.predictions) {
       return <div>Loading fixture list</div>;
     }
-    
-    const fixtures = this.props.fixtures;
+    const fixtures = this.state.fixtures;
     
     // order the fixtures by date, so we can add the dates
     // may just remove this later, not really important what time fixture is for game
@@ -75,6 +100,7 @@ export default class FixtureList extends Component {
       let second = Date.parse(`${fixtures[b].date}`)/1000;
       return first - second;
     });
+    console.log(sortFixtures);
 
     const fixtureElements = sortFixtures.map((id, index) => {
       return <Fixture 
@@ -111,8 +137,13 @@ export default class FixtureList extends Component {
           <button type="submit">
             Submit
           </button>
-
         </form>
+        {this.state.gameweekInView > 1 
+          ? <a onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView - 1)} href="#">Previous week</a>
+          : null }
+          {this.state.gameweekInView < this.props.gameData.gameweek + 1
+            ? <a onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)} href="#">Next week</a>
+            : null }
       </div>
     );
   }

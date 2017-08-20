@@ -121,12 +121,12 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
   return ref.once('value').then((snapshot) => {
     const request = snapshot.val();
     if (gameweeks) {
-      (!Array.isArray(gameweeks)) ? console.log('Gameweeks must be array') : null;
+      if (!Array.isArray(gameweeks)) {console.log('Gameweeks must be array')};
       for (var i = 0; i < gameweeks.length; i++) {
         matchData[gameweeks[i]] = request[gameweeks[i]];
       }
       // send down selection of games
-      console.log(matchData)
+      
       return matchData;
     }
     // send all the games

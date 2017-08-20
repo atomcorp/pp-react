@@ -7,8 +7,9 @@
 import firebase from '../firebase';
 
 export default function SetFixtures() {
-  const test = firebase.database().ref('2017fixtures/gameweek1');
-  const fixtures = gameweek1.fixtures.reduce(function(obj, item, index) {
+  const test = firebase.database().ref('2017fixtures/gameweek3');
+  // fetch: http://api.football-data.org/v1/competitions/445/fixtures/?matchday=3
+  const fixtures = gameweek3.fixtures.reduce(function(obj, item, index) {
     const urlToArray = item._links.self.href.split("/");
     const id = urlToArray[urlToArray.length - 1];
     // obj is the {} at the end of reduce

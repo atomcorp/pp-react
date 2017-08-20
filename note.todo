@@ -6,10 +6,10 @@ App structure:
 
 
 Tasks:
-  ☐ total-results to look up absent computations properly (atm, only checks if none made at all)
+  ✔ total-results to look up absent computations properly (atm, only checks if none made at all) @done (17-08-20 20:48)
   ☐ Move all xhr-request into file
     will probably need to redo xhr requests to take 1-X gameweeks
-  ☐ Sign up form, fields to add: username, teamname, and upload them to server on create
+  ✔ Sign up form, fields to add: username, teamname, and upload them to server on create @done (17-08-20 20:48)
   ☐ allow users to check previous weeks
   ☐ add check to stop people submitting predictions once inPlay
     this will also need to make predictions inputs into 
