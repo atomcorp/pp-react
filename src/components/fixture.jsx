@@ -30,16 +30,23 @@ export class Fixture extends Component {
   render() {
     return (
       <tr>
-        <td>{formatDate(this.props.date)}</td>
-        <td>{this.props.home}</td>
+        <td>{formatDate(this.props.fixture.date)}</td>
+        <td>{this.props.fixture.homeTeamName}</td>
         <td>
-          {this.props.homeResult}
-          <input type="number" value={this.props.homeScore} onChange={(event) => this.onChange(event, "homeScore", this.props.id)} />
+          {this.props.fixture.status === 'FINISHED' ? this.props.fixture.result.goalsHomeTeam: null}
+          {
+            this.props.canPredict 
+            ? <input type="number" value={this.props.prediction.homeScore} onChange={(event) => this.onChange(event, "homeScore", this.props.id)} />
+            : this.props.prediction.homeScore
+          }
           {' - '} 
-          <input type="number" value={this.props.awayScore} onChange={(event) => this.onChange(event, "awayScore", this.props.id)} />  
-          {this.props.awayResult}
+          {this.props.canPredict
+            ? <input type="number" value={this.props.prediction.awayScore} onChange={(event) => this.onChange(event, "awayScore", this.props.id)} />  
+            : this.props.prediction.awayScore
+          }
+          {this.props.fixture.status === 'FINISHED' ? this.props.fixture.result.goalsAwayTeam: null}
         </td>
-        <td>{this.props.away}</td>
+        <td>{this.props.fixture.awayTeamName}</td>
       </tr>
     );
   }
