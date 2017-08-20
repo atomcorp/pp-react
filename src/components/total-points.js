@@ -21,21 +21,21 @@ import {
   updateComputedPoints,
   updateComputedPredictions,
   updateUsersPoints,
-  getFixturesTest
+  getMatchData
 } from '../xhr-requests.js';
 
 export default function TotalPoints(uid, gameData) {
   const season = gameData.season;
-  const gameweeksToCheck = gameData.gameweek;
+  const gameweeksToCheck = gameData.gameweek -1;
   return checkResultsComputed(season, uid).then((computedResult) => {
     if (computedResult === null) {
       // literally nothing,
       // get all fixtures and results
       return Promise.all([
-        getFixtures(season).then((fixtureResults) => {
+        getMatchData(season, 'fixtures').then((fixtureResults) => {
           return fixtureResults;
         }),
-        getPredictions(uid, season).then((predictionsResults) => {
+        getMatchData(season, 'predictions', uid).then((predictionsResults) => {
           return predictionsResults;
         })
       ]).then((promises) => {
@@ -49,8 +49,18 @@ export default function TotalPoints(uid, gameData) {
           weeksToCalculate.push(`gameweek${i}`);
         }
       }
-      // get fixtures for that week
-      getFixtures(season, weeksToCalculate);
+      if (weeksToCalculate.length) {
+        return Promise.all([
+          getMatchData(season, 'predictions', uid, weeksToCalculate).then((fixtureResults) => {
+            return fixtureResults;
+          }),
+          getMatchData(season, 'fixtures', null, weeksToCalculate).then((predictionsResults) => {
+            return predictionsResults;
+          })
+        ]).then((promises) => {
+          return checkAllPredictions(promises[0], promises[1]);
+        });
+      }
     }
   }).then((computedScores) => {
     if (!computedScores) {

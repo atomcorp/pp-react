@@ -121,7 +121,7 @@ export const updateUsersPoints = function(uid, season) {
  * Either a selection or all
  * see: https://stackoverflow.com/a/38193091/2368141
  */
-export function getFixtures(season, gameweeks) {
+export function getFixtures(season, gameweeks = null) {
   const fixturesRef = db.ref(`/${season}fixtures/`);
   const fixtures = {};
   return fixturesRef.once('value').then((snapshot) => {
@@ -136,4 +136,32 @@ export function getFixtures(season, gameweeks) {
   });
 }
 
+
+/**
+ * @param {Number} [season] [eg 2017]
+ * @param {String} [dataType] ['fixtures' or 'predictions']
+ * @param {String} [uid] 
+ * @param {Array} [gameweek] [eg ['gameweek1', gameweek2']]
+ * @return {Promise} Object of fixtures, 
+ * Either a selection or all
+ * see: https://stackoverflow.com/a/38193091/2368141
+ */
+export function getMatchData(season, dataType, uid = null, gameweeks = null) {
+  const fixturesRef = db.ref(`/${season}fixtures/`);
+  const predictionsRef = db.ref(`/${season}predictions/${uid}/`);
+  const ref = (dataType === 'fixtures') ? fixturesRef : predictionsRef;
+  const matchData = {};
+  return ref.once('value').then((snapshot) => {
+    const request = snapshot.val();
+    if (gameweeks) {
+      for (var i = 0; i < gameweeks.length; i++) {
+        matchData[gameweeks[i]] = request[gameweeks[i]];
+      }
+      // send down selection of games
+      return matchData;
+    }
+    // send all the games
+    return request;
+  });
+}
 
