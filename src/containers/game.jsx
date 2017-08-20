@@ -6,7 +6,7 @@ import FixtureList from './fixture-list.jsx';
 
 import PredictionsResult from '../components/predictions-result.jsx';
 import bootstrapGame from '../components/bootstrap-game.js';
-
+import {makeCancelable} from '../make-cancelable.js';
 import sendPredictions from '../xhr-requests/set-predictions.js';
 
 export default class Game extends Component {
@@ -22,26 +22,29 @@ export default class Game extends Component {
       canSubmit: true,
     };
 
-    this.setRequest = this.setRequest.bind(this);
     this.submitPredictions = this.submitPredictions.bind(this);
   }
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
-    bootstrapGame(this.props.uid, this.props.gameData, this.setRequest);
+    const cancelablePromise = makeCancelable(
+      bootstrapGame(this.props.uid, this.props.gameData).then((returnedRequest) => {
+        this.setState({
+          fixtures: returnedRequest.fixtures,
+          predictions: returnedRequest.predictions,
+          player: returnedRequest.user
+        });
+      })
+    );
+    cancelablePromise
+      .promise
+      .then((a) => {
+        console.log(a)
+      })
+      .catch((reason) => console.log('isCanceled', reason.isCanceled));
+    cancelablePromise.cancel(); // Cancel the promise
   }
  
-  // receives data returned from xhr firebase
-  // and sets the apps state
-  setRequest(returnedRequest) {
-    console.log(returnedRequest);
-    this.setState({
-      fixtures: returnedRequest.fixtures,
-      predictions: returnedRequest.predictions,
-      player: returnedRequest.user
-    });
-  }
-
   submitPredictions(predictions) {
     sendPredictions(this.props.uid, this.props.gameData, predictions);
   }

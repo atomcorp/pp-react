@@ -32,7 +32,6 @@ export function checkUserResults(uid, gameweek) {
 * @params: uid [String]
 * Return an object with {gameweek*: true/false}
 */
-
 export function checkResultsComputed(season, uid) {
   const computedResultURL = `/${season}computed/${uid}/`;
   const computedResultsRef = db.ref(computedResultURL); 

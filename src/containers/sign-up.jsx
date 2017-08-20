@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
-
-import {auth} from '../firebase-connect.js';
+import {makeCancelable} from '../make-cancelable.js';
+import {auth, db} from '../firebase-connect.js';
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -9,6 +9,8 @@ export default class SignUp extends Component {
     this.state = {
       email: '',
       password: '',
+      username: '',
+      teamName: '',
       errors: {
         tooShort: false
       },
@@ -30,16 +32,24 @@ export default class SignUp extends Component {
 
   canSubmit() {
     if (!this.state.errors.tooShort) {
-      auth.createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-        console.log(error);
-      }).then((response) => {
-        console.log(response);
-        if(response) {
-          // send off the uid to the database
-          this.setState({redirect: true})
-        }
-        
-      });
+      const cancelablePromise = makeCancelable(
+        auth.createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
+          console.log(error);
+        }).then((response) => {
+          if(response) {
+            db.ref(`users/${response.uid}`).set({
+              id: response.uid,
+              name: this.state.username,
+              team: this.state.teamName,
+            })       
+          }
+        })
+      );
+      cancelablePromise.promise.then(() => {
+        this.setState({redirect: true});
+        console.log('resolved')
+      }).catch((reason) => console.log('isCanceled', reason.isCanceled));
+      cancelablePromise.cancel(); // Cancel the promise
     }
   }
 
@@ -67,6 +77,14 @@ export default class SignUp extends Component {
           <label>
             Password:
             <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
+          </label>
+          <label>
+            Username:
+            <input name="username" type="username" value={this.state.username} onChange={this.handleChange} />
+          </label>
+          <label>
+            Team name:
+            <input name="teamName" type="teamName" value={this.state.teamName} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
         </form>

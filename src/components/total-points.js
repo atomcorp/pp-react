@@ -15,8 +15,6 @@
 import {compareScores} from './calculate-result.jsx';
 import {
   checkResultsComputed,
-  getFixtures,
-  getPredictions,
   updateComputedResults,
   updateComputedPoints,
   updateComputedPredictions,

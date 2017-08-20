@@ -8,7 +8,7 @@ import LogOut from './containers/log-out.jsx';
 import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
-
+import {makeCancelable} from './make-cancelable.js';
 import {bootstrapGame} from './xhr-requests';
 import {auth, storageKey} from './firebase-connect.js';
 
@@ -54,16 +54,26 @@ class App extends Component {
   }
 
   handleGameBootstrap() {
-    bootstrapGame.then((result) => {
-      this.setState({
-        ...this.state, game: {
-          season: result.season,
-          gameweek: result.gameweek,
-          totalGameweeks: result.totalGameweeks
-        },
-        bootstrappedGame: true
-      });
-    });
+    const cancelablePromise = makeCancelable(
+      bootstrapGame.then((result) => {
+        this.setState({
+          ...this.state, game: {
+            season: result.season,
+            gameweek: result.gameweek,
+            totalGameweeks: result.totalGameweeks
+          },
+          bootstrappedGame: true
+        });
+      })
+    );
+    cancelablePromise
+      .promise
+      .then((a) => {
+        console.log('a')
+      })
+      .catch((reason) => console.log('isCanceled', reason.isCanceled));
+    cancelablePromise.cancel(); // Cancel the promise
+
   }
 
   render() {
