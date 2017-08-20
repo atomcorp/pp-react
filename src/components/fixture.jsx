@@ -36,12 +36,21 @@ export class Fixture extends Component {
           {this.props.fixture.status === 'FINISHED' ? this.props.fixture.result.goalsHomeTeam: null}
           {
             this.props.canPredict 
-            ? <input type="number" value={this.props.prediction.homeScore} onChange={(event) => this.onChange(event, "homeScore", this.props.id)} />
+            ? <input 
+                type="number" 
+                value={this.props.prediction.homeScore} 
+                onChange={(event) => this.onChange(event, "homeScore", this.props.id)} 
+              />
             : this.props.prediction.homeScore
           }
           {' - '} 
-          {this.props.canPredict
-            ? <input type="number" value={this.props.prediction.awayScore} onChange={(event) => this.onChange(event, "awayScore", this.props.id)} />  
+          {
+            this.props.canPredict
+            ? <input 
+                type="number" 
+                value={this.props.prediction.awayScore} 
+                onChange={(event) => this.onChange(event, "awayScore", this.props.id)} 
+              />  
             : this.props.prediction.awayScore
           }
           {this.props.fixture.status === 'FINISHED' ? this.props.fixture.result.goalsAwayTeam: null}

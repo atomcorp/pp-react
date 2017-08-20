@@ -64,7 +64,9 @@ export default class FixtureList extends Component {
   // when someone hits the submit button
   onPredictionSubmit(event) {
     event.preventDefault();
-    this.props.submitPredictions(this.state.predictions);
+    if (this.state.canPredict) {
+      this.props.submitPredictions(this.state.predictions);
+    }
   }
 
   /**
