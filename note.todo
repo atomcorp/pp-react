@@ -7,11 +7,11 @@ App structure:
 
 Tasks:
   ✔ total-results to look up absent computations properly (atm, only checks if none made at all) @done (17-08-20 20:48)
-  ☐ Move all xhr-request into file
+  ✔ Move all xhr-request into file @done (17-08-20 22:37)
     will probably need to redo xhr requests to take 1-X gameweeks
   ✔ Sign up form, fields to add: username, teamname, and upload them to server on create @done (17-08-20 20:48)
-  ☐ allow users to check previous weeks
-  ☐ add check to stop people submitting predictions once inPlay
+  ✔ allow users to check previous weeks @done (17-08-20 22:37)
+  ✔ add check to stop people submitting predictions once inPlay @done (17-08-20 22:37)
   ☐ Show user their last weeks points with link to view results
     this will also need to make predictions inputs into 
   ✔ Colour in results depending on prediction @done (17-08-03 19:09)
@@ -28,6 +28,8 @@ Tasks:
     ✔ Weeks fixtures @done (17-08-15 22:56)
     ✔ Predictions (if any) @done (17-08-15 22:56)
     ✔ User data @done (17-08-15 22:56)
+  ☐ make a league page
+  ☐ Show league table of all users results
 
 Todo:
   ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)

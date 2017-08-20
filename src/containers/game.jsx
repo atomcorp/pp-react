@@ -7,7 +7,7 @@ import FixtureList from './fixture-list.jsx';
 import PredictionsResult from '../components/predictions-result.jsx';
 import bootstrapGame from '../components/bootstrap-game.js';
 import {makeCancelable} from '../make-cancelable.js';
-import sendPredictions from '../xhr-requests/set-predictions.js';
+import {sendPredictions} from '../xhr-requests.js';
 
 export default class Game extends Component {
 

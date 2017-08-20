@@ -37,7 +37,9 @@ export class Fixture extends Component {
           {
             this.props.canPredict 
             ? <input 
-                type="number" 
+                type="text" 
+                size="2"
+                maxLength="2"
                 value={this.props.prediction.homeScore} 
                 onChange={(event) => this.onChange(event, "homeScore", this.props.id)} 
               />
@@ -47,7 +49,9 @@ export class Fixture extends Component {
           {
             this.props.canPredict
             ? <input 
-                type="number" 
+                type="text" 
+                size="2"
+                maxLength="2"
                 value={this.props.prediction.awayScore} 
                 onChange={(event) => this.onChange(event, "awayScore", this.props.id)} 
               />  
