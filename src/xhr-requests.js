@@ -90,11 +90,11 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
   // then update 
   db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
     const request = snapshot.val();
-    const data = {};
-    let lastWeeksPoints = null;
-    if (gameweek) {
-      lastWeeksPoints = request[gameweek];
+    if (!request) {
+      return;
     }
+    const data = {};
+    let lastWeeksPoints = request[gameweek];
     let score = 0;
     for (const result in request) {
       score += request[result];
@@ -103,6 +103,9 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
     data.score = score;
     return data;
   }).then((data) => {
+    if (!data) {
+      return;
+    }
     const updateUsersPointsRef ={};
     updateUsersPointsRef[`/users/${uid}/points`] = data.score;
     updateUsersPointsRef[`/users/${uid}/lastWeeksPoints`] = data.lastWeeksPoints ? data.lastWeeksPoints : null;

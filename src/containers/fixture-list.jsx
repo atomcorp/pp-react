@@ -23,7 +23,6 @@ export default class FixtureList extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.gameData)
     const predictions = this.setPredictions(this.props.fixtures, this.props.predictions);
     this.setState({
       predictions: predictions,

@@ -24,7 +24,7 @@ import {
 
 export default function TotalPoints(uid, gameData) {
   const season = gameData.season;
-  let gameweeksToCheck = gameData.gameweek > 1 ? gameData.gameweek - 1 : null;
+  let gameweeksToCheck = gameData.gameweek > 1 ? gameData.gameweek - 1 : 1;
   return checkResultsComputed(season, uid).then((computedResult) => {
     if (computedResult === null) {
       // literally nothing,
