@@ -156,10 +156,13 @@ export function sendPredictions(uid, season, week, predictions) {
 }
 
 export function getGameweekPoints(uid, season, gameweek) {
-  // return db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
-  //   const request = snapshot.val();
-  //   const points = request[gameweek];
-  //   return points;
-  // })
+  return db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
+    const request = snapshot.val();
+    if (!request) {
+      return null;
+    }
+    const points = request[gameweek];
+    return points;
+  })
 }
 

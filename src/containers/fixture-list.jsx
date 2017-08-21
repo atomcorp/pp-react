@@ -90,6 +90,7 @@ export default class FixtureList extends Component {
           gameweekInView: gameweek,
           predictions: data[1][`gameweek${gameweek}`],
           canPredict: helperCanPredict(gameweek, this.props.gameData.gameweek, this.props.gameData.canPredict),
+          predictionResult: data[2] ? data[2] : null
         })
       })
     }
@@ -148,7 +149,7 @@ export default class FixtureList extends Component {
         {this.state.gameweekInView < this.props.gameData.gameweek + 1
           ? <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)}>Next week</button>
           : null }
-        {!this.state.predictionResult !== null
+        {this.state.predictionResult
           ?  (<div>Your predictions: {this.state.predictionResult}</div>)
           : (<div>No results yet</div>)
         }
