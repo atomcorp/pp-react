@@ -139,11 +139,11 @@ export default class FixtureList extends Component {
           }
         </form>
         {this.state.gameweekInView > 1 
-          ? <a onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView - 1)} href="#">Previous week</a>
+          ? <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView - 1)}>Previous week</button>
           : null }
-          {this.state.gameweekInView < this.props.gameData.gameweek
-            ? <a onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)} href="#">Next week</a>
-            : null }
+        {this.state.gameweekInView < this.props.gameData.gameweek
+          ? <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)}>Next week</button>
+          : null }
       </div>
     );
   }

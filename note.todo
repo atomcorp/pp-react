@@ -12,7 +12,7 @@ Tasks:
   ✔ Sign up form, fields to add: username, teamname, and upload them to server on create @done (17-08-20 20:48)
   ✔ allow users to check previous weeks @done (17-08-20 22:37)
   ✔ add check to stop people submitting predictions once inPlay @done (17-08-20 22:37)
-  ☐ Show user their last weeks points with link to view results
+  ✔ Show user their last weeks points with link to view results @done (17-08-21 20:22)
     this will also need to make predictions inputs into 
   ✔ Colour in results depending on prediction @done (17-08-03 19:09)
   ✔ Bring up user state to top level of app @done (17-08-03 19:09)
