@@ -78,7 +78,7 @@ export default function TotalPoints(uid, gameData) {
     updateComputedPoints(uid, season, scores);
     updateComputedPredictions(uid, season, predictions);
   }).then(() => {
-    updateUsersPoints(uid, season);
+    updateUsersPoints(uid, season, `gameweek${gameweeksToCheck}`);
     return true;
   });
 }

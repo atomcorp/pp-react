@@ -59,7 +59,12 @@ export default class Game extends Component {
       <div className="game">
         <h2>{this.state.player.team}</h2>
         <h4>Managed by {this.state.player.name}</h4>
-        <h4>Points: {this.state.player.points}</h4>
+        <h4>Total points: {this.state.player.points}</h4>
+        {
+          this.state.player.lastWeeksPoints 
+            ? <h4>Last weeks points: {this.state.player.lastWeeksPoints}</h4>
+            : null
+        }
         <h4>Gameweek {this.props.gameData.gameweek}</h4>
         <FixtureList gameData={this.props.gameData} player={this.state.player} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
         {this.state.predictions 
