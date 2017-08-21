@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-
+import PredictionsResult from '../components/predictions-result.jsx';
 import {Fixture} from '../components/fixture.jsx';
-import {getMatchData} from '../xhr-requests.js';
+import {getMatchData, getGameweekPoints} from '../xhr-requests.js';
+
 // there should also be a check here somewhere to see 
 // if changes are allowed or not (ie games have been played, or set arbitary cut-off time, say Friday 6PM)
 // if changes not allowed, will auto attempt to calc score using
@@ -13,7 +14,8 @@ export default class FixtureList extends Component {
       predictions: null,
       gameweekInView: this.props.gameData.gameweek,
       canRender: false,
-      canPredict: this.props.gameData.canPredict
+      canPredict: this.props.gameData.canPredict,
+      predictionResult: null
     }
     this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -75,9 +77,10 @@ export default class FixtureList extends Component {
     if (gameweek) {
       Promise.all([
         getMatchData(this.props.gameData.season, 'fixtures', null, [`gameweek${gameweek}`]),
-        getMatchData(this.props.gameData.season, 'predictions', this.props.player.id, [`gameweek${gameweek}`])
+        getMatchData(this.props.gameData.season, 'predictions', this.props.player.id, [`gameweek${gameweek}`]),
+        getGameweekPoints(this.props.player.id, this.props.gameData.season, [`gameweek${gameweek}`])
       ]).then((data) => {
-        if (gameweek > this.props.gameData.gameweek && !data[1][`gameweek${gameweek}`]) {
+        if (!data[1][`gameweek${gameweek}`]) {
           data[1][`gameweek${gameweek}`] = this.setPredictions(data[0][`gameweek${gameweek}`]);
         }
         return data;
@@ -86,7 +89,7 @@ export default class FixtureList extends Component {
           fixtures: data[0][`gameweek${gameweek}`],
           gameweekInView: gameweek,
           predictions: data[1][`gameweek${gameweek}`],
-          canPredict: helperCanPredict(gameweek, this.props.gameData.gameweek),
+          canPredict: helperCanPredict(gameweek, this.props.gameData.gameweek, this.props.gameData.canPredict),
         })
       })
     }
@@ -118,6 +121,7 @@ export default class FixtureList extends Component {
 
     return (
       <div className="fixture-list">
+        Gameweek: {this.state.gameweekInView}
         <form action="prediction" onSubmit={this.onPredictionSubmit}>
           <table className="table table-striped table-bordered">
             <thead>
@@ -144,6 +148,10 @@ export default class FixtureList extends Component {
         {this.state.gameweekInView < this.props.gameData.gameweek + 1
           ? <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)}>Next week</button>
           : null }
+        {!this.state.predictionResult !== null
+          ?  (<div>Your predictions: {this.state.predictionResult}</div>)
+          : (<div>No results yet</div>)
+        }
       </div>
     );
   }
@@ -154,12 +162,13 @@ export default class FixtureList extends Component {
  * @param  {Number}
  * @return {Boolean}
  */
-function helperCanPredict(requestedWeek, currentGameweek) {
+function helperCanPredict(requestedWeek, currentGameweek, canPredict) {
+
   if (requestedWeek < currentGameweek) {
     return false;
   }
   if (requestedWeek > currentGameweek) {
     return true;
   }
-  return currentGameweek;
+  return canPredict;
 }

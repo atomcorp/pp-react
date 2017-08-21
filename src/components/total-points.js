@@ -24,7 +24,7 @@ import {
 
 export default function TotalPoints(uid, gameData) {
   const season = gameData.season;
-  const gameweeksToCheck = gameData.gameweek -1;
+  let gameweeksToCheck = gameData.gameweek > 1 ? gameData.gameweek - 1 : null;
   return checkResultsComputed(season, uid).then((computedResult) => {
     if (computedResult === null) {
       // literally nothing,
@@ -78,7 +78,8 @@ export default function TotalPoints(uid, gameData) {
     updateComputedPoints(uid, season, scores);
     updateComputedPredictions(uid, season, predictions);
   }).then(() => {
-    updateUsersPoints(uid, season, `gameweek${gameweeksToCheck}`);
+    gameweeksToCheck = gameweeksToCheck ? `gameweek${gameweeksToCheck}` : null
+    updateUsersPoints(uid, season, gameweeksToCheck);
     return true;
   });
 }

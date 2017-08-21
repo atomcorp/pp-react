@@ -85,13 +85,17 @@ export const updateComputedPredictions = function(uid, season, predictions) {
 * @param {String} [gameweek] [eg 'gameweek1']
 * get all season points, add together, then post to user
 */
-export const updateUsersPoints = function(uid, season, gameweek) {
+export const updateUsersPoints = function(uid, season, gameweek = null) {
   // first get current user points
   // then update 
   db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
     const request = snapshot.val();
     const data = {};
-    const lastWeeksPoints = request[gameweek];
+    let lastWeeksPoints = null;
+    if (gameweek) {
+      lastWeeksPoints = request[gameweek];
+    }
+    console.log(lastWeeksPoints);
     let score = 0;
     for (const result in request) {
       score += request[result];
@@ -112,7 +116,7 @@ export const updateUsersPoints = function(uid, season, gameweek) {
  * @param {String} [dataType] ['fixtures' or 'predictions']
  * @param {String} [uid] 
  * @param {Array} [gameweek] [eg ['gameweek1', gameweek2']]
- * @return {Promise} Object of fixtures, or null
+ * @return {Promise} Object
  * Either a selection or all
  * see: https://stackoverflow.com/a/38193091/2368141
  */
@@ -124,9 +128,13 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
 
   return ref.once('value').then((snapshot) => {
     const request = snapshot.val();
+    if (!request) {
+      return {};
+    }
     if (gameweeks) {
       if (!Array.isArray(gameweeks)) {console.log('Gameweeks must be array')};
       for (var i = 0; i < gameweeks.length; i++) {
+        console.log(request);
         if (request[gameweeks[i]]) {
           matchData[gameweeks[i]] = request[gameweeks[i]];
         }
@@ -147,5 +155,13 @@ export function sendPredictions(uid, season, week, predictions) {
       console.log("Error updating data:", error);
     }
   })
+}
+
+export function getGameweekPoints(uid, season, gameweek) {
+  // return db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
+  //   const request = snapshot.val();
+  //   const points = request[gameweek];
+  //   return points;
+  // })
 }
 
