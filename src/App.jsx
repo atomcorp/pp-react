@@ -23,7 +23,8 @@ class App extends Component {
       game: {
         season: "",
         gameweek: "",
-        totalGameweeks: ""
+        totalGameweeks: "",
+        canPredict: false
       },
       loggedIn: false,
       bootstrappedGame: false
@@ -60,6 +61,7 @@ class App extends Component {
           ...this.state, game: {
             season: result.season,
             gameweek: result.gameweek,
+            canPredict: result.canPredict,
             totalGameweeks: result.totalGameweeks
           },
           bootstrappedGame: true

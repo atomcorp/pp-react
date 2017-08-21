@@ -95,7 +95,6 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
     if (gameweek) {
       lastWeeksPoints = request[gameweek];
     }
-    console.log(lastWeeksPoints);
     let score = 0;
     for (const result in request) {
       score += request[result];
@@ -134,7 +133,6 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
     if (gameweeks) {
       if (!Array.isArray(gameweeks)) {console.log('Gameweeks must be array')};
       for (var i = 0; i < gameweeks.length; i++) {
-        console.log(request);
         if (request[gameweeks[i]]) {
           matchData[gameweeks[i]] = request[gameweeks[i]];
         }

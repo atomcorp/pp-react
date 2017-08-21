@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PredictionsResult from '../components/predictions-result.jsx';
 import {Fixture} from '../components/fixture.jsx';
 import {getMatchData, getGameweekPoints} from '../xhr-requests.js';
 
@@ -24,6 +23,7 @@ export default class FixtureList extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.gameData)
     const predictions = this.setPredictions(this.props.fixtures, this.props.predictions);
     this.setState({
       predictions: predictions,
