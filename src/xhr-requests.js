@@ -112,7 +112,7 @@ export const updateUsersPoints = function(uid, season, gameweek) {
  * @param {String} [dataType] ['fixtures' or 'predictions']
  * @param {String} [uid] 
  * @param {Array} [gameweek] [eg ['gameweek1', gameweek2']]
- * @return {Promise} Object of fixtures, 
+ * @return {Promise} Object of fixtures, or null
  * Either a selection or all
  * see: https://stackoverflow.com/a/38193091/2368141
  */
@@ -127,10 +127,10 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
     if (gameweeks) {
       if (!Array.isArray(gameweeks)) {console.log('Gameweeks must be array')};
       for (var i = 0; i < gameweeks.length; i++) {
-        matchData[gameweeks[i]] = request[gameweeks[i]];
+        if (request[gameweeks[i]]) {
+          matchData[gameweeks[i]] = request[gameweeks[i]];
+        }
       }
-      // send down selection of games
-      
       return matchData;
     }
     // send all the games
@@ -138,10 +138,10 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
   });
 }
 
-export function sendPredictions(uid, gameData, predictions) {
+export function sendPredictions(uid, season, week, predictions) {
   const refs = {};
   // refs[`${gameData.season}gameweek${gameData.gameweek}/${uid}`] = predictions;
-  refs[`${gameData.season}predictions/${uid}/gameweek${gameData.gameweek}`] = predictions;
+  refs[`${season}predictions/${uid}/gameweek${week}`] = predictions;
   db.ref().update(refs, function(error) {
     if (error) {
       console.log("Error updating data:", error);

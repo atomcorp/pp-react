@@ -47,8 +47,8 @@ export default class Game extends Component {
     cancelablePromise.cancel(); // Cancel the promise
   }
  
-  submitPredictions(predictions) {
-    sendPredictions(this.props.uid, this.props.gameData, predictions);
+  submitPredictions(predictions, gameweek) {
+    sendPredictions(this.props.uid, this.props.gameData.season, gameweek, predictions);
   }
 
   render() {

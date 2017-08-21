@@ -22,33 +22,29 @@ export default class FixtureList extends Component {
   }
 
   componentDidMount() {
-    this.setPredictions();
+    const predictions = this.setPredictions(this.props.fixtures, this.props.predictions);
+    this.setState({
+      predictions: predictions,
+      canRender: true
+    });
   }
 
   // this sets up what's diplayed in the score boxes
   // if user has made predictions before will show those
   // if not just defaults to the predictions 0-0
-  setPredictions() {
-    if (this.props.predictions) {
-      this.setState({
-        predictions: this.props.predictions,
-        canRender: true
-      });
-      return;
+  setPredictions(fixtures, predictions) {
+    if (predictions) {
+      return predictions;
     } 
-    const fixtures = this.props.fixtures;
-    const predictions = {};
+    const newPredictions = {};
     for (const id in fixtures) { 
-      predictions[id] = {
+      newPredictions[id] = {
         homeScore: 0,
         awayScore: 0,
         id: id
       }
     }    
-    this.setState({
-      predictions: predictions,
-      canRender: true
-    })
+    return newPredictions;
   }
 
   // when users changes the scores
@@ -65,7 +61,7 @@ export default class FixtureList extends Component {
   onPredictionSubmit(event) {
     event.preventDefault();
     if (this.state.canPredict) {
-      this.props.submitPredictions(this.state.predictions);
+      this.props.submitPredictions(this.state.predictions, this.state.gameweekInView);
     }
   }
 
@@ -81,11 +77,16 @@ export default class FixtureList extends Component {
         getMatchData(this.props.gameData.season, 'fixtures', null, [`gameweek${gameweek}`]),
         getMatchData(this.props.gameData.season, 'predictions', this.props.player.id, [`gameweek${gameweek}`])
       ]).then((data) => {
+        if (gameweek > this.props.gameData.gameweek && !data[1][`gameweek${gameweek}`]) {
+          data[1][`gameweek${gameweek}`] = this.setPredictions(data[0][`gameweek${gameweek}`]);
+        }
+        return data;
+      }).then((data) => {
         this.setState({
           fixtures: data[0][`gameweek${gameweek}`],
-          predictions: data[1][`gameweek${gameweek}`],
           gameweekInView: gameweek,
-          canPredict: gameweek !== this.props.gameData.gameweek ? false : true 
+          predictions: data[1][`gameweek${gameweek}`],
+          canPredict: helperCanPredict(gameweek, this.props.gameData.gameweek),
         })
       })
     }
@@ -97,7 +98,6 @@ export default class FixtureList extends Component {
       return <div>Loading fixture list</div>;
     }
     const fixtures = this.state.fixtures;
-    
     // order the fixtures by date, so we can add the dates
     // may just remove this later, not really important what time fixture is for game
     const sortFixtures = Object.keys(fixtures).sort(function(a,b) {
@@ -141,10 +141,20 @@ export default class FixtureList extends Component {
         {this.state.gameweekInView > 1 
           ? <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView - 1)}>Previous week</button>
           : null }
-        {this.state.gameweekInView < this.props.gameData.gameweek
+        {this.state.gameweekInView < this.props.gameData.gameweek + 1
           ? <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)}>Next week</button>
           : null }
       </div>
     );
   }
+}
+
+function helperCanPredict(requestedWeek, currentGameweek) {
+  if (requestedWeek < currentGameweek) {
+    return false;
+  }
+  if (requestedWeek > currentGameweek) {
+    return true;
+  }
+  return currentGameweek;
 }
