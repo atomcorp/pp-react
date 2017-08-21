@@ -13,7 +13,7 @@ export default class FixtureList extends Component {
       predictions: null,
       gameweekInView: this.props.gameData.gameweek,
       canRender: false,
-      canPredict: true
+      canPredict: this.props.gameData.canPredict
     }
     this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -32,7 +32,7 @@ export default class FixtureList extends Component {
   // this sets up what's diplayed in the score boxes
   // if user has made predictions before will show those
   // if not just defaults to the predictions 0-0
-  setPredictions(fixtures, predictions) {
+  setPredictions(fixtures, predictions = null) {
     if (predictions) {
       return predictions;
     } 
@@ -149,6 +149,11 @@ export default class FixtureList extends Component {
   }
 }
 
+/**
+ * @param  {Number}
+ * @param  {Number}
+ * @return {Boolean}
+ */
 function helperCanPredict(requestedWeek, currentGameweek) {
   if (requestedWeek < currentGameweek) {
     return false;
