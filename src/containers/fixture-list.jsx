@@ -14,7 +14,8 @@ export default class FixtureList extends Component {
       gameweekInView: this.props.gameData.gameweek,
       canRender: false,
       canPredict: this.props.gameData.canPredict,
-      predictionResult: null
+      predictionResult: null,
+      predictionSubmitError: false
     }
     this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -62,7 +63,12 @@ export default class FixtureList extends Component {
   onPredictionSubmit(event) {
     event.preventDefault();
     if (this.state.canPredict) {
-      this.props.submitPredictions(this.state.predictions, this.state.gameweekInView);
+      if (validatePredictionsHelper(this.state.predictions)) {
+        this.props.submitPredictions(this.state.predictions, this.state.gameweekInView);
+        this.state.predictionSubmitError ? this.setState({predictionSubmitError: false}) : null;
+      } else {
+        this.setState({predictionSubmitError: true})
+      }
     }
   }
 
@@ -88,7 +94,7 @@ export default class FixtureList extends Component {
           fixtures: data[0][`gameweek${gameweek}`],
           gameweekInView: gameweek,
           predictions: data[1][`gameweek${gameweek}`],
-          canPredict: helperCanPredict(gameweek, this.props.gameData.gameweek, this.props.gameData.canPredict),
+          canPredict: canPredictHelper(gameweek, this.props.gameData.gameweek, this.props.gameData.canPredict),
           predictionResult: data[2] ? data[2] : null
         })
       })
@@ -152,6 +158,10 @@ export default class FixtureList extends Component {
           ?  (<div>Your predictions: {this.state.predictionResult}</div>)
           : (<div>No results yet</div>)
         }
+        {this.state.predictionSubmitError
+          ?  (<div>There was an error submitting your predictions, please make sure each team has been predicted</div>)
+          : (<div></div>)
+        }
       </div>
     );
   }
@@ -162,7 +172,7 @@ export default class FixtureList extends Component {
  * @param  {Number}
  * @return {Boolean}
  */
-function helperCanPredict(requestedWeek, currentGameweek, canPredict) {
+function canPredictHelper(requestedWeek, currentGameweek, canPredict) {
 
   if (requestedWeek < currentGameweek) {
     return false;
@@ -171,4 +181,15 @@ function helperCanPredict(requestedWeek, currentGameweek, canPredict) {
     return true;
   }
   return canPredict;
+}
+
+function validatePredictionsHelper(predictions) {
+  console.log(predictions)
+  for (const id in predictions) {
+    if (!Number.isInteger(predictions[id].homeScore) || !Number.isInteger(predictions[id].awayScore)) {
+      return false;
+    } else {
+    }
+  }
+  return true;
 }

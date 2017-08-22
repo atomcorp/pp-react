@@ -37,16 +37,20 @@ export default function TotalPoints(uid, gameData) {
           return predictionsResults;
         })
       ]).then((promises) => {
-        return checkAllPredictions(promises[0], promises[1]);
+        if (Object.keys(promises[1]).length === 0) {
+          return null; // no predictions made
+        }
+        return checkAllPredictions(promises[0], promises[1], gameweeksToCheck);
       });
     } else {
       // grab any weeks that are missing, push into array
       const weeksToCalculate = [];
-      for (var i = 1; i <= gameweeksToCheck; i++) {
+      for (var i = 1; i < gameweeksToCheck; i++) {
         if (!computedResult[`gameweek${i}`]) {
           weeksToCalculate.push(`gameweek${i}`);
         }
       }
+
       if (weeksToCalculate.length) {
         return Promise.all([
           getMatchData(season, 'predictions', uid, weeksToCalculate).then((fixtureResults) => {
@@ -56,13 +60,13 @@ export default function TotalPoints(uid, gameData) {
             return predictionsResults;
           })
         ]).then((promises) => {
-          return checkAllPredictions(promises[0], promises[1]);
+          return checkAllPredictions(promises[0], promises[1], gameweeksToCheck);
         });
       }
     }
   }).then((computedScores) => {
     if (!computedScores) {
-      return;
+      return null;
     }
     const predictions = {};
     const scores = {};
@@ -74,10 +78,13 @@ export default function TotalPoints(uid, gameData) {
         updated[id] = true;
       }
     }
-    updateComputedResults(uid, season, updated);
-    updateComputedPoints(uid, season, scores);
-    updateComputedPredictions(uid, season, predictions);
-  }).then(() => {
+    if (Object.keys(updated).length !== 0) { updateComputedResults(uid, season, updated)};
+    if (Object.keys(scores).length !== 0) { updateComputedPoints(uid, season, scores)};
+    if (Object.keys(predictions).length !== 0) { updateComputedPredictions(uid, season, predictions)};
+  }).then((reject) => {
+    if (!reject) {
+      return false;
+    }
     gameweeksToCheck = gameweeksToCheck ? `gameweek${gameweeksToCheck}` : null
     updateUsersPoints(uid, season, gameweeksToCheck);
     return true;
@@ -91,11 +98,13 @@ export default function TotalPoints(uid, gameData) {
 * @returns {Object} score and updated predictions for each gameweek
 * note: the returned predictions object has had scores added to it
 */
-function checkAllPredictions(fixtures, predictions) {
+function checkAllPredictions(fixtures, predictions, gameweeksToCheck) {
   const resultsToUpload = {};
   // go through the predictions
   for (const gameweek in predictions) {
-    resultsToUpload[gameweek] = compareScores(predictions[gameweek], fixtures[gameweek]);
+    if (parseInt(gameweek.slice(gameweek.length - 1)) < gameweeksToCheck) {
+      resultsToUpload[gameweek] = compareScores(predictions[gameweek], fixtures[gameweek]);
+    }
   }
   // this has 
   return resultsToUpload;
