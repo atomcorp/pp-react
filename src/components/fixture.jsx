@@ -5,6 +5,7 @@ export class Fixture extends Component {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.colour = this.colour.bind(this);
+    this.onFocus = this.onFocus.bind(this);
   }
 
   colour(points) {
@@ -24,6 +25,10 @@ export class Fixture extends Component {
     this.props.onChange(score, homeOrAway, id);
   }
 
+  onFocus(event) {
+    console.log(event.target.select());
+  }
+
   // props will be fixture
   // take 2 team names
   // and print the tds 
@@ -41,6 +46,7 @@ export class Fixture extends Component {
                 size="2"
                 maxLength="2"
                 value={this.props.prediction.homeScore} 
+                onFocus={this.onFocus}
                 onChange={(event) => this.onChange(event, "homeScore", this.props.id)} 
               />
             : this.props.prediction.homeScore
@@ -53,6 +59,7 @@ export class Fixture extends Component {
                 size="2"
                 maxLength="2"
                 value={this.props.prediction.awayScore} 
+                onFocus={this.onFocus}
                 onChange={(event) => this.onChange(event, "awayScore", this.props.id)} 
               />  
             : this.props.prediction.awayScore

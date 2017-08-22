@@ -33,6 +33,7 @@ Tasks:
   ☐ Show league table of all users results
   ☐ if looking at a previous week and someone hasn't made any predictions, do not create predictions for them
     ☐ also just display - v -, instead of 0 - 0
+    ☐ don't allow - v - to be submitted
 
 Todo:
   ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)

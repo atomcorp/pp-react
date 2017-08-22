@@ -40,8 +40,8 @@ export default class FixtureList extends Component {
     const newPredictions = {};
     for (const id in fixtures) { 
       newPredictions[id] = {
-        homeScore: 0,
-        awayScore: 0,
+        homeScore: '-',
+        awayScore: '-',
         id: id
       }
     }    
