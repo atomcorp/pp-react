@@ -44,12 +44,14 @@ export function checkResultsComputed(season, uid) {
 * @param {string} uid
 * @param {Number} season
 * @param {Boolean} points
-* @returns {Object} score and updated predictions for each gameweek
 * note: the returned predictions object has had scores added to it
 */
-export const updateComputedResults = function(uid, season, boolean) {
+export const updateComputedResults = function(uid, season, updated) {
   const updateComputedRef = {};
-  updateComputedRef[`/${season}computed/${uid}/`] = boolean;
+  for (const id in updated) {
+    updateComputedRef[`/${season}computed/${uid}/${id}`] = updated[id];
+  }
+  
   db.ref().update(updateComputedRef);
 }
 
@@ -77,7 +79,7 @@ export const updateComputedPredictions = function(uid, season, predictions) {
   const updateComputedRef = {};
   updateComputedRef[`/${season}predictions/${uid}/`] = predictions;
   console.log(predictions)
-  // db.ref().update(updateComputedRef);
+  db.ref().update(updateComputedRef);
 }
 
 /*

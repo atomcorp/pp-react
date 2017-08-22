@@ -77,6 +77,7 @@ export default function TotalPoints(uid, gameData) {
       }
       updated[id] = true;
     }
+    console.log(updated)
     if (Object.keys(updated).length !== 0) { updateComputedResults(uid, season, updated)};
     if (Object.keys(scores).length !== 0) { updateComputedPoints(uid, season, scores)};
     if (Object.keys(predictions).length !== 0) { updateComputedPredictions(uid, season, predictions)};
