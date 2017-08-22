@@ -76,7 +76,8 @@ export const updateComputedPoints = function(uid, season, points) {
 export const updateComputedPredictions = function(uid, season, predictions) {
   const updateComputedRef = {};
   updateComputedRef[`/${season}predictions/${uid}/`] = predictions;
-  db.ref().update(updateComputedRef);
+  console.log(predictions)
+  // db.ref().update(updateComputedRef);
 }
 
 /*
@@ -90,9 +91,7 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
   // then update 
   db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
     const request = snapshot.val();
-    if (!request) {
-      return;
-    }
+    console.log(request)
     const data = {};
     let lastWeeksPoints = request[gameweek];
     let score = 0;
@@ -136,9 +135,7 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
     if (gameweeks) {
       if (!Array.isArray(gameweeks)) {console.log('Gameweeks must be array')};
       for (var i = 0; i < gameweeks.length; i++) {
-        if (request[gameweeks[i]]) {
-          matchData[gameweeks[i]] = request[gameweeks[i]];
-        }
+        matchData[gameweeks[i]] = request[gameweeks[i]];
       }
       return matchData;
     }

@@ -51,7 +51,7 @@ export class Fixture extends Component {
               />
             : this.props.prediction.homeScore
           }
-          {' - '} 
+          {' : '} 
           {
             this.props.canPredict
             ? <input 

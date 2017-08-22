@@ -45,20 +45,19 @@ export default function TotalPoints(uid, gameData) {
     } else {
       // grab any weeks that are missing, push into array
       const weeksToCalculate = [];
-      for (var i = 1; i < gameweeksToCheck; i++) {
+      for (let i = 1; i < gameweeksToCheck + 1; i++) {
         if (!computedResult[`gameweek${i}`]) {
           weeksToCalculate.push(`gameweek${i}`);
         }
       }
-
       if (weeksToCalculate.length) {
         return Promise.all([
+          getMatchData(season, 'fixtures', null, weeksToCalculate).then((predictionsResults) => {
+            return predictionsResults;
+          }),
           getMatchData(season, 'predictions', uid, weeksToCalculate).then((fixtureResults) => {
             return fixtureResults;
           }),
-          getMatchData(season, 'fixtures', null, weeksToCalculate).then((predictionsResults) => {
-            return predictionsResults;
-          })
         ]).then((promises) => {
           return checkAllPredictions(promises[0], promises[1], gameweeksToCheck);
         });
@@ -75,17 +74,14 @@ export default function TotalPoints(uid, gameData) {
       if (computedScores[id]) {
         predictions[id] = computedScores[id].predictions;
         scores[id] = computedScores[id].score;
-        updated[id] = true;
       }
+      updated[id] = true;
     }
     if (Object.keys(updated).length !== 0) { updateComputedResults(uid, season, updated)};
     if (Object.keys(scores).length !== 0) { updateComputedPoints(uid, season, scores)};
     if (Object.keys(predictions).length !== 0) { updateComputedPredictions(uid, season, predictions)};
   }).then((reject) => {
-    if (!reject) {
-      return false;
-    }
-    gameweeksToCheck = gameweeksToCheck ? `gameweek${gameweeksToCheck}` : null
+    gameweeksToCheck = gameweeksToCheck ? `gameweek${gameweeksToCheck}` : null;
     updateUsersPoints(uid, season, gameweeksToCheck);
     return true;
   });
@@ -102,9 +98,12 @@ function checkAllPredictions(fixtures, predictions, gameweeksToCheck) {
   const resultsToUpload = {};
   // go through the predictions
   for (const gameweek in predictions) {
-    if (parseInt(gameweek.slice(gameweek.length - 1)) < gameweeksToCheck) {
+    if (predictions[gameweek] === undefined) {
+      resultsToUpload[gameweek] = null;
+    } else if (parseInt(gameweek.slice(gameweek.length - 1)) <= gameweeksToCheck ) {
       resultsToUpload[gameweek] = compareScores(predictions[gameweek], fixtures[gameweek]);
     }
+    
   }
   // this has 
   return resultsToUpload;
