@@ -26,7 +26,7 @@ export class Fixture extends Component {
   }
 
   onFocus(event) {
-    console.log(event.target.select());
+    event.target.select();
   }
 
   // props will be fixture
@@ -65,6 +65,11 @@ export class Fixture extends Component {
             : this.props.prediction.awayScore
           }
           {this.props.fixture.status === 'FINISHED' ? this.props.fixture.result.goalsAwayTeam: null}
+          {
+            this.props.prediction.points !== undefined 
+              ? <div>Points: {this.props.prediction.points}</div> 
+              : null
+          }
         </td>
         <td>{this.props.fixture.awayTeamName}</td>
       </tr>
