@@ -168,3 +168,13 @@ export function getGameweekPoints(uid, season, gameweek) {
   })
 }
 
+export function getTotalPoints() {
+  return db.ref(`/users/`).once('value').then((snapshot) => {
+      const request = snapshot.val();
+      if (!request) {
+        return null;
+      }
+      return request;
+    })
+}
+

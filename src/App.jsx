@@ -8,6 +8,7 @@ import LogOut from './containers/log-out.jsx';
 import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
+import Leagues from './components/leagues.jsx';
 import {makeCancelable} from './make-cancelable.js';
 import {bootstrapApp} from './xhr-requests';
 import {auth, storageKey} from './firebase-connect.js';
@@ -99,6 +100,7 @@ class App extends Component {
     const pages ={
       home: <Game uid={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
       profile: <Profile user={this.state.uid} />,
+      leagues: <Leagues uid={this.state.uid} />,
       signUp: <SignUp />,
       logIn: <LogOut />
     }
@@ -114,12 +116,14 @@ class App extends Component {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/profile">Profile</Link></li>
+            <li><Link to="/leagues">Leagues</Link></li>
             {this.state.loggedIn ? null : <li><Link to="/sign-up">Sign up</Link></li>}
             {this.state.loggedIn ? null : <li><Link to="/log-in">Log in</Link></li>}
 
           </ul>
           
           <Route exact path="/" component={() => pages.home}/>
+          <Route exact path="/leagues" component={() => pages.leagues}/>
           <Route exact path="/sign-up" component={() => pages.signUp}/>
           <Route exact path="/profile" component={() => pages.profile}/>
           <Route exact path="/log-in" component={() => pages.logIn}/>
