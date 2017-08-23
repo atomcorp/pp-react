@@ -43,7 +43,7 @@ export function checkResultsComputed(season, uid) {
 /*
 * @param {string} uid
 * @param {Number} season
-* @param {Boolean} points
+* @param {Object} updated {gameweek1: true, etc}
 * note: the returned predictions object has had scores added to it
 */
 export const updateComputedResults = function(uid, season, updated) {
@@ -95,11 +95,11 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
     const request = snapshot.val();
     console.log(request)
     const data = {};
-    let lastWeeksPoints = request[gameweek];
     let score = 0;
     for (const result in request) {
       score += request[result];
     }
+    let lastWeeksPoints = request ? request[gameweek] : null;
     data.lastWeeksPoints = lastWeeksPoints;
     data.score = score;
     return data;
@@ -109,7 +109,7 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
     }
     const updateUsersPointsRef ={};
     updateUsersPointsRef[`/users/${uid}/points`] = data.score;
-    updateUsersPointsRef[`/users/${uid}/lastWeeksPoints`] = data.lastWeeksPoints ? data.lastWeeksPoints : null;
+    updateUsersPointsRef[`/users/${uid}/lastWeeksPoints`] = data.lastWeeksPoints;
     db.ref().update(updateUsersPointsRef);
   });
 }
