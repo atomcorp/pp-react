@@ -27,7 +27,7 @@ export default class Game extends Component {
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
     const cancelablePromise = makeCancelable(
-      bootstrapGame(this.props.uid, this.props.gameData).then((returnedRequest) => {
+      bootstrapGame(this.props.player.id, this.props.gameData).then((returnedRequest) => {
         this.setState({
           fixtures: returnedRequest.fixtures,
           predictions: returnedRequest.predictions,
@@ -45,7 +45,7 @@ export default class Game extends Component {
   }
  
   submitPredictions(predictions, gameweek) {
-    sendPredictions(this.props.uid, this.props.gameData.season, gameweek, predictions);
+    sendPredictions(this.props.player.id, this.props.gameData.season, gameweek, predictions);
   }
 
   render() {
