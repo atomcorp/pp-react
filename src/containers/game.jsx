@@ -17,7 +17,6 @@ export default class Game extends Component {
     this.state = {
       fixtures: null,
       predictions: null,
-      player: null,
       canSubmit: true,
       loadFixtureList: false
     };
@@ -32,7 +31,6 @@ export default class Game extends Component {
         this.setState({
           fixtures: returnedRequest.fixtures,
           predictions: returnedRequest.predictions,
-          player: returnedRequest.user,
           loadFixtureList: true
         });
       })
@@ -56,16 +54,16 @@ export default class Game extends Component {
     }
     return (
       <div className="game">
-        <h2>{this.state.player.team}</h2>
-        <h4>Managed by {this.state.player.name}</h4>
-        <h4>Total points: {this.state.player.points}</h4>
+        <h2>{this.props.player.team}</h2>
+        <h4>Managed by {this.props.player.name}</h4>
+        <h4>Total points: {this.props.player.points}</h4>
         {
-          this.state.player.lastWeeksPoints 
-            ? <h4>Last weeks points: {this.state.player.lastWeeksPoints}</h4>
+          this.props.player.lastWeeksPoints 
+            ? <h4>Last weeks points: {this.props.player.lastWeeksPoints}</h4>
             : null
         }
         <h4>Current gameweek {this.props.gameData.gameweek}</h4>
-        <FixtureList gameData={this.props.gameData} player={this.state.player} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
+        <FixtureList gameData={this.props.gameData} player={this.props.player} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
       </div>
     );
   }

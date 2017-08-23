@@ -91,7 +91,7 @@ class App extends Component {
       );
     }
     const pages ={
-      home: <Game uid={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
+      home: <Game player={this.state.player} gameData={this.state.game} route={this.changeRoute} />,
       profile: <Profile player={this.state.player} />,
       leagues: <Leagues uid={this.state.uid} />,
       signUp: <SignUp />,

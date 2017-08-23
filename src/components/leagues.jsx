@@ -47,9 +47,9 @@ export default class Leagues extends Component {
 
   renderRow(user) {
     return (
-      <tr style={
+      <tr key={user.id} style={
         this.props.uid === user.id ? divStyle : null
-      } key={user.id}>
+      }>
         <td>{user.name}</td>
         <td>{user.team}</td>
         <td>{user.points}</td>
@@ -61,7 +61,6 @@ export default class Leagues extends Component {
     if (!this.render) {
       return;
     }
-    console.log(this.state.rows)
 
     return (
       <div>
