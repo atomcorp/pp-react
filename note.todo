@@ -29,13 +29,15 @@ Tasks:
     ✔ Predictions (if any) @done (17-08-15 22:56)
     ✔ User data @done (17-08-15 22:56)
   ✔ be able to set predictions for next week @done (17-08-21 21:40)
-  ☐ make a league page
-  ☐ Show league table of all users results
+  ✔ make a league page @done (17-08-23 21:54)
+  ✔ Show league table of all users results @done (17-08-23 21:54)
+  ☐ make league table user router :id, to get only scores from people in that league
   ✔ if looking at a previous week and someone hasn't made any predictions, do not create predictions for them @done (17-08-23 20:11)
     ✔ also just display - v -, instead of 0 - 0 @done (17-08-23 20:11)
     ✔ don't allow - v - to be submitted @done (17-08-23 20:11)
   ✔ Input validation on scores @done (17-08-23 20:11)
   ☐ Add saved, inputted, not inputted notifications on predictions (may need to uplift fixture to add state)
+  ☐ add one star to weekly predictions, get double points on correct predictions
 
 Todo:
   ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)
@@ -59,9 +61,9 @@ Todo:
 Thoughts: 
   Can only change the team name once a season
   Add a one offs prediction game (you just do one gameweek)
-  You pick a favourite team - get double points for those results = bad
+  ✘ You pick a favourite team - get double points for those results = bad @cancelled (17-08-23 21:57)
   Star a prediction each week
-  You automatically go into a global league, you can then add extra ones
+  You automatically go into a global league, you can then add extra ones with friends
 
 Notes:
    React folder structure = https://daveceddia.com/react-project-structure/

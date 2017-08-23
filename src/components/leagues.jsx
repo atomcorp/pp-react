@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {getTotalPoints} from '../xhr-requests.js';
+import {getUsers} from '../xhr-requests.js';
 
 
 export default class Leagues extends Component {
@@ -22,7 +22,7 @@ export default class Leagues extends Component {
   }
 
   handlePoints() {
-    const request = getTotalPoints().then((response) => {
+    const request = getUsers().then((response) => {
       const sortPoints = Object.keys(response).sort(function(a,b) {
         let first = `${response[a].points}`;
         let second = `${response[b].points}`;

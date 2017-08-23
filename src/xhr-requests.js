@@ -1,16 +1,24 @@
 import {db} from './firebase-connect';
 import firebase from './firebase';
 
-const gameRefString = `/game`;
-const game = db.ref(gameRefString);
-
 // grab the game setting data we need,
 // gets current gameweek and season
-export const bootstrapApp = new Promise((resolve, reject) => {
-  game.once('value').then((snapshot) => {
-    resolve(snapshot.val());
-  });
-});
+export function bootstrapApp(uid) {
+  return Promise.all([
+    db.ref(`/game`).once('value').then((snapshot) => {
+      return snapshot.val();
+    }),
+    db.ref(`/users/${uid}`).once('value').then((snapshot) => {
+      return snapshot.val();
+    })
+  ]).then((result) => {
+      const resolve = {
+        game: result[0],
+        player: result[1]
+      }
+      return resolve;
+    })
+};
 
 export const updateGame = function(result) {
   db.ref('game').set({
@@ -168,7 +176,8 @@ export function getGameweekPoints(uid, season, gameweek) {
   })
 }
 
-export function getTotalPoints() {
+// really
+export function getUsers() {
   return db.ref(`/users/`).once('value').then((snapshot) => {
       const request = snapshot.val();
       if (!request) {

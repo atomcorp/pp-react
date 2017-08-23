@@ -21,12 +21,8 @@ class App extends Component {
     super(props);
     this.state = {
       route: '/',
-      game: {
-        season: "",
-        gameweek: "",
-        totalGameweeks: "",
-        canPredict: false
-      },
+      game: {},
+      player: {},
       loggedIn: false,
       bootstrappedGame: false
     };
@@ -37,9 +33,9 @@ class App extends Component {
   componentDidMount() {
     // onAuthStateChanged listen for loggin in/out status
     // if user logs out will update app
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
-        this.handleGameBootstrap();
+        this.handleGameBootstrap(user.uid);
         window.localStorage.setItem(storageKey, user.uid);
         this.setState({
           uid: user.uid,
@@ -55,17 +51,14 @@ class App extends Component {
     });
   }
 
-  handleGameBootstrap() {
+  handleGameBootstrap(uid) {
     const cancelablePromise = makeCancelable(
-      bootstrapApp.then((result) => {
+      bootstrapApp(uid).then((request) => {
         this.setState({
-          ...this.state, game: {
-            season: result.season,
-            gameweek: result.gameweek,
-            canPredict: result.canPredict,
-            totalGameweeks: result.totalGameweeks
-          },
-          bootstrappedGame: true
+          ...this.state, 
+          game: request.game,
+          bootstrappedGame: true,
+          player: request.player
         });
       })
     );
@@ -99,7 +92,7 @@ class App extends Component {
     }
     const pages ={
       home: <Game uid={this.state.uid} gameData={this.state.game} route={this.changeRoute} />,
-      profile: <Profile user={this.state.uid} />,
+      profile: <Profile player={this.state.player} />,
       leagues: <Leagues uid={this.state.uid} />,
       signUp: <SignUp />,
       logIn: <LogOut />
