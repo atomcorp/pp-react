@@ -179,11 +179,11 @@ export function getGameweekPoints(uid, season, gameweek) {
 // really
 export function getUsers() {
   return db.ref(`/users/`).once('value').then((snapshot) => {
-      const request = snapshot.val();
-      if (!request) {
-        return null;
-      }
-      return request;
-    })
+    const request = snapshot.val();
+    if (!request) {
+      return null;
+    }
+    return request;
+  })
 }
 
