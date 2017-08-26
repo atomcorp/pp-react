@@ -11,9 +11,10 @@ import Profile from './components/profile.jsx';
 import Leagues from './components/leagues.jsx';
 import {makeCancelable} from './make-cancelable.js';
 import {bootstrapApp} from './xhr-requests';
-import {auth, storageKey} from './firebase-connect.js';
+import {auth, storageKey, isAuthenticated} from './firebase-connect.js';
 
 import UnauthorisedLayout from './layouts/unauthorised-layout.jsx';
+import AuthorisedLayout from './layouts/authorised-layout.jsx';
 
 // import SetFixtures from './xhr-requests/set-fixtures';
 // SetFixtures();
@@ -100,12 +101,17 @@ class App extends Component {
       signUp: <SignUp />,
       logIn: <LogOut />
     }
-
+    console.log(this.state);
     return (
       <BrowserRouter>
         <div>
           <Switch>
             <Route path="/auth" component={UnauthorisedLayout} />
+            {
+              isAuthenticated()
+                ? <AuthorisedLayout canRender={this.state.bootstrappedGame} player={this.state.player} game={this.state.game} />
+                : <Redirect to="/auth" />
+            }
             <Redirect to="/auth" />
           </Switch>
         </div>
@@ -140,5 +146,17 @@ class App extends Component {
   }
 }
 
+const MatchWhenAuthorized = ({component: Component, ...rest}) => (
+  <Route {...rest} render={renderProps => (
+    isAuthenticated() ? (
+      <Component {...renderProps} />
+    ) : (
+      <Redirect to={ {
+        pathname: '/auth',
+        state: {from: renderProps.location}
+      } } />
+    )
+  )}/>
+)
 
 export default App;
