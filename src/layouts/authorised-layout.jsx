@@ -15,11 +15,15 @@ const AuthorisedLayout = (props) => {
     <div>
       <Header isAuth={true} />
       <Switch>
+        <Route path="/profile">
+          <Profile player={props.player} />
+        </Route>
+        <Route path="/leagues">
+          <Leagues uid={props.player.id} />
+        </Route>
         <Route path="/">
           <Game player={props.player} gameData={props.game} />
         </Route>
-        <Route path="/profile" component={Profile} />
-        <Route path="/leagues" component={Leagues} />
         <Redirect to="/" />
       </Switch>
     </div>

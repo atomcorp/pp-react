@@ -146,17 +146,4 @@ class App extends Component {
   }
 }
 
-const MatchWhenAuthorized = ({component: Component, ...rest}) => (
-  <Route {...rest} render={renderProps => (
-    isAuthenticated() ? (
-      <Component {...renderProps} />
-    ) : (
-      <Redirect to={ {
-        pathname: '/auth',
-        state: {from: renderProps.location}
-      } } />
-    )
-  )}/>
-)
-
 export default App;
