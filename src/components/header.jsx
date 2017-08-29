@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LogOut from '../containers/log-out.jsx';
 
 export default function Header(props) {
-  console.log(props);
   return (
     <header className="header">
       <div className="logo">Champions's Choices</div>
@@ -24,10 +24,11 @@ function loggedIn() {
         Name
       </div>
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
-        <li><Link to="/leagues">Leagues</Link></li>
+        <li><Link to="/app/">Home</Link></li>
+        <li><Link to="/app/profile">Profile</Link></li>
+        <li><Link to="/app/leagues">Leagues</Link></li>
       </ul>
+      <LogOut />
     </div>
   );
 }

@@ -4,7 +4,6 @@ import './App.css';
 
 import Game from './containers/game.jsx';
 import SignUp from './containers/sign-up.jsx';
-import LogOut from './containers/log-out.jsx';
 import SignIn from './containers/sign-in.jsx';
 
 import Profile from './components/profile.jsx';
@@ -49,7 +48,8 @@ class App extends Component {
         window.localStorage.removeItem(storageKey);
         this.setState({
           uid: null,
-          loggedIn: false
+          loggedIn: false,
+          bootstrappedGame: false
         });
       }
     });
@@ -77,31 +77,7 @@ class App extends Component {
   }
 
   render() {
-
-    if (!this.state.bootstrappedGame && this.state.loggedIn) {
-      return(
-        <div>
-          Loading game...
-        </div>
-      );
-    }
-
-    if (!this.state.loggedIn) {
-//       return (
-//         <div>
-//           <SignIn />
-//           <SignUp />
-//         </div>
-//       );
-    }
-    const pages ={
-      home: <Game player={this.state.player} gameData={this.state.game} route={this.changeRoute} />,
-      profile: <Profile player={this.state.player} />,
-      leagues: <Leagues uid={this.state.uid} />,
-      signUp: <SignUp />,
-      logIn: <LogOut />
-    }
-    console.log(this.state);
+console.log(isAuthenticated())
     return (
       <BrowserRouter>
         <div>
@@ -109,40 +85,16 @@ class App extends Component {
             <Route path="/auth" component={UnauthorisedLayout} />
             {
               isAuthenticated()
-                ? <AuthorisedLayout canRender={this.state.bootstrappedGame} player={this.state.player} game={this.state.game} />
-                : <Redirect to="/auth" />
+                ? <Route path="/app">
+                    <AuthorisedLayout canRender={this.state.bootstrappedGame} player={this.state.player} game={this.state.game} />
+                  </Route>
+                : null
             }
             <Redirect to="/auth" />
           </Switch>
         </div>
       </BrowserRouter>
     );
-
-//    return (
-      // we will return 
-      // - <FixtureList />
-      // --- <Fixture />
-      // ----- Home & Away Team 
-//      <Router>
-//        <div className="container">
-//          {this.state.loggedIn ? <LogOut /> : null}
-//          <ul>
-//            <li><Link to="/">Home</Link></li>
-//            <li><Link to="/profile">Profile</Link></li>
-//            <li><Link to="/leagues">Leagues</Link></li>
-//            {this.state.loggedIn ? null : <li><Link to="/sign-up">Sign up</Link></li>}
-//            {this.state.loggedIn ? null : <li><Link to="/log-in">Log in</Link></li>}
-//
-//          </ul>
-//          
-//          <Route exact path="/" component={() => pages.home}/>
-//          <Route exact path="/leagues" component={() => pages.leagues}/>
-//          <Route exact path="/sign-up" component={() => pages.signUp}/>
-//          <Route exact path="/profile" component={() => pages.profile}/>
-//          <Route exact path="/log-in" component={() => pages.logIn}/>
-//        </div>
-//      </Router>
-//    );
   }
 }
 
