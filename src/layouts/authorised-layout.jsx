@@ -21,10 +21,10 @@ const AuthorisedLayout = (props) => {
         <Route path="/app/leagues">
           <Leagues uid={props.player.id} />
         </Route>
-        <Route path="/app/">
+        <Route path="/app">
           <Game player={props.player} gameData={props.game} />
         </Route>
-        <Redirect to="/app/" />
+        <Redirect to="/app" />
       </Switch>
     </div>
   )

@@ -27,7 +27,8 @@ class App extends Component {
       player: {},
       loggedIn: false,
       uid: null,
-      bootstrappedGame: false
+      bootstrappedGame: false,
+      loaded: false
     };
 
     this.handleGameBootstrap = this.handleGameBootstrap.bind(this);
@@ -42,14 +43,16 @@ class App extends Component {
         window.localStorage.setItem(storageKey, user.uid);
         this.setState({
           uid: user.uid,
-          loggedIn: true
+          loggedIn: true,
+          loaded: true
         });
       } else {
         window.localStorage.removeItem(storageKey);
         this.setState({
           uid: null,
           loggedIn: false,
-          bootstrappedGame: false
+          bootstrappedGame: false,
+          loaded: true
         });
       }
     });
@@ -77,20 +80,31 @@ class App extends Component {
   }
 
   render() {
-console.log(isAuthenticated())
+    if (!this.state.loaded) {
+      return <div>Loading...</div>;
+    }
+    if (this.state.loggedIn && !this.state.bootstrappedGame) {
+      return <div>Loading your game...</div>; 
+    }
     return (
       <BrowserRouter>
         <div>
           <Switch>
             <Route path="/auth" component={UnauthorisedLayout} />
             {
-              isAuthenticated()
+              this.state.loggedIn
                 ? <Route path="/app">
-                    <AuthorisedLayout canRender={this.state.bootstrappedGame} player={this.state.player} game={this.state.game} />
-                  </Route>
+                  <AuthorisedLayout canRender={this.state.bootstrappedGame} player={this.state.player} game={this.state.game} />
+                </Route>
                 : null
             }
-            <Redirect to="/auth" />
+            
+            {
+              this.state.loggedIn
+                ? <Redirect to="/app" />
+                : <Redirect to="/auth" />
+            }
+            
           </Switch>
         </div>
       </BrowserRouter>
