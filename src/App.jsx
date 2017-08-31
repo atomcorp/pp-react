@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
-import Game from './containers/game.jsx';
-import SignUp from './containers/sign-up.jsx';
-import SignIn from './containers/sign-in.jsx';
-
-import Profile from './components/profile.jsx';
-import Leagues from './components/leagues.jsx';
 import {makeCancelable} from './make-cancelable.js';
 import {bootstrapApp} from './xhr-requests';
-import {auth, storageKey, isAuthenticated} from './firebase-connect.js';
+import {auth, storageKey} from './firebase-connect.js';
 
 import UnauthorisedLayout from './layouts/unauthorised-layout.jsx';
 import AuthorisedLayout from './layouts/authorised-layout.jsx';

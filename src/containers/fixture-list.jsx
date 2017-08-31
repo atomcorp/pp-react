@@ -63,9 +63,9 @@ export default class FixtureList extends Component {
   onPredictionSubmit(event) {
     event.preventDefault();
     if (this.state.canPredict) {
-      if (validatePredictionsHelper(this.state.predictions)) {
+      if (arePredictionsValid(this.state.predictions)) {
         this.props.submitPredictions(this.state.predictions, this.state.gameweekInView);
-        this.state.predictionSubmitError ? this.setState({predictionSubmitError: false}) : null;
+        this.setState({predictionSubmitError: false});
       } else {
         this.setState({predictionSubmitError: true})
       }
@@ -183,7 +183,7 @@ function canPredictHelper(requestedWeek, currentGameweek, canPredict) {
   return canPredict;
 }
 
-function validatePredictionsHelper(predictions) {
+function arePredictionsValid(predictions) {
   console.log(predictions)
   for (const id in predictions) {
     if (!Number.isInteger(predictions[id].homeScore) || !Number.isInteger(predictions[id].awayScore)) {

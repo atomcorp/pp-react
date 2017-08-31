@@ -101,7 +101,7 @@ function checkAllPredictions(fixtures, predictions, gameweeksToCheck) {
   for (const gameweek in predictions) {
     if (predictions[gameweek] === undefined) {
       resultsToUpload[gameweek] = null;
-    } else if (parseInt(gameweek.slice(gameweek.length - 1)) <= gameweeksToCheck ) {
+    } else if (parseInt(gameweek.slice(gameweek.length - 1), 10) <= gameweeksToCheck ) {
       resultsToUpload[gameweek] = compareScores(predictions[gameweek], fixtures[gameweek]);
     }
     

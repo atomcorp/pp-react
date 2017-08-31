@@ -22,7 +22,7 @@ export default class Leagues extends Component {
   }
 
   handlePoints() {
-    const request = getUsers().then((response) => {
+    getUsers().then((response) => {
       const sortPoints = Object.keys(response).sort(function(a,b) {
         let first = `${response[a].points}`;
         let second = `${response[b].points}`;

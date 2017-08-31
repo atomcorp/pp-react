@@ -1,4 +1,3 @@
-import {db} from '../firebase-connect';
 import TotalPoints from '../components/total-points.js';
 import {getMatchData} from '../xhr-requests.js';
 export default function bootstrapGame(uid, gameData) {
