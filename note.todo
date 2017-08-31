@@ -39,6 +39,7 @@ Tasks:
   ☐ Add saved, inputted, not inputted notifications on predictions (may need to uplift fixture to add state)
   ☐ add one star to weekly predictions, get double points on correct predictions
   ☐ add stats (3 points, 1 points) to stats
+  ☐ Make fixture table a seperate component, we pass data to
 
 Todo:
   ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)
@@ -62,6 +63,10 @@ Todo:
     ☐ Profile (private)
     ☐ Team page (public)
     ☐ League page (public)
+
+  Cron:
+    ☐ calculates everyone's score (hourly)
+    ☐ calculates gamedata
   
 Thoughts: 
   Can only change the team name once a season

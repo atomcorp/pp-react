@@ -38,7 +38,6 @@ export class Fixture extends Component {
         <td>{formatDate(this.props.fixture.date)}</td>
         <td>{this.props.fixture.homeTeamName}</td>
         <td>
-          {this.props.fixture.status === 'FINISHED' ? this.props.fixture.result.goalsHomeTeam: null}
           {
             this.props.canPredict 
             ? <input 
@@ -64,7 +63,11 @@ export class Fixture extends Component {
               />  
             : this.props.prediction.awayScore
           }
-          {this.props.fixture.status === 'FINISHED' ? this.props.fixture.result.goalsAwayTeam: null}
+          {
+            this.props.fixture.status === 'FINISHED' 
+            ? <div>{this.props.fixture.result.goalsHomeTeam} : {this.props.fixture.result.goalsAwayTeam}</div>
+            : null
+          }
           {
             this.props.prediction.points !== undefined 
               ? <div>Points: {this.props.prediction.points}</div> 

@@ -5,7 +5,7 @@ import LogOut from '../containers/log-out.jsx';
 export default function Header(props) {
   return (
     <header className="header">
-      <div className="logo">Champions's Choices</div>
+      <div className="logo"><h1>Four Four Too</h1></div>
       <div className="header__authorisation">
         {
           props.isAuth
@@ -20,10 +20,7 @@ export default function Header(props) {
 function loggedIn() {
   return (
     <div className="header__authorised">
-      <div className="header__name">
-        Name
-      </div>
-      <ul>
+      <ul className="list-inline">
         <li><Link to="/app/">Home</Link></li>
         <li><Link to="/app/profile">Profile</Link></li>
         <li><Link to="/app/leagues">Leagues</Link></li>
