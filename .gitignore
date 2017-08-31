@@ -22,3 +22,6 @@ yarn-error.log*
 
 # hide api key fwiw
 src/api.js
+
+*.sublime-project
+*.sublime-workspace

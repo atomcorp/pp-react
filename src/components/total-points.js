@@ -71,11 +71,11 @@ export default function TotalPoints(uid, gameData) {
     const scores = {};
     const updated = {};
     for (const id in computedScores) {
+      updated[id] = true;
       if (computedScores[id]) {
         predictions[id] = computedScores[id].predictions;
         scores[id] = computedScores[id].score;
       }
-      updated[id] = true;
     }
     console.log(updated)
     if (Object.keys(updated).length !== 0) { updateComputedResults(uid, season, updated)};

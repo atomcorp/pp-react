@@ -54,7 +54,7 @@ export default class SignIn extends Component {
     const redirect = this.state.redirect;
     return (
       <div>
-        {redirect ? <Router><Redirect to="/"/></Router> : null}
+        {redirect ? <Router><Redirect to="/app"/></Router> : null}
         <h1>Sign in</h1>
         <form onSubmit={this.handleSubmit}>
           <label>

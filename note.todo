@@ -38,12 +38,17 @@ Tasks:
   ✔ Input validation on scores @done (17-08-23 20:11)
   ☐ Add saved, inputted, not inputted notifications on predictions (may need to uplift fixture to add state)
   ☐ add one star to weekly predictions, get double points on correct predictions
+  ☐ add stats (3 points, 1 points) to stats
 
 Todo:
   ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)
     ☐ Use to order the league
   League:
-    ☐ Make one
+    ✔ Make one @done (17-08-26 12:36)
+    ☐ create custom leagues
+    ☐ need page to submit custom leagues
+    ☐ page to signup to league ()
+    ☐ let firebase create id, then let user create 4 number pin
   Login:
     ✔ Browser state @done (17-08-15 22:56)
   Routing:

@@ -26,6 +26,7 @@ export default class Game extends Component {
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
   componentDidMount() {
+    console.log(this.props);
     const cancelablePromise = makeCancelable(
       bootstrapGame(this.props.player.id, this.props.gameData).then((returnedRequest) => {
         this.setState({
