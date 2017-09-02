@@ -2,18 +2,35 @@
 import React, {Component} from 'react';
 
 type Props = {
-  
+  fixture: {
+    date: string,
+    homeTeamName: string,
+    awayTeamName: string,
+    status: string,
+    result: {
+      goalsHomeTeam: number,
+      goalsAwayTeam: number
+    }
+  },
+  onPredictionChange: (score: number, homeOrAway: string, id: string) => void,
+  id: string,
+  prediction: {
+    awayScore: number,
+    homeScore: number,
+    id: string
+  }
 };
 
-export class Fixture extends Component<Props, State> {
-  constructor(props) {
+export class Fixture extends Component<void, Props, void> {
+  constructor(props:Props) {
     super(props);
-    this.onScoreChange = this.onScoreChange.bind(this);
-    this.colour = this.colour.bind(this);
-    this.onFocus = this.onFocus.bind(this);
+
+    (this:any).onScoreChange = this.onScoreChange.bind(this);
+    (this:any).colour = this.colour.bind(this);
+    (this:any).onFocus = this.onFocus.bind(this);
   }
 
-  colour(points) {
+  colour(points: number): string {
     let colour = '';
     if (points === 3) {
       colour = 'green';
@@ -25,13 +42,19 @@ export class Fixture extends Component<Props, State> {
     return colour;
   }
 
-  onScoreChange(event, homeOrAway, id) {
-    const score = ensurePositiveNumber(event.target.value);
-    this.props.onPredictionChange(score, homeOrAway, id);
+  onScoreChange(event: Event, homeOrAway: string, id: string) {
+    if (event.currentTarget instanceof HTMLInputElement) {
+      const score = ensurePositiveNumber(event.currentTarget.value);
+      this.props.onPredictionChange(score, homeOrAway, id);
+    }
   }
 
-  onFocus(event) {
-    event.target.select();
+  onFocus(event: FocusEvent) {
+    // I don't really get this, but there you go...
+    // https://github.com/facebook/flow/issues/218#issuecomment-74119319
+    if (event.currentTarget instanceof HTMLInputElement) {
+        event.currentTarget.select();
+      }
   }
 
   // props will be fixture
@@ -87,7 +110,7 @@ export class Fixture extends Component<Props, State> {
 
 // helpers
 
-var weekday = new Array(7);
+const weekday = new Array(7);
 weekday[0] =  "Sunday";
 weekday[1] = "Monday";
 weekday[2] = "Tuesday";
@@ -99,7 +122,7 @@ weekday[6] = "Saturday";
 let isUnique = true;
 
 // should probablt do all this on submit
-function formatDate(day) {
+function formatDate(day: string): string {
   let formattedTime = Date.parse(`${day}`)/1000;
   formattedTime = new Date(formattedTime * 1000);
   const dayOfTheWeek = weekday[formattedTime.getDay()];
@@ -111,9 +134,10 @@ function formatDate(day) {
     isUnique = formattedDate;
     return formattedDate;
   } 
+  return '';
 }
 
-function formatMinutes(time) {
+function formatMinutes(time: Date): string | number {
   let minutes = time.getMinutes();
   if (minutes < 9) {
     minutes = '0' + minutes;
@@ -123,7 +147,7 @@ function formatMinutes(time) {
 
 // todo: user can still input a dot (.) after a number
 // but this isn't carried over to DB
-function ensurePositiveNumber(input) {
+function ensurePositiveNumber(input: string): number {
   let score = parseInt(input, 10);
   if (score < 0) {
     score = Math.abs(score);
