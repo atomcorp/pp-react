@@ -3,8 +3,11 @@ import TotalPoints from '../components/total-points.js';
 import {getMatchData} from '../xhr-requests.js';
 
 type GameData = {
+  canPredict: boolean,
   gameweek: number,
-  season: number
+  season: string,
+  time: number,
+  totalGameweeks: number
 };
 
 export default function bootstrapGame(uid: string, gameData: GameData) {

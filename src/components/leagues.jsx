@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import {getUsers} from '../xhr-requests.js';
 
-
 export default class Leagues extends Component {
   // gets given criteria (eg total points, lastweeks points, or gameweek points)
   // get user name, team name and (if needed) gameweek 

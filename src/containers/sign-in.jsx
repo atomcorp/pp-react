@@ -1,10 +1,25 @@
+// @flow
+
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 import {auth} from '../firebase-connect.js';
 
-export default class SignIn extends Component {
-  constructor(props) {
+type State = {
+  email: string,
+  password: string,
+  errors: {
+    tooShort: boolean
+  },
+  redirect: boolean
+};
+
+type Props = {};
+
+export default class SignIn extends Component<void, Props, State> {
+  state: State
+
+  constructor(props: Props) {
     super(props);
     this.state = {
       email: '',
@@ -14,18 +29,22 @@ export default class SignIn extends Component {
       },
       redirect: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.canSubmit = this.canSubmit.bind(this);
+    const self: any = this;
+    self.handleChange = this.handleChange.bind(this);
+    self.handleSubmit = this.handleSubmit.bind(this);
+    self.canSubmit = this.canSubmit.bind(this);
   }
 
-  handleChange(event) {
-    // out of the docs = https://facebook.github.io/react/docs/forms.html
-    const target = event.target;
-    const name = target.name;
-    this.setState({
-      [name]: target.value
-    });
+  handleChange(event: Event) {
+    if (event.currentTarget instanceof HTMLInputElement) {
+      // out of the docs = https://facebook.github.io/react/docs/forms.html
+      const target = event.currentTarget;
+      const name = target.name;
+      this.setState({
+        [name]: target.value
+      });
+    }
+
   }
 
   canSubmit() {
@@ -40,13 +59,15 @@ export default class SignIn extends Component {
     }
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const tooShort = this.state.password.length < 6 ? true : false;
-    // https://stackoverflow.com/a/43639228/2368141
-    const errors = Object.assign({}, this.state.errors);
-    errors.tooShort = tooShort;
-    this.setState({errors}, () => this.canSubmit());
+  handleSubmit(event: Event) {
+    if (event.currentTarget instanceof HTMLInputElement) {
+      event.preventDefault();
+      const tooShort = this.state.password.length < 6 ? true : false;
+      // https://stackoverflow.com/a/43639228/2368141
+      const errors = Object.assign({}, this.state.errors);
+      errors.tooShort = tooShort;
+      this.setState({errors}, () => this.canSubmit());
+    }
   }
 
   render() {

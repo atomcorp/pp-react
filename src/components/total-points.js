@@ -1,3 +1,4 @@
+// @flow
 // 3 possibilites: predicted, not predicted, ...
 
 // get total matchdays
@@ -22,7 +23,15 @@ import {
   getMatchData
 } from '../xhr-requests.js';
 
-export default function TotalPoints(uid, gameData) {
+type GameData = {
+  canPredict: boolean,
+  gameweek: number,
+  season: string,
+  time: number,
+  totalGameweeks: number
+};
+
+export default function TotalPoints(uid: string, gameData: GameData) {
   const season = gameData.season;
   let gameweeksToCheck = gameData.gameweek > 1 ? gameData.gameweek - 1 : 1;
   return checkResultsComputed(season, uid).then((computedResult) => {
@@ -82,8 +91,8 @@ export default function TotalPoints(uid, gameData) {
     if (Object.keys(scores).length !== 0) { updateComputedPoints(uid, season, scores)};
     if (Object.keys(predictions).length !== 0) { updateComputedPredictions(uid, season, predictions)};
   }).then((reject) => {
-    gameweeksToCheck = gameweeksToCheck ? `gameweek${gameweeksToCheck}` : null;
-    updateUsersPoints(uid, season, gameweeksToCheck);
+    const lastWeek = gameweeksToCheck ? `gameweek${gameweeksToCheck}` : null;
+    updateUsersPoints(uid, season, lastWeek);
     return true;
   });
 }

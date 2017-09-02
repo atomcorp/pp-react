@@ -1,15 +1,26 @@
+// @flow
+
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 import {auth} from '../firebase-connect.js';
 
-export default class LogOut extends Component {
-  constructor(props) {
+type State = {
+  redirect: boolean
+};
+
+type Props = {};
+
+export default class LogOut extends Component<void, Props, State> {
+  state: State
+  
+  constructor(props: Props) {
     super(props);
     this.state = {
       redirect: false
     }
-    this.handleClick = this.handleClick.bind(this);
+    const self: any = this;
+    self.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
