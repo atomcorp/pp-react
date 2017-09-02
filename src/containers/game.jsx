@@ -40,7 +40,6 @@ export default class Game extends Component<void, Props, State> {
   componentDidMount() {
     const cancelablePromise = makeCancelable(
       bootstrapGame(this.props.player.id, this.props.gameData).then((returnedRequest) => {
-        console.log(returnedRequest);
         this.setState({
           fixtures: returnedRequest.fixtures,
           predictions: returnedRequest.predictions,

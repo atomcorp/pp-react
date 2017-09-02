@@ -130,7 +130,6 @@ export default class FixtureList extends Component<void, Props, State> {
       return <div>Loading fixture list</div>;
     }
     const fixtures = this.state.fixtures;
-    console.log(fixtures)
     // order the fixtures by date, so we can add the dates
     // may just remove this later, not really important what time fixture is for game
     const sortFixtures = Object.keys(fixtures).sort(function(a,b) {

@@ -18,6 +18,7 @@ export function bootstrapApp(uid: string) {
         game: result[0],
         player: result[1]
       }
+      // resolve.game.gameweek = 3;
       return resolve;
     })
 };
@@ -83,7 +84,9 @@ export const updateComputedResults = function(uid: string, season: string, updat
 */
 export const updateComputedPoints = function(uid: string, season: string, points: {[key: string]: number}) {
   const updateComputedRef = {};
-  updateComputedRef[`/${season}points/${uid}/`] = points;
+  for (const id in points) {
+    updateComputedRef[`/${season}points/${uid}/${id}`] = points[id];
+  }
   db.ref().update(updateComputedRef);
 }
 
@@ -96,8 +99,9 @@ export const updateComputedPoints = function(uid: string, season: string, points
 */
 export const updateComputedPredictions = function(uid: string, season: string, predictions: PredictionsType) {
   const updateComputedRef = {};
-  updateComputedRef[`/${season}predictions/${uid}/`] = predictions;
-  console.log(predictions)
+  for (const id in predictions) {
+    updateComputedRef[`/${season}predictions/${uid}/${id}`] = predictions[id];
+  }
   db.ref().update(updateComputedRef);
 }
 
@@ -112,7 +116,6 @@ export const updateUsersPoints = function(uid: string, season: string, lastweek:
   // then update 
   db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
     const request = snapshot.val();
-    console.log(request)
     const data = {};
     let score = 0;
     for (const result in request) {
@@ -129,7 +132,6 @@ export const updateUsersPoints = function(uid: string, season: string, lastweek:
     }
     const updateUsersPointsRef ={};
     updateUsersPointsRef[`/users/${uid}/points`] = data.score;
-    console.log(data.lastWeeksPoints)
     if (data.lastWeeksPoints !== undefined) {
       updateUsersPointsRef[`/users/${uid}/lastWeeksPoints`] = data.lastWeeksPoints;
     }

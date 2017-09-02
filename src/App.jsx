@@ -55,6 +55,7 @@ class App extends Component {
   handleGameBootstrap(uid) {
     const cancelablePromise = makeCancelable(
       bootstrapApp(uid).then((request) => {
+        console.log(request);
         this.setState({
           ...this.state, 
           game: request.game,
