@@ -1,16 +1,9 @@
 // @flow
 import TotalPoints from '../components/total-points.js';
 import {getMatchData} from '../xhr-requests.js';
+import type {GameType} from '../types.js';
 
-type GameData = {
-  canPredict: boolean,
-  gameweek: number,
-  season: string,
-  time: number,
-  totalGameweeks: number
-};
-
-export default function bootstrapGame(uid: string, gameData: GameData) {
+export default function bootstrapGame(uid: string, gameData: GameType) {
   // https://stackoverflow.com/questions/33178738/how-to-execute-multiple-firebase-request-and-receive-a-callback-when-all-request
   const gameweek = `gameweek${gameData.gameweek}`;
     // here we make sure all the past predictions have been calculated

@@ -1,24 +1,13 @@
 // @flow
 import React, {Component} from 'react';
 
+import type {FixturesType, PredictionsType} from '../types.js';
+
 type Props = {
-  fixture: {
-    date: string,
-    homeTeamName: string,
-    awayTeamName: string,
-    status: string,
-    result: {
-      goalsHomeTeam: number,
-      goalsAwayTeam: number
-    }
-  },
+  fixture: FixturesType,
   onPredictionChange: (score: number, homeOrAway: string, id: string) => void,
   id: string,
-  prediction: {
-    awayScore: number,
-    homeScore: number,
-    id: string
-  }
+  prediction: PredictionsType
 };
 
 export class Fixture extends Component<void, Props, void> {

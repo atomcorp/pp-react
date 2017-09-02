@@ -1,19 +1,32 @@
+// @flow
+
 import React, {Component} from 'react';
 
 import {getUsers} from '../xhr-requests.js';
+import type {PlayerType} from '../types.js'; 
 
-export default class Leagues extends Component {
+type Props = {
+  uid: string
+};
+
+type State = {
+  rows: ?Array<any>,
+  render: boolean
+}
+
+export default class Leagues extends Component<void, Props, State> {
+  state: State
   // gets given criteria (eg total points, lastweeks points, or gameweek points)
   // get user name, team name and (if needed) gameweek 
   // should update a bit of database, and request this resource first
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.state ={
       rows: [],
       render: false
     };
-    this.handlePoints = this.handlePoints.bind(this);
-    this.renderRow = this.renderRow.bind(this);
+    (this:any).handlePoints = this.handlePoints.bind(this);
+    (this:any).renderRow = this.renderRow.bind(this);
   }
 
   componentDidMount() {
@@ -23,8 +36,8 @@ export default class Leagues extends Component {
   handlePoints() {
     getUsers().then((response) => {
       const sortPoints = Object.keys(response).sort(function(a,b) {
-        let first = `${response[a].points}`;
-        let second = `${response[b].points}`;
+        let first = response[a].points;
+        let second = response[b].points;
         return second - first;
       });
       const outcome = {};
@@ -32,11 +45,13 @@ export default class Leagues extends Component {
       outcome.points = response;
       return outcome;
     }).then((outcome) => {
+      console.log(outcome);
       const result = outcome.sortPoints.map((id, index) => {
         return this.renderRow(outcome.points[id]);
       });
       return result;
     }).then((result) => {
+      
       this.setState({
         rows: result,
         render: true
@@ -44,7 +59,7 @@ export default class Leagues extends Component {
     })
   }
 
-  renderRow(user) {
+  renderRow(user: PlayerType) {
     return (
       <tr key={user.id} style={
         this.props.uid === user.id ? divStyle : null

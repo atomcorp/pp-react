@@ -1,12 +1,6 @@
 // @flow
 
-type Predictions = {
-  [id: string]: {
-    homeScore: number,
-    awayScore: number,
-    points: number
-  }
-};
+import type {PredictionsType} from '../types.js';
 
 type Results = {
   [id: string]: {
@@ -17,7 +11,7 @@ type Results = {
   }
 };
 
-export function compareScores(predictions: Predictions, results: Results) {
+export function compareScores(predictions: PredictionsType, results: Results) {
   let cumulativeScore = 0;
   for (const id in predictions) {
     // ensure there are actuall results, otherwise quit

@@ -1,4 +1,4 @@
-// This container sets up the game
+// @flow
 
 import React, {Component} from 'react';
 
@@ -7,21 +7,33 @@ import FixtureList from './fixture-list.jsx';
 import bootstrapGame from '../components/bootstrap-game.js';
 import {makeCancelable} from '../make-cancelable.js';
 import {sendPredictions} from '../xhr-requests.js';
+import type {PlayerType, GameType, FixturesType, PredictionsType} from '../types.js';
 
-export default class Game extends Component {
+type State = {
+  fixtures: {} | FixturesType,
+  predictions: {} | PredictionsType,
+  loadFixtureList: boolean
+};
 
-  constructor(props) {
+type Props = {
+  player: PlayerType,
+  gameData: GameType
+};
+
+export default class Game extends Component<void, Props, State> {
+  state: State
+
+  constructor(props: Props) {
     super(props);
     // username, season and gameweek will be retrieved form server on load
     // will move this back up to app or something later
     this.state = {
-      fixtures: null,
-      predictions: null,
-      canSubmit: true,
+      fixtures: {},
+      predictions: {},
       loadFixtureList: false
     };
 
-    this.submitPredictions = this.submitPredictions.bind(this);
+    (this:any).submitPredictions = this.submitPredictions.bind(this);
   }
 
   // https://daveceddia.com/where-fetch-data-componentwillmount-vs-componentdidmount/
@@ -45,7 +57,7 @@ export default class Game extends Component {
     cancelablePromise.cancel(); // Cancel the promise
   }
  
-  submitPredictions(predictions, gameweek) {
+  submitPredictions(predictions: PredictionsType, gameweek: GameType) {
     sendPredictions(this.props.player.id, this.props.gameData.season, gameweek, predictions);
   }
 

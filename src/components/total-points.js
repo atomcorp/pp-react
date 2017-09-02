@@ -23,15 +23,9 @@ import {
   getMatchData
 } from '../xhr-requests.js';
 
-type GameData = {
-  canPredict: boolean,
-  gameweek: number,
-  season: string,
-  time: number,
-  totalGameweeks: number
-};
+import type {GameType} from '../types.js';
 
-export default function TotalPoints(uid: string, gameData: GameData) {
+export default function TotalPoints(uid: string, gameData: GameType) {
   const season = gameData.season;
   let gameweeksToCheck = gameData.gameweek > 1 ? gameData.gameweek - 1 : 1;
   return checkResultsComputed(season, uid).then((computedResult) => {
