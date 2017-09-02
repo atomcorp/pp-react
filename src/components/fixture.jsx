@@ -1,13 +1,13 @@
 // @flow
 import React, {Component} from 'react';
 
-import type {FixturesType, PredictionsType} from '../types.js';
+import type {FixtureType, PredictionType} from '../types.js';
 
 type Props = {
-  fixture: FixturesType,
+  fixture: FixtureType,
   onPredictionChange: (score: number, homeOrAway: string, id: string) => void,
   id: string,
-  prediction: PredictionsType
+  prediction: PredictionType
 };
 
 export class Fixture extends Component<void, Props, void> {

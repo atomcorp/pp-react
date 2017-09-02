@@ -1,26 +1,49 @@
+// @flow
 import React, {Component} from 'react';
 import {Fixture} from '../components/fixture.jsx';
 import {getMatchData, getGameweekPoints} from '../xhr-requests.js';
+import type {PlayerType, GameType, FixturesType, PredictionsType} from '../types.js';
+
+type State = {
+  fixtures: FixturesType,
+  predictions: {} | PredictionsType,
+  gameweekInView: number,
+  canRender: boolean,
+  canPredict: boolean,
+  predictionResult: null | number,
+  predictionSubmitError: boolean
+};
+
+type Props = {
+  player: PlayerType,
+  gameData: GameType,
+  fixtures: FixturesType,
+  predictions: {} | PredictionsType,
+  submitPredictions: (predictions: any, gameweek: number) => void
+};
 
 // there should also be a check here somewhere to see 
 // if changes are allowed or not (ie games have been played, or set arbitary cut-off time, say Friday 6PM)
 // if changes not allowed, will auto attempt to calc score using
-export default class FixtureList extends Component {
-  constructor(props) {
+export default class FixtureList extends Component<void, Props, State> {
+  state: State
+
+  constructor(props: Props) {
     super(props);
     this.state = {
       fixtures: this.props.fixtures,
-      predictions: null,
+      predictions: {},
       gameweekInView: this.props.gameData.gameweek,
       canRender: false,
       canPredict: this.props.gameData.canPredict,
       predictionResult: null,
       predictionSubmitError: false
     }
-    this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
-    this.onPredictionChange = this.onPredictionChange.bind(this);
-    this.setPredictions = this.setPredictions.bind(this);
-    this.handleWeekChange = this.handleWeekChange.bind(this);
+    const self: any = this;
+    self.onPredictionSubmit = this.onPredictionSubmit.bind(this);
+    self.onPredictionChange = this.onPredictionChange.bind(this);
+    self.setPredictions = this.setPredictions.bind(this);
+    self.handleWeekChange = this.handleWeekChange.bind(this);
   }
 
   componentDidMount() {
@@ -34,8 +57,8 @@ export default class FixtureList extends Component {
   // this sets up what's diplayed in the score boxes
   // if user has made predictions before will show those
   // if not just defaults to the predictions 0-0
-  setPredictions(fixtures, predictions = null) {
-    if (predictions) {
+  setPredictions(fixtures: FixturesType, predictions: {} | PredictionsType = {}) {
+    if (Object.getOwnPropertyNames(predictions).length) {
       return predictions;
     } 
     const newPredictions = {};
@@ -50,7 +73,7 @@ export default class FixtureList extends Component {
   }
 
   // when users changes the scores
-  onPredictionChange(input, homeOrAway, id) {
+  onPredictionChange(input: string | number, homeOrAway: string, id: string) {
     const score = parseInt(input, 10);
     // https://stackoverflow.com/a/38779819/2368141
     this.setState((prevState) => {
@@ -60,7 +83,7 @@ export default class FixtureList extends Component {
   }
 
   // when someone hits the submit button
-  onPredictionSubmit(event) {
+  onPredictionSubmit(event: Event) {
     event.preventDefault();
     if (this.state.canPredict) {
       if (arePredictionsValid(this.state.predictions)) {
@@ -77,7 +100,7 @@ export default class FixtureList extends Component {
    * @param  {Number} gameweek
    * Will set new state for the fixtures
    */
-  handleWeekChange(event, gameweek) {
+  handleWeekChange(event: Event, gameweek: number) {
     event.preventDefault();
     if (gameweek) {
       Promise.all([
@@ -107,11 +130,12 @@ export default class FixtureList extends Component {
       return <div>Loading fixture list</div>;
     }
     const fixtures = this.state.fixtures;
+    console.log(fixtures)
     // order the fixtures by date, so we can add the dates
     // may just remove this later, not really important what time fixture is for game
     const sortFixtures = Object.keys(fixtures).sort(function(a,b) {
-      let first = Date.parse(`${fixtures[a].date}`)/1000;
-      let second = Date.parse(`${fixtures[b].date}`)/1000;
+      let first = Date.parse(fixtures[a].date)/1000;
+      let second = Date.parse(fixtures[b].date)/1000;
       return first - second;
     });
     const fixtureElements = sortFixtures.map((id, index) => {
@@ -172,7 +196,7 @@ export default class FixtureList extends Component {
  * @param  {Number}
  * @return {Boolean}
  */
-function canPredictHelper(requestedWeek, currentGameweek, canPredict) {
+function canPredictHelper(requestedWeek: number, currentGameweek: number, canPredict: boolean) {
 
   if (requestedWeek < currentGameweek) {
     return false;
@@ -183,12 +207,11 @@ function canPredictHelper(requestedWeek, currentGameweek, canPredict) {
   return canPredict;
 }
 
-function arePredictionsValid(predictions) {
+function arePredictionsValid(predictions: PredictionsType) {
   console.log(predictions)
   for (const id in predictions) {
     if (!Number.isInteger(predictions[id].homeScore) || !Number.isInteger(predictions[id].awayScore)) {
       return false;
-    } else {
     }
   }
   return true;

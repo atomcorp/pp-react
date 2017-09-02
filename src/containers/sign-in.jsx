@@ -60,14 +60,12 @@ export default class SignIn extends Component<void, Props, State> {
   }
 
   handleSubmit(event: Event) {
-    if (event.currentTarget instanceof HTMLInputElement) {
-      event.preventDefault();
-      const tooShort = this.state.password.length < 6 ? true : false;
-      // https://stackoverflow.com/a/43639228/2368141
-      const errors = Object.assign({}, this.state.errors);
-      errors.tooShort = tooShort;
-      this.setState({errors}, () => this.canSubmit());
-    }
+    event.preventDefault();
+    const tooShort = this.state.password.length < 6 ? true : false;
+    // https://stackoverflow.com/a/43639228/2368141
+    const errors = Object.assign({}, this.state.errors);
+    errors.tooShort = tooShort;
+    this.setState({errors}, () => this.canSubmit());
   }
 
   render() {

@@ -23,7 +23,7 @@ export default function bootstrapGame(uid: string, gameData: GameType) {
         // arrays return in order
         const dataObject = {
           fixtures: data[0][gameweek],
-          predictions: data[1][gameweek]
+          predictions: data[1][gameweek] ? data[1][gameweek] : {}
         }
         resolveData(dataObject);
       })

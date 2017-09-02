@@ -1,6 +1,6 @@
 // @flow
 
-export type FixturesType = {
+export type FixtureType = {
   date: string,
   homeTeamName: string,
   awayTeamName: string,
@@ -11,12 +11,20 @@ export type FixturesType = {
   }
 };
 
-export type PredictionsType = {
-  awayScore: number,
-  homeScore: number,
+export type PredictionType = {
+  awayScore: ?number,
+  homeScore: ?number,
   id: string,
-  points: number
+  points: ?number
 };
+
+export type FixturesType = {
+  [key: string]: FixtureType
+}
+
+export type PredictionsType = {
+  [key: string]: PredictionType
+}
 
 export type GameType = {
   canPredict: boolean,

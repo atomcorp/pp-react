@@ -56,6 +56,7 @@ export default class SignUp extends Component<void, Props, State> {
         auth.createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
           console.log(error);
         }).then((response) => {
+          console.log(response)
           if(response) {
             db.ref(`users/${response.uid}`).set({
               id: response.uid,
@@ -74,14 +75,12 @@ export default class SignUp extends Component<void, Props, State> {
   }
 
   handleSubmit(event: Event) {
-    if (event.currentTarget instanceof HTMLInputElement) {
-      event.preventDefault();
-      const tooShort = this.state.password.length < 6 ? true : false;
-      // https://stackoverflow.com/a/43639228/2368141
-      const errors = Object.assign({}, this.state.errors);
-      errors.tooShort = tooShort;
-      this.setState({errors}, () => this.canSubmit());
-    }
+    event.preventDefault();
+    const tooShort = this.state.password.length < 6 ? true : false;
+    // https://stackoverflow.com/a/43639228/2368141
+    const errors = Object.assign({}, this.state.errors);
+    errors.tooShort = tooShort;
+    this.setState({errors}, () => this.canSubmit());
   }
 
   render() {
