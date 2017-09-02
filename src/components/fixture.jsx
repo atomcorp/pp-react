@@ -1,9 +1,14 @@
+// @flow
 import React, {Component} from 'react';
 
-export class Fixture extends Component {
+type Props = {
+  
+};
+
+export class Fixture extends Component<Props, State> {
   constructor(props) {
     super(props);
-    this.onChange = this.onChange.bind(this);
+    this.onScoreChange = this.onScoreChange.bind(this);
     this.colour = this.colour.bind(this);
     this.onFocus = this.onFocus.bind(this);
   }
@@ -20,9 +25,9 @@ export class Fixture extends Component {
     return colour;
   }
 
-  onChange(event, homeOrAway, id) {
+  onScoreChange(event, homeOrAway, id) {
     const score = ensurePositiveNumber(event.target.value);
-    this.props.onChange(score, homeOrAway, id);
+    this.props.onPredictionChange(score, homeOrAway, id);
   }
 
   onFocus(event) {
@@ -46,7 +51,7 @@ export class Fixture extends Component {
                 maxLength="2"
                 value={this.props.prediction.homeScore} 
                 onFocus={this.onFocus}
-                onChange={(event) => this.onChange(event, "homeScore", this.props.id)} 
+                onChange={(event) => this.onScoreChange(event, "homeScore", this.props.id)} 
               />
             : this.props.prediction.homeScore
           }
@@ -59,7 +64,7 @@ export class Fixture extends Component {
                 maxLength="2"
                 value={this.props.prediction.awayScore} 
                 onFocus={this.onFocus}
-                onChange={(event) => this.onChange(event, "awayScore", this.props.id)} 
+                onChange={(event) => this.onScoreChange(event, "awayScore", this.props.id)} 
               />  
             : this.props.prediction.awayScore
           }

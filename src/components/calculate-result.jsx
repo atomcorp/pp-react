@@ -1,11 +1,23 @@
-// Component
+// @flow
 
-export function calculateResult(props) {
-  const score = compareScores(props.predictions, props.fixtures);
-  return score;
-}
+type Predictions = {
+  [id: string]: {
+    homeScore: number,
+    awayScore: number,
+    points: number
+  }
+};
 
-export function compareScores(predictions, results) {
+type Results = {
+  [id: string]: {
+    result: {
+      goalsHomeTeam: number,
+      goalsAwayTeam: number
+    }
+  }
+};
+
+export function compareScores(predictions: Predictions, results: Results) {
   let cumulativeScore = 0;
   for (const id in predictions) {
     // ensure there are actuall results, otherwise quit

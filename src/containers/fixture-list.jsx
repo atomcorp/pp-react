@@ -18,7 +18,7 @@ export default class FixtureList extends Component {
       predictionSubmitError: false
     }
     this.onPredictionSubmit = this.onPredictionSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.onPredictionChange = this.onPredictionChange.bind(this);
     this.setPredictions = this.setPredictions.bind(this);
     this.handleWeekChange = this.handleWeekChange.bind(this);
   }
@@ -50,7 +50,7 @@ export default class FixtureList extends Component {
   }
 
   // when users changes the scores
-  onChange(input, homeOrAway, id) {
+  onPredictionChange(input, homeOrAway, id) {
     const score = parseInt(input, 10);
     // https://stackoverflow.com/a/38779819/2368141
     this.setState((prevState) => {
@@ -120,7 +120,7 @@ export default class FixtureList extends Component {
         key={index} 
         fixture={fixtures[id]}
         prediction={this.state.predictions[id]}
-        onChange={this.onChange} 
+        onPredictionChange={this.onPredictionChange} 
         canPredict={this.state.canPredict}
         />;
     });

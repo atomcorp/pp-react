@@ -1,8 +1,13 @@
+// @flow
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOut from '../containers/log-out.jsx';
 
-export default function Header(props) {
+type Props = {
+  isAuth: boolean
+};
+
+export default function Header(props: Props) {
   return (
     <header className="header">
       <div className="logo"><h1>Four Four Too</h1></div>

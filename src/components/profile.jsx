@@ -1,6 +1,15 @@
+// @flow
 import React from 'react';
 
-export default function Profile(props) {
+type Props = {
+  player: {
+    name: string,
+    team: string,
+    points: string
+  }
+};
+
+export default function Profile(props: Props) {
 
   return(
     <div className="profile">
