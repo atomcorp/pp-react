@@ -7,7 +7,6 @@ import Profile from '../components/profile.jsx';
 import Leagues from '../components/leagues.jsx';
 
 const AuthorisedLayout = (props) => {
-  console.log(props);
   if (!props.canRender) {
     return <div>Loading...</div>
   }

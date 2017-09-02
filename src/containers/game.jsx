@@ -40,7 +40,6 @@ export default class Game extends Component<void, Props, State> {
   componentDidMount() {
     const cancelablePromise = makeCancelable(
       bootstrapGame(this.props.player.id, this.props.gameData).then((returnedRequest) => {
-        console.log(returnedRequest);
         this.setState({
           fixtures: returnedRequest.fixtures,
           predictions: returnedRequest.predictions,
@@ -51,7 +50,7 @@ export default class Game extends Component<void, Props, State> {
     cancelablePromise
       .promise
       .then((a) => {
-        console.log(a)
+
       })
       .catch((reason) => console.log('isCanceled', reason.isCanceled));
     cancelablePromise.cancel(); // Cancel the promise

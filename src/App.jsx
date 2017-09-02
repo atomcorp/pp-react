@@ -66,7 +66,7 @@ class App extends Component {
     cancelablePromise
       .promise
       .then((a) => {
-        console.log('a')
+
       })
       .catch((reason) => console.log('isCanceled', reason.isCanceled));
     cancelablePromise.cancel(); // Cancel the promise

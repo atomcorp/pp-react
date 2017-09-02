@@ -40,7 +40,7 @@ export const updateGame = function(result: Result) {
 export function checkUserResults(uid: string, gameweek: number) {
   const userRefString = `/2017-gameweek1/jl0WOxfgipe0IiavUyfbdjBOPmp1/predicted`;
   db.ref(userRefString).on('value', (snapshot) => {
-    console.log(snapshot.exists());
+
   })
 }
 
@@ -97,7 +97,6 @@ export const updateComputedPoints = function(uid: string, season: string, points
 export const updateComputedPredictions = function(uid: string, season: string, predictions: PredictionsType) {
   const updateComputedRef = {};
   updateComputedRef[`/${season}predictions/${uid}/`] = predictions;
-  console.log(predictions)
   db.ref().update(updateComputedRef);
 }
 
@@ -112,7 +111,6 @@ export const updateUsersPoints = function(uid: string, season: string, lastweek:
   // then update 
   db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
     const request = snapshot.val();
-    console.log(request)
     const data = {};
     let score = 0;
     for (const result in request) {
@@ -129,7 +127,6 @@ export const updateUsersPoints = function(uid: string, season: string, lastweek:
     }
     const updateUsersPointsRef ={};
     updateUsersPointsRef[`/users/${uid}/points`] = data.score;
-    console.log(data.lastWeeksPoints)
     if (data.lastWeeksPoints !== undefined) {
       updateUsersPointsRef[`/users/${uid}/lastWeeksPoints`] = data.lastWeeksPoints;
     }
