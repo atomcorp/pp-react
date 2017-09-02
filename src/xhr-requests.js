@@ -1,9 +1,11 @@
+// @flow
 import {db} from './firebase-connect';
 import firebase from './firebase';
+import type {PredictionsType} from './types.js';
 
 // grab the game setting data we need,
 // gets current gameweek and season
-export function bootstrapApp(uid) {
+export function bootstrapApp(uid: string) {
   return Promise.all([
     db.ref(`/game`).once('value').then((snapshot) => {
       return snapshot.val();
@@ -20,7 +22,13 @@ export function bootstrapApp(uid) {
     })
 };
 
-export const updateGame = function(result) {
+type Result = {
+  currentMatchday: number,
+  year: string,
+  numberOfMatchdays: number
+};
+
+export const updateGame = function(result: Result) {
   db.ref('game').set({
     time: firebase.database.ServerValue.TIMESTAMP,
     gameweek: result.currentMatchday,
@@ -29,7 +37,7 @@ export const updateGame = function(result) {
   });
 }
 
-export function checkUserResults(uid, gameweek) {
+export function checkUserResults(uid: string, gameweek: number) {
   const userRefString = `/2017-gameweek1/jl0WOxfgipe0IiavUyfbdjBOPmp1/predicted`;
   db.ref(userRefString).on('value', (snapshot) => {
     console.log(snapshot.exists());
@@ -40,7 +48,7 @@ export function checkUserResults(uid, gameweek) {
 * @params: uid [String]
 * Return an object with {gameweek*: true/false}
 */
-export function checkResultsComputed(season, uid) {
+export function checkResultsComputed(season: string, uid: string) {
   const computedResultURL = `/${season}computed/${uid}/`;
   const computedResultsRef = db.ref(computedResultURL); 
   return computedResultsRef.once('value').then((snapshot) => {
@@ -54,7 +62,10 @@ export function checkResultsComputed(season, uid) {
 * @param {Object} updated {gameweek1: true, etc}
 * note: the returned predictions object has had scores added to it
 */
-export const updateComputedResults = function(uid, season, updated) {
+type Computed = {
+  [key: string]: boolean
+}
+export const updateComputedResults = function(uid: string, season: string, updated: Computed) {
   const updateComputedRef = {};
   for (const id in updated) {
     updateComputedRef[`/${season}computed/${uid}/${id}`] = updated[id];
@@ -70,7 +81,7 @@ export const updateComputedResults = function(uid, season, updated) {
 * @returns {Object} score and updated predictions for each gameweek
 * note: the returned predictions object has had scores added to it
 */
-export const updateComputedPoints = function(uid, season, points) {
+export const updateComputedPoints = function(uid: string, season: string, points: {[key: string]: number}) {
   const updateComputedRef = {};
   updateComputedRef[`/${season}points/${uid}/`] = points;
   db.ref().update(updateComputedRef);
@@ -83,7 +94,7 @@ export const updateComputedPoints = function(uid, season, points) {
 * @returns {Object} score and updated predictions for each gameweek
 * note: the returned predictions object has had scores added to it
 */
-export const updateComputedPredictions = function(uid, season, predictions) {
+export const updateComputedPredictions = function(uid: string, season: string, predictions: PredictionsType) {
   const updateComputedRef = {};
   updateComputedRef[`/${season}predictions/${uid}/`] = predictions;
   console.log(predictions)
@@ -96,7 +107,7 @@ export const updateComputedPredictions = function(uid, season, predictions) {
 * @param {String} [gameweek] [eg 'gameweek1']
 * get all season points, add together, then post to user
 */
-export const updateUsersPoints = function(uid, season, gameweek = null) {
+export const updateUsersPoints = function(uid: string, season: string, lastweek: string = '') {
   // first get current user points
   // then update 
   db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
@@ -107,8 +118,9 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
     for (const result in request) {
       score += request[result];
     }
-    let lastWeeksPoints = request ? request[gameweek] : null;
-    data.lastWeeksPoints = lastWeeksPoints;
+    if (lastweek && request) {
+      data.lastWeeksPoints = request[lastweek];
+    }
     data.score = score;
     return data;
   }).then((data) => {
@@ -117,7 +129,10 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
     }
     const updateUsersPointsRef ={};
     updateUsersPointsRef[`/users/${uid}/points`] = data.score;
-    updateUsersPointsRef[`/users/${uid}/lastWeeksPoints`] = data.lastWeeksPoints;
+    console.log(data.lastWeeksPoints)
+    if (data.lastWeeksPoints !== undefined) {
+      updateUsersPointsRef[`/users/${uid}/lastWeeksPoints`] = data.lastWeeksPoints;
+    }
     db.ref().update(updateUsersPointsRef);
   });
 }
@@ -131,7 +146,7 @@ export const updateUsersPoints = function(uid, season, gameweek = null) {
  * Either a selection or all
  * see: https://stackoverflow.com/a/38193091/2368141
  */
-export function getMatchData(season, dataType, uid = null, gameweeks = null) {
+export function getMatchData(season: string, dataType: string, uid: string = '', gameweeks: Array<string> = []) {
   const fixturesRef = db.ref(`/${season}fixtures/`);
   const predictionsRef = db.ref(`/${season}predictions/${uid}/`);
   const ref = (dataType === 'fixtures') ? fixturesRef : predictionsRef;
@@ -142,7 +157,7 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
     if (!request) {
       return {};
     }
-    if (gameweeks) {
+    if (gameweeks.length) {
       if (!Array.isArray(gameweeks)) {console.log('Gameweeks must be array')};
       for (var i = 0; i < gameweeks.length; i++) {
         matchData[gameweeks[i]] = request[gameweeks[i]];
@@ -154,7 +169,7 @@ export function getMatchData(season, dataType, uid = null, gameweeks = null) {
   });
 }
 
-export function sendPredictions(uid, season, week, predictions) {
+export function sendPredictions(uid: string, season: string, week: number, predictions: PredictionsType) {
   const refs = {};
   // refs[`${gameData.season}gameweek${gameData.gameweek}/${uid}`] = predictions;
   refs[`${season}predictions/${uid}/gameweek${week}`] = predictions;
@@ -165,7 +180,16 @@ export function sendPredictions(uid, season, week, predictions) {
   })
 }
 
-export function getGameweekPoints(uid, season, gameweek) {
+/**
+ * @param {String} uid
+ * @param {String} season
+ * @param {String} [uid] 
+ * @param {String} [gameweek] <eg 'gameweek1'>
+ * @return {Promise} Object {gameweek: number}
+ * Either a selection or all
+ * see: https://stackoverflow.com/a/38193091/2368141
+ */
+export function getGameweekPoints(uid: string, season: string, gameweek: string) {
   return db.ref(`/${season}points/${uid}`).once('value').then((snapshot) => {
     const request = snapshot.val();
     if (!request) {

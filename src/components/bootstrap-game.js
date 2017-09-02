@@ -17,7 +17,7 @@ export default function bootstrapGame(uid: string, gameData: GameType) {
       })
     }).then(() => {
       Promise.all([
-        getMatchData(gameData.season, 'fixtures', null, [gameweek]),
+        getMatchData(gameData.season, 'fixtures', '', [gameweek]),
         getMatchData(gameData.season, 'predictions', uid, [gameweek])
       ]).then((data) => {
         // arrays return in order

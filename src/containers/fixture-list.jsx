@@ -104,9 +104,9 @@ export default class FixtureList extends Component<void, Props, State> {
     event.preventDefault();
     if (gameweek) {
       Promise.all([
-        getMatchData(this.props.gameData.season, 'fixtures', null, [`gameweek${gameweek}`]),
+        getMatchData(this.props.gameData.season, 'fixtures', '', [`gameweek${gameweek}`]),
         getMatchData(this.props.gameData.season, 'predictions', this.props.player.id, [`gameweek${gameweek}`]),
-        getGameweekPoints(this.props.player.id, this.props.gameData.season, [`gameweek${gameweek}`])
+        getGameweekPoints(this.props.player.id, this.props.gameData.season, `gameweek${gameweek}`)
       ]).then((data) => {
         if (!data[1][`gameweek${gameweek}`]) {
           data[1][`gameweek${gameweek}`] = this.setPredictions(data[0][`gameweek${gameweek}`]);

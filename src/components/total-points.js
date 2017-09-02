@@ -33,7 +33,7 @@ export default function TotalPoints(uid: string, gameData: GameType) {
       // literally nothing,
       // get all fixtures and results
       return Promise.all([
-        getMatchData(season, 'fixtures').then((fixtureResults) => {
+        getMatchData(season, 'fixtures', '').then((fixtureResults) => {
           return fixtureResults;
         }),
         getMatchData(season, 'predictions', uid).then((predictionsResults) => {
@@ -55,7 +55,7 @@ export default function TotalPoints(uid: string, gameData: GameType) {
       }
       if (weeksToCalculate.length) {
         return Promise.all([
-          getMatchData(season, 'fixtures', null, weeksToCalculate).then((predictionsResults) => {
+          getMatchData(season, 'fixtures', '', weeksToCalculate).then((predictionsResults) => {
             return predictionsResults;
           }),
           getMatchData(season, 'predictions', uid, weeksToCalculate).then((fixtureResults) => {
@@ -85,7 +85,7 @@ export default function TotalPoints(uid: string, gameData: GameType) {
     if (Object.keys(scores).length !== 0) { updateComputedPoints(uid, season, scores)};
     if (Object.keys(predictions).length !== 0) { updateComputedPredictions(uid, season, predictions)};
   }).then((reject) => {
-    const lastWeek = gameweeksToCheck ? `gameweek${gameweeksToCheck}` : null;
+    const lastWeek = gameweeksToCheck ? `gameweek${gameweeksToCheck}` : '';
     updateUsersPoints(uid, season, lastWeek);
     return true;
   });
