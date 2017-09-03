@@ -34,7 +34,7 @@ export default class LogOut extends Component<void, Props, State> {
 
   render() {
     return (
-      <div>
+      <div className="logout">
         {this.state.redirect ? <Router><Redirect to="/auth"/></Router> : null}
         <button onClick={this.handleClick}>Log out</button>
       </div>

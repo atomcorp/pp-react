@@ -1,0 +1,57 @@
+$lineheight: 1.5; 
+$fontSize: 20px;
+
+$primaryTextColour: #90a59e;
+$linkBlue: #708ECC;
+
+@mixin heading() {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: $fontSize * 2;
+  line-height: $lineheight;
+  font-weight: 700;
+}
+
+@mixin paragraph() {
+  font-family: 'Open Sans', sans-serif;
+  font-size: $fontSize;
+  line-height: $lineheight;
+  color: primaryTextColour;
+}
+
+@mixin button($color: #708ECC) {
+  // bootstrap .btn
+  display: inline-block;
+  font-weight: 400;
+  line-height: $lineheight;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  font-size: $fontSize;
+  border-radius: .25rem;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  color: $color;
+  background-color: #fff;
+  border-color: $color;
+  &:hover {
+   color: #fff;
+   background-color: $color;
+   border-color: $color;
+    cursor: pointer;
+  }
+}
+
+@mixin link($color: #708ECC) {
+  color: $color;
+  text-decoration: none;
+  &:hover, &:focus {
+    border-bottom: 3px solid;
+  }
+}
