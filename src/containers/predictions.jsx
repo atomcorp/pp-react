@@ -147,16 +147,30 @@ export default class FixtureList extends Component<void, Props, State> {
         canPredict={this.state.canPredict}
         />;
     });
-
+    let breakdown = {};
+    if (this.state.predictionResult) {
+      breakdown = breakDownPredictionResults(this.state.predictions);
+    }
     return (
       <div className="predictions__container">
-        <div className="predictions">
-          <div className="predictions__info">
-            <div className="predictions__gameweek">
-              <div className="predictions__label">Game week</div>
-              <div className="predictions__points">{this.state.gameweekInView}</div>
-            </div>
+        <div className="predictions__header">
+          <div className="predictions__gameweek">
+            Game week {this.state.gameweekInView}
           </div>
+          {
+            this.state.predictionResult !== null
+            ? (
+                <div className="predictions__results">
+                  <div className="predictions__breakdown">
+                    3 points: {breakdown[3]}, 1 point: {breakdown[1]}, 0 points: {breakdown[0]} Total points: {this.state.predictionResult}
+                  </div>
+                  <div className="predictions__totals"></div>
+                </div>
+              )
+            : (<div>No results yet</div>)
+          }
+        </div>
+        <div className="predictions">
           <form action="prediction" onSubmit={this.onPredictionSubmit} className="fixtures">
             {fixtureElements}
             {
@@ -189,11 +203,6 @@ export default class FixtureList extends Component<void, Props, State> {
               : null 
             }
           </div>
-          
-          {this.state.predictionResult
-            ?  (<div>Your predictions: {this.state.predictionResult}</div>)
-            : (<div>No results yet</div>)
-          }
           {this.state.predictionSubmitError
             ?  (<div>There was an error submitting your predictions, please make sure each team has been predicted</div>)
             : (<div></div>)
@@ -228,4 +237,16 @@ function arePredictionsValid(predictions: PredictionsType) {
     }
   }
   return true;
+}
+
+function breakDownPredictionResults(predictions: PredictionsType) {
+  const result = {
+    3: 0,
+    1: 0,
+    0: 0
+  }
+  for (const id in predictions) {
+    result[predictions[id].points]++;
+  }
+  return result;
 }

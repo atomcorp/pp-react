@@ -101,7 +101,6 @@ export class Fixture extends Component<void, Props, void> {
           </div>
       </div>
       <div className="fixture__info">
-        
         <div className="fixture__star">
           *
         </div>

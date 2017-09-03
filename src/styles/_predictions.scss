@@ -10,26 +10,16 @@
   border: 1px solid #e2f1ec;
 }
 
-@mixin pointsTable() {
+.predictions__header {
   display: flex;
-  align-items: center;
-  margin: 0 0 15px;
+  background: #fff;
+  padding: 15px;
   border: 1px solid #e2f1ec;
+  border-bottom: 0;
 }
 
 .predictions__gameweek {
-  @include pointsTable();
-  flex: 0 0 auto;
-}
-
-.predictions__label {
-  margin: 0 15px 0 0;
-}
-
-.predictions__points {
-  padding: 15px;
-  // background: #FFEC5E;
-  border-left: 1px solid #e2f1ec;
+  margin: 0 auto 0 0;
 }
 
 .predictions__submit {
