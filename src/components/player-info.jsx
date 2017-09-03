@@ -21,7 +21,7 @@ export default function PlayerInfo(props) {
             : null
         }
         <div className="player-info__gameweek">
-          <div className="player-info__label">Current gameweek</div>
+          <div className="player-info__label">Active game week</div>
           <div className="player-info__points">{props.gameData.gameweek}</div>
         </div>
       </div>
