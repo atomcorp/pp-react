@@ -40,6 +40,9 @@ Tasks:
   ☐ add one star to weekly predictions, get double points on correct predictions
   ☐ add stats (3 points, 1 points) to stats
   ☐ Make fixture table a seperate component, we pass data to
+  ☐ need to remove total-points, and add general function to update all users points, computations @critical
+    ☐ also, 2017computed is a bit of a flaky way of doing things
+      possibly just have a way to manually update a certain week
 
 Todo:
   ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)

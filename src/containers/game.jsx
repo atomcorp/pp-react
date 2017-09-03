@@ -50,7 +50,7 @@ export default class Game extends Component<void, Props, State> {
     cancelablePromise
       .promise
       .then((a) => {
-        console.log(a)
+
       })
       .catch((reason) => console.log('isCanceled', reason.isCanceled));
     cancelablePromise.cancel(); // Cancel the promise
