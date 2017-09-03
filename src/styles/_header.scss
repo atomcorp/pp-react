@@ -1,14 +1,14 @@
 .header {
   display: flex;
   padding: 30px;
-  color: $primaryHighlight;
+  color: $text;
   border-bottom: 3px solid;
 }
 
 .logo {
   a {
     text-decoration: none;
-    color: $primaryHighlight;
+    color: $text;
     text-decoration: none;
   }
   h1 {
@@ -33,12 +33,12 @@
     margin: 0 15px 0 0;
   }
   a {
-    @include link($primaryHighlight);
+    @include link($text);
   }
 }
 
 .logout {
   button {
-    @include button($primaryHighlight);
+    @include button($text);
   }
 }

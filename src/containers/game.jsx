@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 
-import FixtureList from './fixture-list.jsx';
+import Predictions from './predictions.jsx';
 import PlayerInfo from '../components/player-info.jsx';
 
 import bootstrapGame from '../components/bootstrap-game.js';
@@ -71,7 +71,7 @@ export default class Game extends Component<void, Props, State> {
           gameData={this.props.gameData}
           player={this.props.player}
         />
-        <FixtureList 
+        <Predictions 
           gameData={this.props.gameData} 
           player={this.props.player} 
           fixtures={this.state.fixtures} 

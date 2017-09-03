@@ -1,0 +1,59 @@
+.fixture__container {
+  display: flex;
+  align-items: center;
+}
+
+.fixture {
+  width: 90%;
+}
+
+.fixture__info {
+  display: flex;
+  width: 10%;
+}
+
+.fixture__date {
+  font-size: 14px;
+  margin: 15px 0 5px;
+  text-align: center;
+  &:empty {
+    margin: 0;
+  }
+}
+
+.fixture__match {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px;
+}
+
+
+.fixture__scores {
+  display: flex;
+  align-items: center;
+}
+
+.fixture__team {
+  width: 40%;
+}
+
+.fixture__input {
+  text-align: center;
+  padding: 8px 0;
+  width: 60px;
+  margin: 0 15px;
+}
+
+.fixture__team--home {
+  margin: 0 15px 0 auto;
+  text-align: right;
+}
+
+.fixture__team--away {
+  margin: 0 auto 0 15px;
+}
+
+.fixture__predictions {
+  display: flex;
+  align-items: center;
+}

@@ -51,48 +51,69 @@ export class Fixture extends Component<void, Props, void> {
   // and print the tds 
   render() {
     return (
-      <tr>
-        <td>{formatDate(this.props.fixture.date)}</td>
-        <td>{this.props.fixture.homeTeamName}</td>
-        <td>
-          {
-            this.props.canPredict 
-            ? <input 
-                type="text" 
-                size="2"
-                maxLength="2"
-                value={this.props.prediction.homeScore} 
-                onFocus={this.onFocus}
-                onChange={(event) => this.onScoreChange(event, "homeScore", this.props.id)} 
-              />
-            : this.props.prediction.homeScore
-          }
-          {' : '} 
-          {
-            this.props.canPredict
-            ? <input 
-                type="text" 
-                size="2"
-                maxLength="2"
-                value={this.props.prediction.awayScore} 
-                onFocus={this.onFocus}
-                onChange={(event) => this.onScoreChange(event, "awayScore", this.props.id)} 
-              />  
-            : this.props.prediction.awayScore
-          }
-          {
-            this.props.fixture.status === 'FINISHED' 
-            ? <div>{this.props.fixture.result.goalsHomeTeam} : {this.props.fixture.result.goalsAwayTeam}</div>
-            : null
-          }
-          {
-            this.props.prediction.points !== undefined 
-              ? <div>Points: {this.props.prediction.points}</div> 
-              : null
-          }
-        </td>
-        <td>{this.props.fixture.awayTeamName}</td>
-      </tr>
+      <div className="fixture__container">
+        <div className="fixture">
+          <div className="fixture__date">{formatDate(this.props.fixture.date)}</div>
+          <div className="fixture__match">
+            <div className="fixture__team fixture__team--home">{this.props.fixture.homeTeamName}</div>
+            <div className="fixture__scores">
+              {
+                this.props.fixture.status === 'FINISHED' 
+                ? <div className="fixture__result fixture__result--home">{this.props.fixture.result.goalsHomeTeam}</div>
+                : null
+              }
+              <div className="fixture__predictions">
+                {
+                  this.props.canPredict 
+                  ? <input 
+                      className="fixture__input"
+                      type="text" 
+                      size="2"
+                      maxLength="2"
+                      value={this.props.prediction.homeScore} 
+                      onFocus={this.onFocus}
+                      onChange={(event) => this.onScoreChange(event, "homeScore", this.props.id)} 
+                    />
+                  : <input className="fixture__input fixture__input--disabled" disabled value={this.props.prediction.homeScore} />
+                }
+                {<div className="fixture__colon">:</div>} 
+                {
+                  this.props.canPredict
+                  ? <input 
+                      className="fixture__input"
+                      type="text" 
+                      size="2"
+                      maxLength="2"
+                      value={this.props.prediction.awayScore} 
+                      onFocus={this.onFocus}
+                      onChange={(event) => this.onScoreChange(event, "awayScore", this.props.id)} 
+                    />  
+                  : <input className="fixture__input fixture__input--disabled" disabled value={this.props.prediction.awayScore} />
+                }
+              </div>
+              {
+                this.props.fixture.status === 'FINISHED' 
+                ? <div className="fixture__result fixture__result--away">{this.props.fixture.result.goalsAwayTeam}</div>
+                : null
+              }
+            </div>
+            <div className="fixture__team fixture__team--away">{this.props.fixture.awayTeamName}</div>
+          </div>
+      </div>
+      <div className="fixture__info">
+        
+        <div className="fixture__star">
+          *
+        </div>
+        <div className="fixture__update">
+        {
+          this.props.prediction.points !== undefined 
+            ? <div className="fixture__points">Points: {this.props.prediction.points}</div> 
+            : <div className="fixture__submit">X</div>
+        }
+        </div>
+      </div>
+      </div>
     );
   }
 }

@@ -11,7 +11,6 @@ export default function PlayerInfo(props) {
           <div className="player-info__label">Total points</div>
           <div className="player-info__points">{props.player.points}</div>
         </div>
-
         {
           props.player.lastWeeksPoints 
             ? (<div className="player-info__last-points">

@@ -399,12 +399,12 @@ template {
 .header {
   display: flex;
   padding: 30px;
-  color: #23CE6B;
+  color: #3a3a3c;
   border-bottom: 3px solid; }
 
 .logo a {
   text-decoration: none;
-  color: #23CE6B;
+  color: #3a3a3c;
   text-decoration: none; }
 
 .logo h1 {
@@ -428,7 +428,7 @@ template {
     display: inline-block;
     margin: 0 15px 0 0; }
   .header__list a {
-    color: #23CE6B;
+    color: #3a3a3c;
     text-decoration: none; }
     .header__list a:hover, .header__list a:focus {
       border-bottom: 3px solid; }
@@ -451,13 +451,13 @@ template {
   -webkit-transition: all .2s ease-in-out;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
-  color: #23CE6B;
+  color: #3a3a3c;
   background-color: #fff;
-  border-color: #23CE6B; }
+  border-color: #3a3a3c; }
   .logout button:hover {
     color: #fff;
-    background-color: #23CE6B;
-    border-color: #23CE6B;
+    background-color: #3a3a3c;
+    border-color: #3a3a3c;
     cursor: pointer; }
 
 .game {
@@ -508,3 +508,163 @@ template {
   padding: 15px;
   margin: 0 0 0 auto;
   border-left: 1px solid #e2f1ec; }
+
+.predictions__container {
+  padding: 15px;
+  flex: 1; }
+
+.predictions {
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0px 9px 0px -6px #dbdbdb;
+  border: 1px solid #e2f1ec; }
+
+.predictions__gameweek {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px;
+  border: 1px solid #e2f1ec;
+  flex: 0 0 auto; }
+
+.predictions__label {
+  margin: 0 15px 0 0; }
+
+.predictions__points {
+  padding: 15px;
+  border-left: 1px solid #e2f1ec; }
+
+.predictions__submit {
+  text-align: center; }
+  .predictions__submit button {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: .25rem;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    color: #23CE6B;
+    background-color: #fff;
+    border-color: #23CE6B;
+    width: auto; }
+    .predictions__submit button:hover {
+      color: #fff;
+      background-color: #23CE6B;
+      border-color: #23CE6B;
+      cursor: pointer; }
+
+.predictions__next {
+  margin: 0 0 0 auto; }
+  .predictions__next button {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    font-size: 20px;
+    border-radius: .25rem;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    color: #3a3a3c;
+    background-color: #fff;
+    border-color: #3a3a3c; }
+    .predictions__next button:hover {
+      color: #fff;
+      background-color: #3a3a3c;
+      border-color: #3a3a3c;
+      cursor: pointer; }
+
+.predictions__prev button {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 5px 10px;
+  font-size: 20px;
+  border-radius: .25rem;
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+  color: #3a3a3c;
+  background-color: #fff;
+  border-color: #3a3a3c; }
+  .predictions__prev button:hover {
+    color: #fff;
+    background-color: #3a3a3c;
+    border-color: #3a3a3c;
+    cursor: pointer; }
+
+.predictions__week-choice {
+  display: flex; }
+
+.fixture__container {
+  display: flex;
+  align-items: center; }
+
+.fixture {
+  width: 90%; }
+
+.fixture__info {
+  display: flex;
+  width: 10%; }
+
+.fixture__date {
+  font-size: 14px;
+  margin: 15px 0 5px;
+  text-align: center; }
+  .fixture__date:empty {
+    margin: 0; }
+
+.fixture__match {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px; }
+
+.fixture__scores {
+  display: flex;
+  align-items: center; }
+
+.fixture__team {
+  width: 40%; }
+
+.fixture__input {
+  text-align: center;
+  padding: 8px 0;
+  width: 60px;
+  margin: 0 15px; }
+
+.fixture__team--home {
+  margin: 0 15px 0 auto;
+  text-align: right; }
+
+.fixture__team--away {
+  margin: 0 auto 0 15px; }
+
+.fixture__predictions {
+  display: flex;
+  align-items: center; }

@@ -149,42 +149,56 @@ export default class FixtureList extends Component<void, Props, State> {
     });
 
     return (
-      <div className="fixture-list">
-        Gameweek: {this.state.gameweekInView}
-        <form action="prediction" onSubmit={this.onPredictionSubmit}>
-          <table className="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Home</th>
-                <th>Prediction</th>
-                <th>Away</th>
-              </tr>
-            </thead>
-            <tbody> 
-              {fixtureElements}
-            </tbody>
-          </table>
-          {
-            this.state.canPredict 
-            ? <button type="submit">Submit</button>
-            : <div>Can't submit anymore</div>
+      <div className="predictions__container">
+        <div className="predictions">
+          <div className="predictions__info">
+            <div className="predictions__gameweek">
+              <div className="predictions__label">Game week</div>
+              <div className="predictions__points">{this.state.gameweekInView}</div>
+            </div>
+          </div>
+          <form action="prediction" onSubmit={this.onPredictionSubmit} className="fixtures">
+            {fixtureElements}
+            {
+              this.state.canPredict 
+              ? (
+                <div className="predictions__submit">
+                  <button type="submit">Submit</button>
+                </div>
+              )
+              : <div>Can't submit anymore</div>
+            }
+          </form>
+          <div className="predictions__week-choice">
+            {
+              this.state.gameweekInView > 1 
+              ? (
+                  <div className="predictions__prev">
+                    <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView - 1)}>Previous week</button>
+                  </div>
+                )
+              : null 
+            }
+            {
+              this.state.gameweekInView < this.props.gameData.gameweek + 1
+              ? (
+                  <div className="predictions__next">
+                    <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)}>Next week</button>
+                  </div>
+                )
+              : null 
+            }
+          </div>
+          
+          {this.state.predictionResult
+            ?  (<div>Your predictions: {this.state.predictionResult}</div>)
+            : (<div>No results yet</div>)
           }
-        </form>
-        {this.state.gameweekInView > 1 
-          ? <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView - 1)}>Previous week</button>
-          : null }
-        {this.state.gameweekInView < this.props.gameData.gameweek + 1
-          ? <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)}>Next week</button>
-          : null }
-        {this.state.predictionResult
-          ?  (<div>Your predictions: {this.state.predictionResult}</div>)
-          : (<div>No results yet</div>)
-        }
-        {this.state.predictionSubmitError
-          ?  (<div>There was an error submitting your predictions, please make sure each team has been predicted</div>)
-          : (<div></div>)
-        }
+          {this.state.predictionSubmitError
+            ?  (<div>There was an error submitting your predictions, please make sure each team has been predicted</div>)
+            : (<div></div>)
+          }
+        </div>
       </div>
     );
   }
