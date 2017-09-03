@@ -1,12 +1,14 @@
 $lineheight: 1.5; 
 $fontSize: 20px;
 
-$primaryTextColour: #90a59e;
+$primaryHighlight: #23CE6B; // green
+$alternateHighlight: #FC9F5B; // orange
+$text: #3a3a3c;
 $linkBlue: #708ECC;
 
-@mixin heading() {
+@mixin heading($size: $fontSize * 2) {
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: $fontSize * 2;
+  font-size: $size;
   line-height: $lineheight;
   font-weight: 700;
 }
@@ -15,7 +17,7 @@ $linkBlue: #708ECC;
   font-family: 'Open Sans', sans-serif;
   font-size: $fontSize;
   line-height: $lineheight;
-  color: primaryTextColour;
+  color: $text;
 }
 
 @mixin button($color: #708ECC) {

@@ -26,7 +26,8 @@ body {
   margin: 0;
   font-size: 20px;
   font-family: 'Open Sans', sans-serif;
-  background: #FFFDEF; }
+  background: #FFFDEF;
+  color: #3a3a3c; }
 
 /**
  * Add the correct display in IE 9-.
@@ -398,15 +399,19 @@ template {
 .header {
   display: flex;
   padding: 30px;
-  color: #90a59e;
+  color: #23CE6B;
   border-bottom: 3px solid; }
 
 .logo a {
   text-decoration: none;
-  color: #90a59e;
+  color: #23CE6B;
   text-decoration: none; }
 
 .logo h1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 40px;
+  line-height: 1.5;
+  font-weight: 700;
   margin: 0;
   line-height: 1; }
 
@@ -423,7 +428,7 @@ template {
     display: inline-block;
     margin: 0 15px 0 0; }
   .header__list a {
-    color: #90a59e;
+    color: #23CE6B;
     text-decoration: none; }
     .header__list a:hover, .header__list a:focus {
       border-bottom: 3px solid; }
@@ -446,11 +451,60 @@ template {
   -webkit-transition: all .2s ease-in-out;
   -o-transition: all .2s ease-in-out;
   transition: all .2s ease-in-out;
-  color: #90a59e;
+  color: #23CE6B;
   background-color: #fff;
-  border-color: #90a59e; }
+  border-color: #23CE6B; }
   .logout button:hover {
     color: #fff;
-    background-color: #90a59e;
-    border-color: #90a59e;
+    background-color: #23CE6B;
+    border-color: #23CE6B;
     cursor: pointer; }
+
+.game {
+  display: flex;
+  align-items: flex-start; }
+
+.player-info__container {
+  padding: 15px; }
+
+.player-info {
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0px 9px 0px -6px #dbdbdb;
+  border: 1px solid #e2f1ec; }
+
+.player-info__team {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 30px;
+  line-height: 1.5;
+  font-weight: 700;
+  margin: 0 0 15px; }
+
+.player-info__manager {
+  margin: 0 0 15px; }
+
+.player-info__total-points {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px;
+  border: 1px solid #e2f1ec; }
+
+.player-info__last-points {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px;
+  border: 1px solid #e2f1ec; }
+
+.player-info__gameweek {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px;
+  border: 1px solid #e2f1ec; }
+
+.player-info__label {
+  margin: 0 0 0 15px; }
+
+.player-info__points {
+  padding: 15px;
+  margin: 0 0 0 auto;
+  border-left: 1px solid #e2f1ec; }

@@ -1,0 +1,52 @@
+.player-info__container {
+  padding: 15px;
+}
+
+.player-info {
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0px 9px 0px -6px #dbdbdb;
+  border: 1px solid #e2f1ec;
+  
+}
+
+.player-info__team {
+  @include heading($fontSize * 1.5);
+  margin: 0 0 15px;
+  // color: $alternateHighlight;
+}
+
+.player-info__manager {
+  margin: 0 0 15px;
+  // color: $alternateHighlight;
+}
+
+@mixin pointsTable() {
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px;
+  border: 1px solid #e2f1ec;
+}
+
+.player-info__total-points {
+  @include pointsTable();
+}
+
+.player-info__last-points {
+  @include pointsTable();
+}
+
+.player-info__gameweek {
+  @include pointsTable();
+}
+
+.player-info__label {
+  margin: 0 0 0 15px;
+}
+
+.player-info__points {
+  padding: 15px;
+  // background: #FFEC5E;
+  margin: 0 0 0 auto;
+  border-left: 1px solid #e2f1ec;
+}

@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 
 import FixtureList from './fixture-list.jsx';
+import PlayerInfo from '../components/player-info.jsx';
 
 import bootstrapGame from '../components/bootstrap-game.js';
 import {makeCancelable} from '../make-cancelable.js';
@@ -66,16 +67,17 @@ export default class Game extends Component<void, Props, State> {
     }
     return (
       <div className="game">
-        <h2>{this.props.player.team}</h2>
-        <h4>Managed by {this.props.player.name}</h4>
-        <h4>Total points: {this.props.player.points}</h4>
-        {
-          this.props.player.lastWeeksPoints 
-            ? <h4>Last weeks points: {this.props.player.lastWeeksPoints}</h4>
-            : null
-        }
-        <h4>Current gameweek {this.props.gameData.gameweek}</h4>
-        <FixtureList gameData={this.props.gameData} player={this.props.player} fixtures={this.state.fixtures} predictions={this.state.predictions} submitPredictions={this.submitPredictions} />
+        <PlayerInfo 
+          gameData={this.props.gameData}
+          player={this.props.player}
+        />
+        <FixtureList 
+          gameData={this.props.gameData} 
+          player={this.props.player} 
+          fixtures={this.state.fixtures} 
+          predictions={this.state.predictions} 
+          submitPredictions={this.submitPredictions} 
+        />
       </div>
     );
   }

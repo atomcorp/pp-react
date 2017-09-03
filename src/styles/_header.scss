@@ -1,17 +1,18 @@
 .header {
   display: flex;
   padding: 30px;
-  color: $primaryTextColour;
+  color: $primaryHighlight;
   border-bottom: 3px solid;
 }
 
 .logo {
   a {
     text-decoration: none;
-    color: $primaryTextColour;
+    color: $primaryHighlight;
     text-decoration: none;
   }
   h1 {
+    @include heading($fontSize * 2);
     margin: 0;
     line-height: 1;
   }
@@ -32,12 +33,12 @@
     margin: 0 15px 0 0;
   }
   a {
-    @include link($primaryTextColour);
+    @include link($primaryHighlight);
   }
 }
 
 .logout {
   button {
-    @include button($primaryTextColour);
+    @include button($primaryHighlight);
   }
 }
