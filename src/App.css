@@ -401,8 +401,14 @@ template {
   color: #90a59e;
   border-bottom: 3px solid; }
 
+.logo a {
+  text-decoration: none;
+  color: #90a59e;
+  text-decoration: none; }
+
 .logo h1 {
-  margin: 0; }
+  margin: 0;
+  line-height: 1; }
 
 .header__links {
   margin: 0 0 0 auto;

@@ -10,7 +10,7 @@ type Props = {
 export default function Header(props: Props) {
   return (
     <header className="header">
-      <div className="logo"><h1>Four Four Too</h1></div>
+      <div className="logo"><Link to="/app/"><h1>Four Four Too</h1></Link></div>
       {
         props.isAuth
           ? loggedIn()
@@ -24,7 +24,6 @@ function loggedIn() {
   return (
     <div className="header__links header__authorised">
       <ul className="header__list">
-        <li><Link to="/app/">Home</Link></li>
         <li><Link to="/app/profile">Profile</Link></li>
         <li><Link to="/app/leagues">Leagues</Link></li>
       </ul>
