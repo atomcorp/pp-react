@@ -19,14 +19,17 @@ export function compareScores(predictions: PredictionType, results: Results) {
       return null;
     }
     let score = 0;
-    const scores = predictions[id];
-    if (scores.homeScore === results[id].result.goalsHomeTeam && scores.awayScore === results[id].result.goalsAwayTeam) {
+    const prediction = predictions[id];
+    if (prediction.homeScore === results[id].result.goalsHomeTeam && prediction.awayScore === results[id].result.goalsAwayTeam) {
       score = 3;
-    } else if (calculateWinType(scores.homeScore, scores.awayScore) === calculateWinType(results[id].result.goalsHomeTeam, results[id].result.goalsAwayTeam)) {
+    } else if (calculateWinType(prediction.homeScore, prediction.awayScore) === calculateWinType(results[id].result.goalsHomeTeam, results[id].result.goalsAwayTeam)) {
       score = 1;
     }
-    cumulativeScore += score;
     // const test = `${results[id].home} v ${results[id].away}: ${results[id].result.goalsHomeTeam}:${scores.awayScore} | ${scores.homeScore}:${results[id].result.goalsAwayTeam}`;
+    if (prediction.star) {
+      score = score * 2;
+    }
+    cumulativeScore += score;
     predictions[id].points = score;
   }
   const outcome = {

@@ -7,7 +7,8 @@ type Props = {
   fixture: FixtureType,
   onPredictionChange: (score: number, homeOrAway: string, id: string) => void,
   id: string,
-  prediction: PredictionType
+  prediction: PredictionType,
+  setStar: (id: string) => void
 };
 
 export class Fixture extends Component<void, Props, void> {
@@ -101,14 +102,16 @@ export class Fixture extends Component<void, Props, void> {
           </div>
       </div>
       <div className="fixture__info">
-        <div className="fixture__star">
-          <button className="star" onClick={() => this.props.setStar(this.props.id)}>
-            {
-              this.props.prediction.star 
-                ? <div className="star__icon">{starFilled()}</div> 
-                : <div className="star__icon">{starUnfilled()}</div>
-            }
-          </button>
+        <div className="fixture__star">          
+          {
+             this.props.canPredict
+              ? (<button className="star" onClick={() => this.props.setStar(this.props.id)}>
+                  <div className="star__icon">
+                    {this.props.prediction.star ? starFilled() : starUnfilled()}
+                  </div> 
+                </button>)
+              : (this.props.prediction.star ? starFilled() : starUnfilled())
+          }
         </div>
         <div className="fixture__update">
         {

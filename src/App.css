@@ -669,4 +669,5 @@ template {
   padding: 0;
   margin: 0;
   border: 0;
-  line-height: 0; }
+  line-height: 0;
+  cursor: pointer; }

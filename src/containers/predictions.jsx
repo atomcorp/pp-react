@@ -115,7 +115,6 @@ export default class FixtureList extends Component<void, Props, State> {
       }
       return prevState;
     });
-    console.log(this.state.predictions);
   }
 
   /**
@@ -187,7 +186,7 @@ export default class FixtureList extends Component<void, Props, State> {
             ? (
                 <div className="predictions__results">
                   <div className="predictions__breakdown">
-                    3 points: {breakdown[3]}, 1 point: {breakdown[1]}, 0 points: {breakdown[0]} Total points: {this.state.predictionResult}
+                    Star points: {breakdown['star']}, 3 points: {breakdown[3]}, 1 point: {breakdown[1]}, 0 points: {breakdown[0]} Total points: {this.state.predictionResult}
                   </div>
                   <div className="predictions__totals"></div>
                 </div>
@@ -273,11 +272,18 @@ function breakDownPredictionResults(predictions: PredictionsType) {
   const result = {
     '3': 0,
     '1': 0,
-    '0': 0
+    '0': 0,
+    'star': 0
   };
   for (const id in predictions) {
-    if (predictions[id].points) {
+    if (predictions[id].points !== null && predictions[id].points !== undefined) {
       result[predictions[id].points]++;
+    }
+    if (predictions[id].star) {
+      if (predictions[id].points !== null && predictions[id].points !== undefined) {
+        result.star = predictions[id].points;
+      }
+      
     }
   }
   return result;
