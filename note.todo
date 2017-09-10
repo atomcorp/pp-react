@@ -38,7 +38,7 @@ Tasks:
   ✔ Input validation on scores @done (17-08-23 20:11)
   ☐ Add saved, inputted, not inputted notifications on predictions (may need to uplift fixture to add state)
   ☐ add one star to weekly predictions, get double points on correct predictions
-  ☐ add stats (3 points, 1 points) to stats
+  ✔ add stats (3 points, 1 points) to stats @done (17-09-10 15:15)
   ☐ Make fixture table a seperate component, we pass data to
   ☐ need to remove total-points, and add general function to update all users points, computations @critical
     ☐ also, 2017computed is a bit of a flaky way of doing things

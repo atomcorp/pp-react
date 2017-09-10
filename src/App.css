@@ -663,3 +663,10 @@ template {
 .fixture__predictions {
   display: flex;
   align-items: center; }
+
+.star {
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  line-height: 0; }

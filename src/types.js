@@ -15,7 +15,8 @@ export type PredictionType = {
   awayScore: ?number,
   homeScore: ?number,
   id: string,
-  points: ?number
+  points: ?number,
+  star: boolean
 };
 
 export type FixturesType = {

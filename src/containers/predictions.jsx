@@ -11,7 +11,8 @@ type State = {
   canRender: boolean,
   canPredict: boolean,
   predictionResult: null | number,
-  predictionSubmitError: boolean
+  predictionSubmitError: boolean,
+  hasEditedPrediction: boolean
 };
 
 type Props = {
@@ -37,13 +38,15 @@ export default class FixtureList extends Component<void, Props, State> {
       canRender: false,
       canPredict: this.props.gameData.canPredict,
       predictionResult: null,
-      predictionSubmitError: false
+      predictionSubmitError: false,
+      hasEditedPrediction: false
     }
     const self: any = this;
     self.onPredictionSubmit = this.onPredictionSubmit.bind(this);
     self.onPredictionChange = this.onPredictionChange.bind(this);
     self.setPredictions = this.setPredictions.bind(this);
     self.handleWeekChange = this.handleWeekChange.bind(this);
+    self.setStar = this.setStar.bind(this);
   }
 
   componentDidMount() {
@@ -56,7 +59,7 @@ export default class FixtureList extends Component<void, Props, State> {
 
   // this sets up what's diplayed in the score boxes
   // if user has made predictions before will show those
-  // if not just defaults to the predictions 0-0
+  // if not just defaults to - : -
   setPredictions(fixtures: FixturesType, predictions: {} | PredictionsType = {}) {
     if (Object.getOwnPropertyNames(predictions).length) {
       return predictions;
@@ -66,7 +69,8 @@ export default class FixtureList extends Component<void, Props, State> {
       newPredictions[id] = {
         homeScore: '-',
         awayScore: '-',
-        id: id
+        id: id,
+        star: false
       }
     }    
     return newPredictions;
@@ -78,6 +82,7 @@ export default class FixtureList extends Component<void, Props, State> {
     // https://stackoverflow.com/a/38779819/2368141
     this.setState((prevState) => {
       prevState.predictions[id][homeOrAway] = score;
+      prevState.hasEditedPrediction = true;
       return prevState;
     });
   }
@@ -88,11 +93,29 @@ export default class FixtureList extends Component<void, Props, State> {
     if (this.state.canPredict) {
       if (arePredictionsValid(this.state.predictions)) {
         this.props.submitPredictions(this.state.predictions, this.state.gameweekInView);
-        this.setState({predictionSubmitError: false});
+        this.setState({
+          predictionSubmitError: false,
+          hasEditedPrediction: false
+        });
       } else {
         this.setState({predictionSubmitError: true})
       }
     }
+  }
+
+  setStar(starId: string) {
+    this.setState((prevState) => {
+      if (prevState.predictions[starId].star) {
+        prevState.predictions[starId].star = false;
+      } else {
+        for (const id in prevState.predictions) {
+          prevState.predictions[id].star = false;
+        }
+        prevState.predictions[starId].star = true;
+      }
+      return prevState;
+    });
+    console.log(this.state.predictions);
   }
 
   /**
@@ -118,7 +141,8 @@ export default class FixtureList extends Component<void, Props, State> {
           gameweekInView: gameweek,
           predictions: data[1][`gameweek${gameweek}`],
           canPredict: canPredictHelper(gameweek, this.props.gameData.gameweek, this.props.gameData.canPredict),
-          predictionResult: data[2] ? data[2] : null
+          predictionResult: data[2] ? data[2] : null,
+          hasEditedPrediction: false
         })
       })
     }
@@ -139,12 +163,13 @@ export default class FixtureList extends Component<void, Props, State> {
     });
     const fixtureElements = sortFixtures.map((id, index) => {
       return <Fixture 
-        id={id} 
-        key={index} 
-        fixture={fixtures[id]}
-        prediction={this.state.predictions[id]}
-        onPredictionChange={this.onPredictionChange} 
-        canPredict={this.state.canPredict}
+          id={id} 
+          key={index} 
+          fixture={fixtures[id]}
+          prediction={this.state.predictions[id]}
+          onPredictionChange={this.onPredictionChange} 
+          canPredict={this.state.canPredict}
+          setStar={this.setStar}
         />;
     });
     let breakdown = {};
@@ -206,6 +231,10 @@ export default class FixtureList extends Component<void, Props, State> {
           {this.state.predictionSubmitError
             ?  (<div>There was an error submitting your predictions, please make sure each team has been predicted</div>)
             : (<div></div>)
+          }
+          {this.state.hasEditedPrediction
+            ?  (<div>You've made a change</div>)
+            : (<div>No changes</div>)
           }
         </div>
       </div>
