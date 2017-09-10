@@ -1,6 +1,14 @@
+// @flow
 import React from 'react';
 
-export default function PlayerInfo(props) {
+import type {PlayerType, GameType} from '../types.js';
+
+type Props = {
+  player: PlayerType,
+  gameData: GameType
+}; 
+
+export default function PlayerInfo(props: Props) {
 
   return (
     <div className="player-info__container">

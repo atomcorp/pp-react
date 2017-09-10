@@ -1,12 +1,10 @@
 // @flow
 import React from 'react';
 
+import type {PlayerType} from '../types.js';
+
 type Props = {
-  player: {
-    name: string,
-    team: string,
-    points: string
-  }
+  player: PlayerType
 };
 
 export default function Profile(props: Props) {

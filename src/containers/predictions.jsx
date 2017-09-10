@@ -240,13 +240,16 @@ function arePredictionsValid(predictions: PredictionsType) {
 }
 
 function breakDownPredictionResults(predictions: PredictionsType) {
+  // flow doesn't like keys being numbers
   const result = {
-    3: 0,
-    1: 0,
-    0: 0
-  }
+    '3': 0,
+    '1': 0,
+    '0': 0
+  };
   for (const id in predictions) {
-    result[predictions[id].points]++;
+    if (predictions[id].points) {
+      result[predictions[id].points]++;
+    }
   }
   return result;
 }

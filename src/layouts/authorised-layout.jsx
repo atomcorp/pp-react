@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 
@@ -6,7 +7,15 @@ import Game from '../containers/game.jsx';
 import Profile from '../components/profile.jsx';
 import Leagues from '../components/leagues.jsx';
 
-const AuthorisedLayout = (props) => {
+import type {PlayerType, GameType} from '../types.js';
+
+type Props = {
+  canRender: boolean,
+  player: PlayerType,
+  game: GameType
+};
+
+const AuthorisedLayout = (props: Props) => {
   if (!props.canRender) {
     return <div>Loading...</div>
   }

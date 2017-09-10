@@ -623,11 +623,10 @@ template {
   align-items: center; }
 
 .fixture {
-  width: 90%; }
+  flex: 1; }
 
 .fixture__info {
-  display: flex;
-  width: 10%; }
+  display: flex; }
 
 .fixture__date {
   font-size: 14px;
