@@ -37,7 +37,7 @@ Tasks:
     ✔ don't allow - v - to be submitted @done (17-08-23 20:11)
   ✔ Input validation on scores @done (17-08-23 20:11)
   ☐ Add saved, inputted, not inputted notifications on predictions (may need to uplift fixture to add state)
-  ☐ add one star to weekly predictions, get double points on correct predictions
+  ✔ add one star to weekly predictions, get double points on correct predictions @done (17-09-10 16:24)
   ✔ add stats (3 points, 1 points) to stats @done (17-09-10 15:15)
   ☐ Make fixture table a seperate component, we pass data to
   ☐ need to remove total-points, and add general function to update all users points, computations @critical

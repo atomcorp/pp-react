@@ -11,10 +11,19 @@ type Props = {
   setStar: (id: string) => void
 };
 
-export class Fixture extends Component<void, Props, void> {
-  constructor(props:Props) {
+type State = {
+  modified: boolean
+};
+
+export default class Fixture extends Component<void, Props, State> {
+  state: State;
+
+  constructor(props: Props) {
     super(props);
-    
+    this.state = {
+      modified: false
+    };
+    // console.log(this.props)
     (this:any).onScoreChange = this.onScoreChange.bind(this);
     (this:any).colour = this.colour.bind(this);
     (this:any).onFocus = this.onFocus.bind(this);
@@ -35,7 +44,18 @@ export class Fixture extends Component<void, Props, void> {
   onScoreChange(event: Event, homeOrAway: string, id: string) {
     if (event.currentTarget instanceof HTMLInputElement) {
       const score = ensurePositiveNumber(event.currentTarget.value);
+      this.setState({
+        modified: true
+      })
       this.props.onPredictionChange(score, homeOrAway, id);
+    }
+  }
+
+  componentDidUpdate() {
+    if (!this.props.hasEditedPrediction && this.state.modified) {
+      this.setState({
+        modified: false
+      })
     }
   }
 
@@ -43,8 +63,8 @@ export class Fixture extends Component<void, Props, void> {
     // I don't really get this, but there you go...
     // https://github.com/facebook/flow/issues/218#issuecomment-74119319
     if (event.currentTarget instanceof HTMLInputElement) {
-        event.currentTarget.select();
-      }
+      event.currentTarget.select();
+    }
   }
 
   // props will be fixture
@@ -60,7 +80,7 @@ export class Fixture extends Component<void, Props, void> {
             <div className="fixture__scores">
               {
                 this.props.fixture.status === 'FINISHED' 
-                ? <div className="fixture__result fixture__result--home">{this.props.fixture.result.goalsHomeTeam}</div>
+                ? <div className="fixture__result fixture__result--home">({this.props.fixture.result.goalsHomeTeam})</div>
                 : null
               }
               <div className="fixture__predictions">
@@ -94,7 +114,7 @@ export class Fixture extends Component<void, Props, void> {
               </div>
               {
                 this.props.fixture.status === 'FINISHED' 
-                ? <div className="fixture__result fixture__result--away">{this.props.fixture.result.goalsAwayTeam}</div>
+                ? <div className="fixture__result fixture__result--away">({this.props.fixture.result.goalsAwayTeam})</div>
                 : null
               }
             </div>
@@ -117,7 +137,11 @@ export class Fixture extends Component<void, Props, void> {
         {
           this.props.prediction.points !== undefined 
             ? <div className="fixture__points">Points: {this.props.prediction.points}</div> 
-            : <div className="fixture__submit">X</div>
+            : this.state.modified
+              ? <div>!</div>
+              : this.props.hasSubmittedPredictions 
+                ? <div>✔</div> 
+                : <div>✘</div> 
         }
         </div>
       </div>

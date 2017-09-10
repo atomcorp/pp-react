@@ -1,6 +1,6 @@
 // @flow
 import React, {Component} from 'react';
-import {Fixture} from '../components/fixture.jsx';
+import Fixture from './fixture.jsx';
 import {getMatchData, getGameweekPoints} from '../xhr-requests.js';
 import type {PlayerType, GameType, FixturesType, PredictionsType} from '../types.js';
 
@@ -12,7 +12,8 @@ type State = {
   canPredict: boolean,
   predictionResult: null | number,
   predictionSubmitError: boolean,
-  hasEditedPrediction: boolean
+  hasEditedPrediction: boolean,
+  hasSubmittedPredictions: boolean
 };
 
 type Props = {
@@ -27,10 +28,11 @@ type Props = {
 // if changes are allowed or not (ie games have been played, or set arbitary cut-off time, say Friday 6PM)
 // if changes not allowed, will auto attempt to calc score using
 export default class FixtureList extends Component<void, Props, State> {
-  state: State
+  state: State;
 
   constructor(props: Props) {
     super(props);
+    // todo: this needs a clear up
     this.state = {
       fixtures: this.props.fixtures,
       predictions: {},
@@ -39,7 +41,8 @@ export default class FixtureList extends Component<void, Props, State> {
       canPredict: this.props.gameData.canPredict,
       predictionResult: null,
       predictionSubmitError: false,
-      hasEditedPrediction: false
+      hasEditedPrediction: false,
+      hasSubmittedPredictions: false
     }
     const self: any = this;
     self.onPredictionSubmit = this.onPredictionSubmit.bind(this);
@@ -62,6 +65,9 @@ export default class FixtureList extends Component<void, Props, State> {
   // if not just defaults to - : -
   setPredictions(fixtures: FixturesType, predictions: {} | PredictionsType = {}) {
     if (Object.getOwnPropertyNames(predictions).length) {
+      this.setState({
+        hasSubmittedPredictions: true
+      });
       return predictions;
     } 
     const newPredictions = {};
@@ -72,7 +78,10 @@ export default class FixtureList extends Component<void, Props, State> {
         id: id,
         star: false
       }
-    }    
+    }
+    this.setState({
+      hasSubmittedPredictions: false
+    });
     return newPredictions;
   }
 
@@ -95,7 +104,8 @@ export default class FixtureList extends Component<void, Props, State> {
         this.props.submitPredictions(this.state.predictions, this.state.gameweekInView);
         this.setState({
           predictionSubmitError: false,
-          hasEditedPrediction: false
+          hasEditedPrediction: false,
+          hasSubmittedPredictions: true
         });
       } else {
         this.setState({predictionSubmitError: true})
@@ -169,6 +179,8 @@ export default class FixtureList extends Component<void, Props, State> {
           onPredictionChange={this.onPredictionChange} 
           canPredict={this.state.canPredict}
           setStar={this.setStar}
+          hasSubmittedPredictions={this.state.hasSubmittedPredictions}
+          hasEditedPrediction={this.state.hasEditedPrediction}
         />;
     });
     let breakdown = {};
@@ -281,7 +293,7 @@ function breakDownPredictionResults(predictions: PredictionsType) {
     }
     if (predictions[id].star) {
       if (predictions[id].points !== null && predictions[id].points !== undefined) {
-        result.star = predictions[id].points;
+        result.star++;
       }
       
     }
