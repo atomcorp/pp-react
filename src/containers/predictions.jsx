@@ -270,7 +270,6 @@ function canPredictHelper(requestedWeek: number, currentGameweek: number, canPre
 }
 
 function arePredictionsValid(predictions: PredictionsType) {
-  console.log(predictions)
   for (const id in predictions) {
     if (!Number.isInteger(predictions[id].homeScore) || !Number.isInteger(predictions[id].awayScore)) {
       return false;

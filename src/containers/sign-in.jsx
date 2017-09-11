@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
-
+import {errorCodes} from '../helpers.js';
 import {auth} from '../firebase-connect.js';
 
 type State = {
@@ -11,6 +11,8 @@ type State = {
   errors: {
     tooShort: boolean
   },
+  error: boolean,
+  message: string,
   redirect: boolean
 };
 
@@ -27,11 +29,13 @@ export default class SignIn extends Component<void, Props, State> {
       errors: {
         tooShort: false
       },
+      error: false,
+      message: '',
       redirect: false
     };
     const self: any = this;
     self.handleChange = this.handleChange.bind(this);
-    self.handleSubmit = this.handleSubmit.bind(this);
+    // self.handleSubmit = this.handleSubmit.bind(this);
     self.canSubmit = this.canSubmit.bind(this);
   }
 
@@ -47,35 +51,31 @@ export default class SignIn extends Component<void, Props, State> {
 
   }
 
-  canSubmit() {
-    if (!this.state.errors.tooShort) {
-      auth.signInWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-        console.log(error, Object.keys(error).length);
-      }).then((response) => {
-        console.log(response);
-        this.setState({redirect: true});
-        
-      });
-    }
-  }
-
-  handleSubmit(event: Event) {
+  canSubmit(event: Event) {
     event.preventDefault();
-    const tooShort = this.state.password.length < 6 ? true : false;
-    // https://stackoverflow.com/a/43639228/2368141
-    const errors = Object.assign({}, this.state.errors);
-    errors.tooShort = tooShort;
-    this.setState({errors}, () => this.canSubmit());
+    const self = this;
+    auth.signInWithEmailAndPassword(this.state.email, this.state.password)
+      .catch(function(error) {
+        console.log(error, Object.keys(error).length);
+        self.setState({
+          error: true,
+          message: errorCodes(error.code)
+        });
+      })
+      .then((response) => {
+        console.log(response);
+        self.setState({redirect: true});     
+      });
   }
 
   render() {
     const errors = this.state.errors.tooShort ? 'Password too short' : 'No errors';
     const redirect = this.state.redirect;
     return (
-      <div>
+      <div className="sign-in">
         {redirect ? <Router><Redirect to="/app"/></Router> : null}
         <h1>Sign in</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={(event) => this.canSubmit(event)}>
           <label>
             Email:
             <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
@@ -86,8 +86,14 @@ export default class SignIn extends Component<void, Props, State> {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <div className="errors">{errors}</div>
+        {
+          this.state.error 
+            ? <div className="errors">{this.state.message}</div>
+            : null
+        }
+        
       </div>
     );
   }
 }
+
