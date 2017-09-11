@@ -55,7 +55,16 @@ class App extends Component {
   handleGameBootstrap(uid) {
     const cancelablePromise = makeCancelable(
       bootstrapApp(uid).then((request) => {
-        console.log(request);
+        if (!request.player) {
+          window.localStorage.removeItem(storageKey);
+          this.setState({
+            uid: null,
+            loggedIn: false,
+            bootstrappedGame: false,
+            loaded: true
+          });
+          return;
+        }
         this.setState({
           ...this.state, 
           game: request.game,
