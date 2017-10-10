@@ -54,6 +54,9 @@
   h1 {
     margin: 0;
     font-size: 24px;
+    border-bottom: 3px solid;
+    padding: 0 0 3px;
+    display: inline-block;
   }
   @include responsive($small) {
     order: 2;
@@ -65,6 +68,7 @@
   display: flex;
   list-style: none;
   padding: 0;
+  margin: 0;
   @include responsive($small) {
     order: 1;
   }
@@ -86,7 +90,7 @@
 
 .header__logout {
   button {
-    // border 0 cancels browser default border
+    // border 0 cancels browser default border before we reset it
     border: 0;
     @include header-link();
     background: transparent;

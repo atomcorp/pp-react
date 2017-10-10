@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 
 import Predictions from './predictions.jsx';
-import PlayerInfo from '../components/player-info.jsx';
+import Player from '../components/player-info.jsx';
 
 import bootstrapGame from '../components/bootstrap-game.js';
 import {makeCancelable} from '../make-cancelable.js';
@@ -67,7 +67,7 @@ export default class Game extends Component<void, Props, State> {
     }
     return (
       <div className="game">
-        <PlayerInfo 
+        <Player 
           gameData={this.props.gameData}
           player={this.props.player}
         />
