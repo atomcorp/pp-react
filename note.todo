@@ -46,6 +46,7 @@ Tasks:
   ☐ rewrite Predictions.jsx, to seperate out the fixtures from the rest of the stuff, probably need to add fixture creation to fixtures.jsx
   ✔ sign in and out now offer proper validation tips and include adding team/user names @done (17-09-11 22:24)
   ☐ if you predict 4-4 and it is 4-4, get 30 points
+  ☐ Ticks reset when you go between weeks @bug @high
 
 Todo:
   ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)
