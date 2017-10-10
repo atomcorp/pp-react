@@ -11,7 +11,9 @@ type State = {
   password: string,
   username: string,
   teamName: string,
-  redirect: boolean
+  redirect: boolean,
+  message: string,
+  error: boolean
 };
 
 type Props = {};
