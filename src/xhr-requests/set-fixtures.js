@@ -5,7 +5,7 @@ import {FB_DATA_API} from '../api.js';
 // and upload data
 
 // also need one for doing scores
-const gameweekID = 5;
+const gameweekID = 6;
 const header = { 
   headers: { 'X-Auth-Token': FB_DATA_API }
 };

@@ -76,6 +76,17 @@ export default class Fixture extends Component<void, Props, State> {
         <div className="fixture">
           <div className="fixture__date">{formatDate(this.props.fixture.date)}</div>
           <div className="fixture__match">
+            <div className="fixture__star">          
+              {
+                 this.props.canPredict
+                  ? (<button className="star" onClick={() => this.props.setStar(this.props.id)}>
+                      <div className="star__icon">
+                        {this.props.prediction.star ? starFilled() : starUnfilled()}
+                      </div> 
+                    </button>)
+                  : (this.props.prediction.star ? starFilled() : starUnfilled())
+              }
+            </div>
             <div className="fixture__team fixture__team--home">{this.props.fixture.homeTeamName}</div>
             <div className="fixture__scores">
               {
@@ -85,7 +96,7 @@ export default class Fixture extends Component<void, Props, State> {
               }
               <div className="fixture__predictions">
                 {
-                  this.props.canPredict 
+                  this.props.fixture.status === 'TIMED' 
                   ? <input 
                       className="fixture__input"
                       type="text" 
@@ -99,7 +110,7 @@ export default class Fixture extends Component<void, Props, State> {
                 }
                 {<div className="fixture__colon">:</div>} 
                 {
-                  this.props.canPredict
+                  this.props.fixture.status === 'TIMED'
                   ? <input 
                       className="fixture__input"
                       type="text" 
@@ -122,17 +133,7 @@ export default class Fixture extends Component<void, Props, State> {
           </div>
       </div>
       <div className="fixture__info">
-        <div className="fixture__star">          
-          {
-             this.props.canPredict
-              ? (<button className="star" onClick={() => this.props.setStar(this.props.id)}>
-                  <div className="star__icon">
-                    {this.props.prediction.star ? starFilled() : starUnfilled()}
-                  </div> 
-                </button>)
-              : (this.props.prediction.star ? starFilled() : starUnfilled())
-          }
-        </div>
+        
         <div className="fixture__update">
         {
           this.props.prediction.points !== undefined 

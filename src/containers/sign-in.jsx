@@ -8,9 +8,6 @@ import {auth} from '../firebase-connect.js';
 type State = {
   email: string,
   password: string,
-  errors: {
-    tooShort: boolean
-  },
   error: boolean,
   message: string,
   redirect: boolean
@@ -26,9 +23,6 @@ export default class SignIn extends Component<void, Props, State> {
     this.state = {
       email: '',
       password: '',
-      errors: {
-        tooShort: false
-      },
       error: false,
       message: '',
       redirect: false
@@ -69,7 +63,6 @@ export default class SignIn extends Component<void, Props, State> {
   }
 
   render() {
-    const errors = this.state.errors.tooShort ? 'Password too short' : 'No errors';
     const redirect = this.state.redirect;
     return (
       <div className="sign-in">
