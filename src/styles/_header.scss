@@ -1,44 +1,97 @@
-.header {
-  display: flex;
-  padding: 30px;
-  color: $text;
-  border-bottom: 3px solid;
+@mixin header-section() {
+  @include responsive($small) {
+    width: 33%;
+  }
 }
 
-.logo {
+@mixin header-link() {
+  border-bottom: 3px solid $header-background;
+  // negative margin is for underline
+  margin: 0 15px -3px 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: $header-text;
+  &:hover {
+    border-bottom: 3px solid;
+  }
+}
+
+.header {
+  background: $header-background;
+  color: $header-text;
+  font-weight: 700;
+}
+
+.header__container {
+  @include responsive($small) {
+    display: flex;
+      align-items: center;
+      padding: 15px 30px;
+      margin: 0 auto;
+      max-width: 90rem;
+  }
+}
+
+.header__section {
+  @include header-section();
+}
+
+
+.header__logo {
+  @include header-section();
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
   a {
     text-decoration: none;
-    color: $text;
-    text-decoration: none;
+    color: $header-text;
+    &:visited {
+      color: $header-text;
+    }
   }
   h1 {
-    @include heading($fontSize * 2);
     margin: 0;
-    line-height: 1;
+    font-size: 24px;
+  }
+  @include responsive($small) {
+    order: 2;
   }
 }
 
-.header__links {
-  margin: 0 0 0 auto;
+.header__navigation {
+  @include header-section();
   display: flex;
-  align-items: center;
-}
-
-.header__list {
-  padding: 0;
-  margin: 0;
   list-style: none;
-  li {
-    display: inline-block;
-    margin: 0 15px 0 0;
-  }
-  a {
-    @include link($text);
+  padding: 0;
+  @include responsive($small) {
+    order: 1;
   }
 }
 
-.logout {
+.header__link {
+  @include header-link();
+}
+
+.header__user {
+  @include header-section();
+  @include responsive($small) {
+    order: 3;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.header__logout {
   button {
-    @include button($text);
+    // border 0 cancels browser default border
+    border: 0;
+    @include header-link();
+    background: transparent;
+    padding: 0;
+    font-weight: 700;
+    display: block;
   }
 }

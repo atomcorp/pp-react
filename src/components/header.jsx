@@ -9,32 +9,52 @@ type Props = {
 
 export default function Header(props: Props) {
   return (
-    <header className="header">
-      <div className="logo"><Link to="/app/"><h1>Four Four Too</h1></Link></div>
-      {
-        props.isAuth
-          ? loggedIn()
-          : loggedOut()
-      }
-    </header>
+    <div className="header">
+      <header className="header__container">
+        <div className="header__logo">
+          <Link to="/app/"><h1>44Too</h1></Link>
+        </div>
+        {
+          props.isAuth
+            ? primaryNavigation()
+            : null
+        }
+        {
+          props.isAuth
+            ? loggedInAdmin()
+            : null
+        }
+        {
+          !props.isAuth
+            ? loggedOut()
+            : null
+        }
+      </header>
+    </div>
   );
 }
 
-function loggedIn() {
+function primaryNavigation() {
   return (
-    <div className="header__links header__authorised">
-      <ul className="header__list">
-        <li><Link to="/app/profile">Profile</Link></li>
-        <li><Link to="/app/leagues">Leagues</Link></li>
-      </ul>
-      <LogOut />
+    <ul className="header__navigation">
+      <li><Link className="header__link" to="/app/">Predictions</Link></li>
+      <li><Link className="header__link" to="/app/profile">Profile</Link></li>
+      <li><Link className="header__link" to="/app/leagues">Leagues</Link></li>
+    </ul>
+  );
+}
+
+function loggedInAdmin() {
+  return (
+    <div className="header__user header__user--logged-in">
+      <LogOut class="header__logout" />
     </div>
   );
 }
 
 function loggedOut() {
   return (
-    <div className="header__links header__unauthorised">
+    <div className="header__user header__user--logged-out">
       <ul className="header__list">
         <li><Link to="/auth/sign-up">Sign up</Link></li>
         <li><Link to="/auth/sign-in">Sign in</Link></li>

@@ -1,9 +1,17 @@
-@import "mixins/type";
-@import "normalize-plus";
+/*@import "mixins/type";
 
-@import "header";
+
+
 @import "game";
 @import "player-info";
 @import "predictions";
 @import "fixtures";
-@import "fixture";
+@import "fixture";*/
+
+// new
+@import "base/normalize-plus";
+@import "base/variables";
+@import "base/mixins";
+@import "base/defaults";
+
+@import "header";

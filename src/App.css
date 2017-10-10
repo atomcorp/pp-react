@@ -1,3 +1,12 @@
+/*@import "mixins/type";
+
+
+
+@import "game";
+@import "player-info";
+@import "predictions";
+@import "fixtures";
+@import "fixture";*/
 * {
   box-sizing: border-box; }
 
@@ -26,8 +35,7 @@ body {
   margin: 0;
   font-size: 20px;
   font-family: 'Open Sans', sans-serif;
-  background: #fafdfa;
-  color: #3a3a3c; }
+  background: #fafdfa; }
 
 /**
  * Add the correct display in IE 9-.
@@ -396,278 +404,90 @@ template {
 [hidden] {
   display: none; }
 
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 18px;
+  color: #333399; }
+
 .header {
-  display: flex;
-  padding: 30px;
-  color: #3a3a3c;
-  border-bottom: 3px solid; }
+  background: #252322;
+  color: #fbfbfb;
+  font-weight: 700; }
 
-.logo a {
+@media (min-width: 768px) {
+  .header__container {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    margin: 0 auto;
+    max-width: 90rem; } }
+
+@media (min-width: 768px) {
+  .header__section {
+    width: 33%; } }
+
+.header__logo {
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px; }
+  @media (min-width: 768px) {
+    .header__logo {
+      width: 33%; } }
+  .header__logo a {
+    text-decoration: none;
+    color: #fbfbfb; }
+    .header__logo a:visited {
+      color: #fbfbfb; }
+  .header__logo h1 {
+    margin: 0;
+    font-size: 24px; }
+  @media (min-width: 768px) {
+    .header__logo {
+      order: 2; } }
+
+.header__navigation {
+  display: flex;
+  list-style: none;
+  padding: 0; }
+  @media (min-width: 768px) {
+    .header__navigation {
+      width: 33%; } }
+  @media (min-width: 768px) {
+    .header__navigation {
+      order: 1; } }
+
+.header__link {
+  border-bottom: 3px solid #252322;
+  margin: 0 15px -3px 0;
+  cursor: pointer;
   text-decoration: none;
-  color: #3a3a3c;
-  text-decoration: none; }
+  color: #fbfbfb; }
+  .header__link:hover {
+    border-bottom: 3px solid; }
 
-.logo h1 {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 40px;
-  line-height: 1.5;
-  font-weight: 700;
-  margin: 0;
-  line-height: 1; }
+@media (min-width: 768px) {
+  .header__user {
+    width: 33%; } }
 
-.header__links {
-  margin: 0 0 0 auto;
-  display: flex;
-  align-items: center; }
+@media (min-width: 768px) {
+  .header__user {
+    order: 3;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end; } }
 
-.header__list {
-  padding: 0;
-  margin: 0;
-  list-style: none; }
-  .header__list li {
-    display: inline-block;
-    margin: 0 15px 0 0; }
-  .header__list a {
-    color: #3a3a3c;
-    text-decoration: none; }
-    .header__list a:hover, .header__list a:focus {
-      border-bottom: 3px solid; }
-
-.logout button {
-  display: inline-block;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 5px 10px;
-  font-size: 20px;
-  border-radius: .25rem;
-  -webkit-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
-  color: #3a3a3c;
-  background-color: #fff;
-  border-color: #3a3a3c; }
-  .logout button:hover {
-    color: #fff;
-    background-color: #3a3a3c;
-    border-color: #3a3a3c;
-    cursor: pointer; }
-
-.game {
-  display: flex;
-  align-items: flex-start; }
-
-.player-info__container {
-  padding: 15px; }
-
-.player-info {
-  background: #fff;
-  padding: 15px;
-  box-shadow: 0px 9px 0px -6px #dbdbdb;
-  border: 1px solid #e2f1ec; }
-
-.player-info__team {
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 30px;
-  line-height: 1.5;
-  font-weight: 700;
-  margin: 0 0 15px; }
-
-.player-info__manager {
-  margin: 0 0 15px; }
-
-.player-info__total-points {
-  display: flex;
-  align-items: center;
-  margin: 0 0 15px;
-  border: 1px solid #e2f1ec; }
-
-.player-info__last-points {
-  display: flex;
-  align-items: center;
-  margin: 0 0 15px;
-  border: 1px solid #e2f1ec; }
-
-.player-info__gameweek {
-  display: flex;
-  align-items: center;
-  margin: 0 0 15px;
-  border: 1px solid #e2f1ec; }
-
-.player-info__label {
-  margin: 0 0 0 15px; }
-
-.player-info__points {
-  padding: 15px;
-  margin: 0 0 0 auto;
-  border-left: 1px solid #e2f1ec; }
-
-.predictions__container {
-  padding: 15px;
-  flex: 1; }
-
-.predictions {
-  background: #fff;
-  padding: 15px;
-  box-shadow: 0px 9px 0px -6px #dbdbdb;
-  border: 1px solid #e2f1ec; }
-
-.predictions__header {
-  display: flex;
-  background: #fff;
-  padding: 15px;
-  border: 1px solid #e2f1ec;
-  border-bottom: 0; }
-
-.predictions__gameweek {
-  margin: 0 auto 0 0; }
-
-.predictions__submit {
-  text-align: center; }
-  .predictions__submit button {
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: 5px 10px;
-    font-size: 20px;
-    border-radius: .25rem;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    color: #23CE6B;
-    background-color: #fff;
-    border-color: #23CE6B;
-    width: auto; }
-    .predictions__submit button:hover {
-      color: #fff;
-      background-color: #23CE6B;
-      border-color: #23CE6B;
-      cursor: pointer; }
-
-.predictions__next {
-  margin: 0 0 0 auto; }
-  .predictions__next button {
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.5;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: 5px 10px;
-    font-size: 20px;
-    border-radius: .25rem;
-    -webkit-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    transition: all .2s ease-in-out;
-    color: #3a3a3c;
-    background-color: #fff;
-    border-color: #3a3a3c; }
-    .predictions__next button:hover {
-      color: #fff;
-      background-color: #3a3a3c;
-      border-color: #3a3a3c;
-      cursor: pointer; }
-
-.predictions__prev button {
-  display: inline-block;
-  font-weight: 400;
-  line-height: 1.5;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 5px 10px;
-  font-size: 20px;
-  border-radius: .25rem;
-  -webkit-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
-  color: #3a3a3c;
-  background-color: #fff;
-  border-color: #3a3a3c; }
-  .predictions__prev button:hover {
-    color: #fff;
-    background-color: #3a3a3c;
-    border-color: #3a3a3c;
-    cursor: pointer; }
-
-.predictions__week-choice {
-  display: flex; }
-
-.fixture__container {
-  display: flex;
-  align-items: center; }
-
-.fixture {
-  flex: 1; }
-
-.fixture__info {
-  display: flex; }
-
-.fixture__date {
-  font-size: 14px;
-  margin: 15px 0 5px;
-  text-align: center; }
-  .fixture__date:empty {
-    margin: 0; }
-
-.fixture__match {
-  display: flex;
-  align-items: center;
-  margin: 0 0 15px; }
-
-.fixture__scores {
-  display: flex;
-  align-items: center; }
-
-.fixture__team {
-  width: 40%; }
-
-.fixture__input {
-  text-align: center;
-  padding: 8px 0;
-  width: 60px;
-  margin: 0 15px; }
-
-.fixture__team--home {
-  margin: 0 15px 0 auto;
-  text-align: right; }
-
-.fixture__team--away {
-  margin: 0 auto 0 15px; }
-
-.fixture__predictions {
-  display: flex;
-  align-items: center; }
-
-.star {
-  background: #fff;
-  padding: 0;
-  margin: 0;
+.header__logout button {
   border: 0;
-  line-height: 0;
-  cursor: pointer; }
+  border-bottom: 3px solid #252322;
+  margin: 0 15px -3px 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fbfbfb;
+  background: transparent;
+  padding: 0;
+  font-weight: 700;
+  display: block; }
+  .header__logout button:hover {
+    border-bottom: 3px solid; }
