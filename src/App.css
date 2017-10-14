@@ -804,3 +804,49 @@ body {
   .fixture__state svg {
     fill: #333399;
     margin: 0; }
+
+.stats {
+  margin: 0 0 30px; }
+  @media (min-width: 768px) {
+    .stats {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 0 60px; } }
+
+.stats__points {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 0 15px 15px; }
+  @media (min-width: 768px) {
+    .stats__points {
+      margin: 0 15px 0 0;
+      align-items: center;
+      margin: 0 15px 15px 0; } }
+
+.stats__point {
+  font-size: 48px;
+  font-weight: 700; }
+
+.stats__charts {
+  margin: 0 0 0 15px;
+  display: flex; }
+
+.stats__chart {
+  display: flex;
+  align-items: center; }
+
+.stats__label {
+  margin: 0 15px 0 0;
+  padding: 5px 0;
+  border-bottom: 1px solid #fbfbfb; }
+
+.stats__bars {
+  min-width: 200px; }
+
+.stats__bar {
+  background: #333399;
+  color: #fbfbfb;
+  padding: 5px 5px 5px 10px;
+  border-bottom: 1px solid; }
