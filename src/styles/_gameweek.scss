@@ -17,12 +17,14 @@
 
 .gameweek__previous {
   button {
+    cursor: pointer;
     @include button-label();
   }
 }
 
 .gameweek__next {
   button {
+    cursor: pointer;
     @include button-label();
   }
 }

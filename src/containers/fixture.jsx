@@ -140,7 +140,7 @@ export default class Fixture extends Component<void, Props, State> {
             <div className="fixture__update">
             {
               this.props.prediction.points !== undefined 
-                ? <div className="fixture__points">Points: {this.props.prediction.points}</div> 
+                ? <div className="fixture__points">{this.props.prediction.points}</div> 
                 : this.state.modified
                   ? warningIcon()
                   : this.props.hasSubmittedPredictions 

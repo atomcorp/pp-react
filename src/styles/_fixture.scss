@@ -36,8 +36,8 @@
   width: 36px;
   height: 36px;
   text-align: center;
-  border: 1px solid $primary-colour;
-  color: $primary-colour;
+  border: 1px solid $system-colour;
+  color: $system-colour;
   font-weight: 700;
   @include responsive($small) {
     width: 60px;
@@ -98,9 +98,16 @@
 
 .fixture__state {
   @include info();
+  font-size: initial;
   margin: 0 0 0 auto;
   svg {
+    font-size: 36px;
     fill: $primary-colour;
     margin: 0;
   }
+}
+
+.fixture__points {
+  font-size: 24px;
+  font-weight: 700;
 }

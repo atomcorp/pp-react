@@ -407,7 +407,7 @@ template {
 body {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 18px;
-  color: #333399; }
+  color: #333; }
 
 .header {
   background: #252322;
@@ -662,6 +662,7 @@ body {
   margin: 0 0 30px; }
 
 .gameweek__previous button {
+  cursor: pointer;
   background: none;
   border: 0;
   color: inherit;
@@ -671,6 +672,7 @@ body {
       font-size: 36px; } }
 
 .gameweek__next button {
+  cursor: pointer;
   background: none;
   border: 0;
   color: inherit;
@@ -750,8 +752,8 @@ body {
   width: 36px;
   height: 36px;
   text-align: center;
-  border: 1px solid #333399;
-  color: #333399;
+  border: 1px solid #333;
+  color: #333;
   font-weight: 700; }
   @media (min-width: 768px) {
     .fixture__input {
@@ -800,10 +802,16 @@ body {
 .fixture__state {
   align-self: center;
   font-size: 36px;
+  font-size: initial;
   margin: 0 0 0 auto; }
   .fixture__state svg {
+    font-size: 36px;
     fill: #333399;
     margin: 0; }
+
+.fixture__points {
+  font-size: 24px;
+  font-weight: 700; }
 
 .stats {
   margin: 0 0 30px; }
@@ -812,7 +820,7 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin: 0 0 60px; } }
+      margin: 0 0 45px; } }
 
 .stats__points {
   display: flex;
@@ -846,7 +854,21 @@ body {
   min-width: 200px; }
 
 .stats__bar {
-  background: #333399;
   color: #fbfbfb;
-  padding: 5px 5px 5px 10px;
-  border-bottom: 1px solid; }
+  border-bottom: 1px solid;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  text-align: right; }
+  .stats__bar.stats__bar--great {
+    background: #ffcb2c; }
+  .stats__bar.stats__bar--good {
+    background: #729871; }
+  .stats__bar.stats__bar--ok {
+    background: #cc6633; }
+  .stats__bar.stats__bar--bad {
+    background: #cc3340; }
+  .stats__bar[data-bar="0"] {
+    color: #333; }
+  .stats__bar span {
+    padding: 0 0 0 5px; }

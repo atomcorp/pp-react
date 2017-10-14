@@ -31,18 +31,18 @@ export default function Stats(props) {
           </div>
         </div>
         <div className="stats__bars">
-          <div className="stats__bar" data-bar="{breakdown['star']}" style={{width: breakdown['star'] * 100 + '%'}}>
-            {breakdown['star']}
+          <div className="stats__bar stats__bar--great" data-bar={breakdown['star']} style={{width: breakdown['star'] * 100 + '%'}}>
+            <span>{breakdown['star']}</span>
           </div>
 
-          <div className="stats__bar" data-bar="{breakdown['3']}" style={{width: breakdown['3'] / matches * 100 + '%'}}>
-            {breakdown['3']}
+          <div className="stats__bar stats__bar--good" data-bar={breakdown['3']} style={{width: breakdown['3'] / matches * 100 + '%'}}>
+            <span>{breakdown['3']}</span>
           </div>
-          <div className="stats__bar" data-bar="{breakdown['1']}" style={{width: breakdown['1'] / matches * 100 + '%'}}>
-            {breakdown['1']}
+          <div className="stats__bar stats__bar--ok" data-bar={breakdown['1']} style={{width: breakdown['1'] / matches * 100 + '%'}}>
+            <span>{breakdown['1']}</span>
           </div>
-          <div className="stats__bar" data-bar="{breakdown['0']}" style={{width: breakdown['0'] / matches * 100 + '%'}}>
-            {breakdown['0']}
+          <div className="stats__bar stats__bar--bad" data-bar={breakdown['0']} style={{width: breakdown['0'] / matches * 100 + '%'}}>
+            <span>{breakdown['0']}</span>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 0 60px;
+    margin: 0 0 45px;
   }
 }
 
@@ -46,8 +46,28 @@
 }
 
 .stats__bar {
-  background: $primary-colour;
   color: $primary-contrast;
-  padding: 5px 5px 5px 10px;
   border-bottom: 1px solid;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  &.stats__bar--great {
+    background: $great-colour;
+  }
+  &.stats__bar--good {
+    background: $good-colour;
+  }
+  &.stats__bar--ok {
+    background: $ok-colour;
+  }
+  &.stats__bar--bad {
+    background: $bad-colour;
+  }
+  &[data-bar="0"] {
+    color: $system-colour;
+  }
+  span {
+    padding: 0 0 0 5px;
+  }
 }
