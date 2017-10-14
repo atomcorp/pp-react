@@ -1,0 +1,75 @@
+.fixture {
+  display: flex;
+  align-content: center;
+  margin: 0 0 30px;
+}
+
+.fixture__date {
+  text-align: center;
+  margin: 0 0 15px;
+}
+
+.fixture__match {
+  flex: 1 0 auto;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  input {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border: 1px solid $primary-colour;
+    color: $primary-colour;
+    font-weight: 700;
+  }
+}
+
+@mixin team() {
+  width: 40%;
+  align-self: center;
+  font-size: 24px;
+}
+
+.fixture__home {
+  @include team();
+  text-align: right;
+}
+
+.fixture__away {
+  @include team();
+}
+
+.fixture__predictions {
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+  text-align: center;
+}
+
+.fixture__colon {
+    margin: 0 5px;
+}
+
+@mixin info() {
+  align-self: center;
+  font-size: 36px;
+}
+
+.fixture__star {
+  @include info();
+  button {
+    background: none;
+    border: 0;
+    color: inherit; 
+  }
+  svg {
+    fill: $primary-colour;
+  }
+}
+
+.fixture__state {
+  @include info();  
+  svg {
+    fill: $primary-colour;
+  }
+}

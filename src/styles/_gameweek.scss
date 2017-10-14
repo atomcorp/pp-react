@@ -1,0 +1,33 @@
+.gameweek {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 30px;
+}
+
+@mixin button-label() {
+  background: none;
+  border: 0;
+  color: inherit; 
+  font-size: 36px;
+}
+
+.gameweek__previous {
+  button {
+    @include button-label();
+  }
+}
+
+.gameweek__next {
+  button {
+    @include button-label();
+  }
+}
+
+.gameweek__current {
+  font-size: 72px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0 15px;
+  text-transform: uppercase;
+}

@@ -405,7 +405,7 @@ template {
   display: none; }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 18px;
   color: #333399; }
 
@@ -483,6 +483,7 @@ body {
     justify-content: flex-end; } }
 
 .header__logout button {
+  font-family: "Source Sans Pro", sans-serif;
   border: 0;
   border-bottom: 3px solid #252322;
   margin: 0 15px -3px 0;
@@ -584,3 +585,114 @@ body {
   width: 55px;
   text-align: center;
   font-size: 24px; }
+
+.game {
+  padding: 30px;
+  margin: 0 auto;
+  max-width: 90rem; }
+
+.gameweek {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 30px; }
+
+.gameweek__previous button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font-size: 36px; }
+
+.gameweek__next button {
+  background: none;
+  border: 0;
+  color: inherit;
+  font-size: 36px; }
+
+.gameweek__current {
+  font-size: 72px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0 15px;
+  text-transform: uppercase; }
+
+.fixtures__submit {
+  text-align: center; }
+  .fixtures__submit input {
+    font-size: 24px;
+    text-transform: uppercase;
+    padding: 12px 30px;
+    background: #fff;
+    border-radius: 4px;
+    border: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    border: 1px solid #333399;
+    color: #333399;
+    cursor: pointer; }
+    .fixtures__submit input:hover {
+      background: #333399;
+      color: #fbfbfb; }
+
+.fixtures {
+  margin: 0 0 60px;
+  padding: 30px;
+  background: #fff;
+  box-shadow: 0px 3px 10px rgba(51, 51, 51, 0.23); }
+
+.fixture {
+  display: flex;
+  align-content: center;
+  margin: 0 0 30px; }
+
+.fixture__date {
+  text-align: center;
+  margin: 0 0 15px; }
+
+.fixture__match {
+  flex: 1 0 auto;
+  display: flex;
+  align-content: center;
+  justify-content: center; }
+  .fixture__match input {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    border: 1px solid #333399;
+    color: #333399;
+    font-weight: 700; }
+
+.fixture__home {
+  width: 40%;
+  align-self: center;
+  font-size: 24px;
+  text-align: right; }
+
+.fixture__away {
+  width: 40%;
+  align-self: center;
+  font-size: 24px; }
+
+.fixture__predictions {
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+  text-align: center; }
+
+.fixture__colon {
+  margin: 0 5px; }
+
+.fixture__star {
+  align-self: center;
+  font-size: 36px; }
+  .fixture__star button {
+    background: none;
+    border: 0;
+    color: inherit; }
+  .fixture__star svg {
+    fill: #333399; }
+
+.fixture__state {
+  align-self: center;
+  font-size: 36px; }
+  .fixture__state svg {
+    fill: #333399; }

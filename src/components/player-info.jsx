@@ -20,7 +20,7 @@ export default function Player(props: Props) {
         <div className="player__stats">  
           <div className="player__points">
             <div className="player__total">{ props.player.lastWeeksPoints ? props.player.lastWeeksPoints : '-' }</div>
-            <div>Last weeks points</div>
+            <div>Last week</div>
           </div>
           <div className="player__points">
             <div className="player__total">{props.player.points}</div>
@@ -29,8 +29,8 @@ export default function Player(props: Props) {
         </div>
         <div className="player__status">
           <div className="player__gameweek">
-            <div className="player__label">Active game week</div>
-            <div className="player__points">{props.gameData.gameweek}</div>
+            <div className="player__week">Active game week</div>
+            <div className="player__inplay">{props.gameData.gameweek}</div>
           </div>
         </div>
       </div>

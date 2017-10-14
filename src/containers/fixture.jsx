@@ -72,22 +72,22 @@ export default class Fixture extends Component<void, Props, State> {
   // and print the tds 
   render() {
     return (
-      <div className="fixture__container">
+      <section>
+        <div className="fixture__date">{formatDate(this.props.fixture.date)}</div>
         <div className="fixture">
-          <div className="fixture__date">{formatDate(this.props.fixture.date)}</div>
+          <div className="fixture__star">          
+            {
+               this.props.canPredict
+                ? (<button className="star" onClick={() => this.props.setStar(this.props.id)}>
+                    <div className="star__icon">
+                      {this.props.prediction.star ? starFilled() : starUnfilled()}
+                    </div> 
+                  </button>)
+                : (this.props.prediction.star ? starFilled() : starUnfilled())
+            }
+          </div>
           <div className="fixture__match">
-            <div className="fixture__star">          
-              {
-                 this.props.canPredict
-                  ? (<button className="star" onClick={() => this.props.setStar(this.props.id)}>
-                      <div className="star__icon">
-                        {this.props.prediction.star ? starFilled() : starUnfilled()}
-                      </div> 
-                    </button>)
-                  : (this.props.prediction.star ? starFilled() : starUnfilled())
-              }
-            </div>
-            <div className="fixture__team fixture__team--home">{this.props.fixture.homeTeamName}</div>
+            <div className="fixture__home">{this.props.fixture.homeTeamName}</div>
             <div className="fixture__scores">
               {
                 this.props.fixture.status === 'FINISHED' 
@@ -129,24 +129,23 @@ export default class Fixture extends Component<void, Props, State> {
                 : null
               }
             </div>
-            <div className="fixture__team fixture__team--away">{this.props.fixture.awayTeamName}</div>
+            <div className="fixture__away">{this.props.fixture.awayTeamName}</div>
           </div>
-      </div>
-      <div className="fixture__info">
-        
-        <div className="fixture__update">
-        {
-          this.props.prediction.points !== undefined 
-            ? <div className="fixture__points">Points: {this.props.prediction.points}</div> 
-            : this.state.modified
-              ? <div>!</div>
-              : this.props.hasSubmittedPredictions 
-                ? <div>✔</div> 
-                : <div>✘</div> 
-        }
+          <div className="fixture__state">
+            <div className="fixture__update">
+            {
+              this.props.prediction.points !== undefined 
+                ? <div className="fixture__points">Points: {this.props.prediction.points}</div> 
+                : this.state.modified
+                  ? warningIcon()
+                  : this.props.hasSubmittedPredictions 
+                    ? okIcon()
+                    : errorIcon()
+            }
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
+      </section>
     );
   }
 }
@@ -162,6 +161,20 @@ weekday[4] = "Thursday";
 weekday[5] = "Friday";
 weekday[6] = "Saturday";
 
+const monthName = new Array(12);
+monthName[0] =  "January";
+monthName[1] = "February";
+monthName[2] = "March";
+monthName[3] = "April";
+monthName[4] = "May";
+monthName[5] = "June";
+monthName[6] = "July";
+monthName[7] = "August";
+monthName[8] = "September";
+monthName[9] = "October";
+monthName[10] = "November";
+monthName[11] = "December";
+
 let isUnique = true;
 
 // should probablt do all this on submit
@@ -170,9 +183,10 @@ function formatDate(day: string): string {
   formattedTime = new Date(formattedTime * 1000);
   const dayOfTheWeek = weekday[formattedTime.getDay()];
   const date = formattedTime.getDate();
-  const month = formattedTime.getMonth();
+  const month = monthName[formattedTime.getMonth()];
   const minutes = formatMinutes(formattedTime);
-  const formattedDate = `${dayOfTheWeek} ${date}/${month} ${formattedTime.getHours()}:${minutes}`;
+  // const formattedDate = `${dayOfTheWeek} ${date}/${month} ${formattedTime.getHours()}:${minutes}`;
+  const formattedDate = `${dayOfTheWeek} ${date} ${month}`;
   if (isUnique && isUnique !== formattedDate) {
     isUnique = formattedDate;
     return formattedDate;
@@ -215,3 +229,30 @@ const starFilled = () => {
         <path d="M0 0h24v24H0z" fill="none"/>
     </svg>)
 };
+
+const warningIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M12 7.77L18.39 18H5.61L12 7.77M12 4L2 20h20L12 4z"/>
+        <path d="M0 0h24v24H0V0z" fill="none"/>
+    </svg>
+  );
+}
+
+const okIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+    </svg>
+  );
+}
+
+const errorIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="24" viewBox="0 0 24 24" width="24">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+  );
+}

@@ -188,10 +188,30 @@ export default class FixtureList extends Component<void, Props, State> {
       breakdown = breakDownPredictionResults(this.state.predictions);
     }
     return (
-      <div className="predictions__container">
-        <div className="predictions__header">
-          <div className="predictions__gameweek">
-            Game week {this.state.gameweekInView}
+      <div className="game">
+        <div className="game__header">
+          <div className="gameweek">
+            {
+              this.state.gameweekInView > 1 
+              ? (
+                  <div className="gameweek__previous">
+                    <button aria-label="Previous week" type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView - 1)}>◀</button>
+                  </div>
+                )
+              : null 
+            }
+            <div className="gameweek__current">
+              Game week {this.state.gameweekInView}
+            </div>
+            {
+              this.state.gameweekInView < this.props.gameData.gameweek
+              ? (
+                  <div className="gameweek__next">
+                    <button aria-label="Next week" type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)}>▶</button>
+                  </div>
+                )
+              : null 
+            }
           </div>
           {
             this.state.predictionResult !== null
@@ -203,51 +223,30 @@ export default class FixtureList extends Component<void, Props, State> {
                   <div className="predictions__totals"></div>
                 </div>
               )
-            : (<div>No results yet</div>)
+            : null
           }
         </div>
-        <div className="predictions">
-          <form action="prediction" onSubmit={this.onPredictionSubmit} className="fixtures">
-            {fixtureElements}
-            {
-              this.state.canPredict 
-              ? (
-                <div className="predictions__submit">
-                  <button type="submit">Submit</button>
-                </div>
-              )
-              : <div>Can't submit anymore</div>
-            }
-          </form>
-          <div className="predictions__week-choice">
-            {
-              this.state.gameweekInView > 1 
-              ? (
-                  <div className="predictions__prev">
-                    <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView - 1)}>Previous week</button>
-                  </div>
-                )
-              : null 
-            }
-            {
-              this.state.gameweekInView < this.props.gameData.gameweek + 1
-              ? (
-                  <div className="predictions__next">
-                    <button type="button" onClick={(event) => this.handleWeekChange(event, this.state.gameweekInView + 1)}>Next week</button>
-                  </div>
-                )
-              : null 
-            }
-          </div>
-          {this.state.predictionSubmitError
-            ?  (<div>There was an error submitting your predictions, please make sure each team has been predicted</div>)
-            : (<div></div>)
+        <form action="prediction" onSubmit={this.onPredictionSubmit} className="fixtures">
+          {fixtureElements}
+          {
+            this.state.canPredict 
+            ? (
+              <div className="predictions__submit">
+                <button type="submit">Submit</button>
+              </div>
+            )
+            : <div>Can't submit anymore</div>
           }
-          {this.state.hasEditedPrediction
-            ?  (<div>You've made a change</div>)
-            : (<div>No changes</div>)
-          }
-        </div>
+        </form>
+
+        {this.state.predictionSubmitError
+          ?  (<div>There was an error submitting your predictions, please make sure each team has been predicted</div>)
+          : (<div></div>)
+        }
+        {this.state.hasEditedPrediction
+          ?  (<div>You've made a change</div>)
+          : (<div>No changes</div>)
+        }
       </div>
     );
   }

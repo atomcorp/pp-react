@@ -66,7 +66,7 @@ export default class Game extends Component<void, Props, State> {
       return <div>Loading fixtures...</div>;
     }
     return (
-      <div className="game">
+      <section className="main">
         <Player 
           gameData={this.props.gameData}
           player={this.props.player}
@@ -78,7 +78,7 @@ export default class Game extends Component<void, Props, State> {
           predictions={this.state.predictions} 
           submitPredictions={this.submitPredictions} 
         />
-      </div>
+      </section>
     );
   }
 

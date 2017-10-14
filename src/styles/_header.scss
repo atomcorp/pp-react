@@ -25,10 +25,10 @@
 .header__container {
   @include responsive($small) {
     display: flex;
-      align-items: center;
-      padding: 15px 30px;
-      margin: 0 auto;
-      max-width: 90rem;
+    align-items: center;
+    padding: 15px 30px;
+    margin: 0 auto;
+    max-width: 90rem;
   }
 }
 
@@ -90,6 +90,7 @@
 
 .header__logout {
   button {
+    font-family: $primary-font;
     // border 0 cancels browser default border before we reset it
     border: 0;
     @include header-link();
