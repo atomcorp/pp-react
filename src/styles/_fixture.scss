@@ -1,33 +1,56 @@
 .fixture {
   display: flex;
+  flex-wrap: wrap;
   align-content: center;
-  margin: 0 0 30px;
+  padding: 0 0 30px;
+  border-bottom: 1px solid #eee;
+  @include responsive($small) {
+    flex-wrap: nowrap;
+    border-bottom: 0;
+  }
 }
 
 .fixture__date {
   text-align: center;
-  margin: 0 0 15px;
+  padding: 15px 0 0;
+  font-weight: 700;
+  @include responsive($small) {
+    padding: 15px 0;
+    font-weight: 400;
+  }
 }
 
 .fixture__match {
-  flex: 1 0 auto;
   display: flex;
   align-content: center;
   justify-content: center;
-  input {
+  order: 1;
+  flex: 1 0 100%;
+  @include responsive($small) {
+    flex: 1 0 auto;
+    order: initial;
+  }
+}
+
+.fixture__input {
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  border: 1px solid $primary-colour;
+  color: $primary-colour;
+  font-weight: 700;
+  @include responsive($small) {
     width: 60px;
     height: 60px;
-    text-align: center;
-    border: 1px solid $primary-colour;
-    color: $primary-colour;
-    font-weight: 700;
   }
 }
 
 @mixin team() {
   width: 40%;
   align-self: center;
-  font-size: 24px;
+  @include responsive($small) {
+    font-size: 24px;
+  }
 }
 
 .fixture__home {
@@ -37,6 +60,11 @@
 
 .fixture__away {
   @include team();
+}
+
+.fixture__scores {
+  display: flex;
+  align-items: center;
 }
 
 .fixture__predictions {
@@ -61,6 +89,7 @@
     background: none;
     border: 0;
     color: inherit; 
+    padding: 0;
   }
   svg {
     fill: $primary-colour;
@@ -68,8 +97,10 @@
 }
 
 .fixture__state {
-  @include info();  
+  @include info();
+  margin: 0 0 0 auto;
   svg {
     fill: $primary-colour;
+    margin: 0;
   }
 }

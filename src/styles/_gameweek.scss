@@ -9,7 +9,10 @@
   background: none;
   border: 0;
   color: inherit; 
-  font-size: 36px;
+  font-size: 24px;
+  @include responsive($small) {
+    font-size: 36px;
+  }
 }
 
 .gameweek__previous {
@@ -25,9 +28,12 @@
 }
 
 .gameweek__current {
-  font-size: 72px;
+  font-size: 24px;
   text-align: center;
   font-weight: 700;
   margin: 0 15px;
   text-transform: uppercase;
+  @include responsive($small) {
+    font-size: 72px;
+  }
 }

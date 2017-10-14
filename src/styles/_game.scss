@@ -1,6 +1,9 @@
 .game {
-  padding: 30px;
+  padding: 15px 0;
   margin: 0 auto;
   max-width: 90rem;
+  @include responsive($small) {
+    padding: 30px;
+  }
 }
 

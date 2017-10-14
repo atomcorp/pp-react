@@ -71,9 +71,14 @@ export default class Fixture extends Component<void, Props, State> {
   // take 2 team names
   // and print the tds 
   render() {
+    const fixtureData = formatDate(this.props.fixture.date);
     return (
       <section>
-        <div className="fixture__date">{formatDate(this.props.fixture.date)}</div>
+        { 
+          fixtureData
+          ? <div className="fixture__date">{fixtureData}</div>
+          : null
+        }
         <div className="fixture">
           <div className="fixture__star">          
             {

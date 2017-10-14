@@ -431,7 +431,8 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
-  letter-spacing: 3px; }
+  letter-spacing: 3px;
+  padding: 15px; }
   @media (min-width: 768px) {
     .header__logo {
       width: 33%; } }
@@ -448,10 +449,11 @@ body {
     display: inline-block; }
   @media (min-width: 768px) {
     .header__logo {
-      order: 2; } }
+      order: 2;
+      padding: 0; } }
 
 .header__navigation {
-  display: flex;
+  display: none;
   list-style: none;
   padding: 0;
   margin: 0; }
@@ -460,6 +462,7 @@ body {
       width: 33%; } }
   @media (min-width: 768px) {
     .header__navigation {
+      display: flex;
       order: 1; } }
 
 .header__link {
@@ -482,20 +485,25 @@ body {
     display: flex;
     justify-content: flex-end; } }
 
-.header__logout button {
-  font-family: "Source Sans Pro", sans-serif;
-  border: 0;
-  border-bottom: 3px solid #252322;
-  margin: 0 15px -3px 0;
-  cursor: pointer;
-  text-decoration: none;
-  color: #fbfbfb;
-  background: transparent;
-  padding: 0;
-  font-weight: 700;
-  display: block; }
-  .header__logout button:hover {
-    border-bottom: 3px solid; }
+.header__logout {
+  display: none; }
+  .header__logout button {
+    font-family: "Source Sans Pro", sans-serif;
+    border: 0;
+    border-bottom: 3px solid #252322;
+    margin: 0 15px -3px 0;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fbfbfb;
+    background: transparent;
+    padding: 0;
+    font-weight: 700;
+    display: block; }
+    .header__logout button:hover {
+      border-bottom: 3px solid; }
+  @media (min-width: 768px) {
+    .header__logout {
+      display: block; } }
 
 .player {
   background: #333399;
@@ -503,93 +511,149 @@ body {
   box-shadow: 0px 3px 10px rgba(51, 51, 51, 0.23); }
 
 .player__container {
+  margin: 0 auto;
+  max-width: 90rem;
+  padding: 15px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 60px 30px;
-  margin: 0 auto;
-  max-width: 90rem; }
+  flex-wrap: wrap; }
+  @media (min-width: 768px) {
+    .player__container {
+      padding: 60px 30px;
+      justify-content: space-between;
+      flex-wrap: nowrap; } }
 
 .player__stats {
-  display: flex;
-  justify-content: center; }
+  display: flex; }
   @media (min-width: 768px) {
     .player__stats {
       width: 33%; } }
+  @media (min-width: 768px) {
+    .player__stats {
+      justify-content: center; } }
 
 .player__points {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0 5px; }
+  margin: 0 15px 0 0; }
+  @media (min-width: 768px) {
+    .player__points {
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 5px;
+      margin: 0; } }
 
 .player__total {
-  font-size: 48px;
+  font-size: 28px;
   font-weight: 700;
-  margin: 0 0 5px; }
+  margin: 0 5px 5px 0; }
+  @media (min-width: 768px) {
+    .player__total {
+      font-size: 48px;
+      margin: 0 0 5px; } }
 
-@media (min-width: 768px) {
-  .player__personal {
-    width: 33%; } }
+.player__personal {
+  margin: 0 0 5px;
+  flex: 1 0 100%; }
+  @media (min-width: 768px) {
+    .player__personal {
+      margin: 0;
+      flex: 1 0 auto; } }
+  @media (min-width: 768px) {
+    .player__personal {
+      width: 33%; } }
 
 .player__team {
-  font-size: 48px;
   font-weight: 700;
-  margin: 0 0 5px; }
+  margin: 0 0 5px;
+  font-size: 28px; }
+  @media (min-width: 768px) {
+    .player__team {
+      font-size: 48px; } }
 
 .player__manager span {
   font-weight: 700; }
 
 .player__status {
-  display: flex;
-  justify-content: flex-end; }
+  display: flex; }
   @media (min-width: 768px) {
     .player__status {
       width: 33%; } }
+  @media (min-width: 768px) {
+    .player__status {
+      justify-content: flex-end; } }
 
 .player__gameweek {
   display: flex;
   justify-content: flex-end; }
 
 .player__week {
-  padding: 15px;
-  align-self: center; }
+  padding: 5px;
+  align-self: center;
+  order: 2; }
+  @media (min-width: 768px) {
+    .player__week {
+      padding: 15px; } }
+  @media (min-width: 768px) {
+    .player__week {
+      order: 1; } }
 
 .player__inplay {
   align-self: center;
-  padding: 15px;
-  background: #fbfbfb;
-  color: #333399;
+  padding: 0;
   font-weight: 700;
   text-transform: uppercase;
-  width: 55px;
   text-align: center;
-  font-size: 24px; }
+  font-size: 28px;
+  margin: 0 5px 5px 0;
+  order: 1; }
+  @media (min-width: 768px) {
+    .player__inplay {
+      background: #fbfbfb;
+      color: #333399;
+      min-width: 55px;
+      padding: 15px;
+      font-size: 24px;
+      margin: 0; } }
+  @media (min-width: 768px) {
+    .player__inplay {
+      order: 2; } }
 
 .player__predictions {
   display: flex;
   justify-content: flex-end; }
 
 .player__prediction {
-  padding: 15px;
+  padding: 5px;
   align-self: center; }
+  @media (min-width: 768px) {
+    .player__prediction {
+      padding: 15px; } }
 
 .player__added {
   align-self: center;
-  padding: 15px;
-  background: #fbfbfb;
-  color: #333399;
+  padding: 0;
   font-weight: 700;
   text-transform: uppercase;
-  width: 55px;
   text-align: center;
-  font-size: 24px; }
+  font-size: 28px;
+  margin: 0 5px 5px 0; }
+  @media (min-width: 768px) {
+    .player__added {
+      background: #fbfbfb;
+      color: #333399;
+      min-width: 55px;
+      padding: 15px;
+      font-size: 24px;
+      margin: 0; } }
 
 .game {
-  padding: 30px;
+  padding: 15px 0;
   margin: 0 auto;
   max-width: 90rem; }
+  @media (min-width: 768px) {
+    .game {
+      padding: 30px; } }
 
 .gameweek {
   display: flex;
@@ -601,76 +665,117 @@ body {
   background: none;
   border: 0;
   color: inherit;
-  font-size: 36px; }
+  font-size: 24px; }
+  @media (min-width: 768px) {
+    .gameweek__previous button {
+      font-size: 36px; } }
 
 .gameweek__next button {
   background: none;
   border: 0;
   color: inherit;
-  font-size: 36px; }
+  font-size: 24px; }
+  @media (min-width: 768px) {
+    .gameweek__next button {
+      font-size: 36px; } }
 
 .gameweek__current {
-  font-size: 72px;
+  font-size: 24px;
   text-align: center;
   font-weight: 700;
   margin: 0 15px;
   text-transform: uppercase; }
+  @media (min-width: 768px) {
+    .gameweek__current {
+      font-size: 72px; } }
 
 .fixtures__submit {
-  text-align: center; }
-  .fixtures__submit input {
-    font-size: 24px;
+  text-align: center;
+  padding: 15px 0 0; }
+  .fixtures__submit button {
+    font-weight: 700;
     text-transform: uppercase;
     padding: 12px 30px;
     background: #fff;
-    border-radius: 4px;
     border: 0;
     font-family: 'Source Sans Pro', sans-serif;
     border: 1px solid #333399;
     color: #333399;
     cursor: pointer; }
-    .fixtures__submit input:hover {
+    .fixtures__submit button:hover {
       background: #333399;
       color: #fbfbfb; }
 
 .fixtures {
   margin: 0 0 60px;
-  padding: 30px;
+  padding: 15px;
   background: #fff;
   box-shadow: 0px 3px 10px rgba(51, 51, 51, 0.23); }
+  @media (min-width: 768px) {
+    .fixtures {
+      padding: 30px; } }
 
 .fixture {
   display: flex;
+  flex-wrap: wrap;
   align-content: center;
-  margin: 0 0 30px; }
+  padding: 0 0 30px;
+  border-bottom: 1px solid #eee; }
+  @media (min-width: 768px) {
+    .fixture {
+      flex-wrap: nowrap;
+      border-bottom: 0; } }
 
 .fixture__date {
   text-align: center;
-  margin: 0 0 15px; }
+  padding: 15px 0 0;
+  font-weight: 700; }
+  @media (min-width: 768px) {
+    .fixture__date {
+      padding: 15px 0;
+      font-weight: 400; } }
 
 .fixture__match {
-  flex: 1 0 auto;
   display: flex;
   align-content: center;
-  justify-content: center; }
-  .fixture__match input {
-    width: 60px;
-    height: 60px;
-    text-align: center;
-    border: 1px solid #333399;
-    color: #333399;
-    font-weight: 700; }
+  justify-content: center;
+  order: 1;
+  flex: 1 0 100%; }
+  @media (min-width: 768px) {
+    .fixture__match {
+      flex: 1 0 auto;
+      order: initial; } }
+
+.fixture__input {
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  border: 1px solid #333399;
+  color: #333399;
+  font-weight: 700; }
+  @media (min-width: 768px) {
+    .fixture__input {
+      width: 60px;
+      height: 60px; } }
 
 .fixture__home {
   width: 40%;
   align-self: center;
-  font-size: 24px;
   text-align: right; }
+  @media (min-width: 768px) {
+    .fixture__home {
+      font-size: 24px; } }
 
 .fixture__away {
   width: 40%;
-  align-self: center;
-  font-size: 24px; }
+  align-self: center; }
+  @media (min-width: 768px) {
+    .fixture__away {
+      font-size: 24px; } }
+
+.fixture__scores {
+  display: flex;
+  align-items: center; }
 
 .fixture__predictions {
   display: flex;
@@ -687,12 +792,15 @@ body {
   .fixture__star button {
     background: none;
     border: 0;
-    color: inherit; }
+    color: inherit;
+    padding: 0; }
   .fixture__star svg {
     fill: #333399; }
 
 .fixture__state {
   align-self: center;
-  font-size: 36px; }
+  font-size: 36px;
+  margin: 0 0 0 auto; }
   .fixture__state svg {
-    fill: #333399; }
+    fill: #333399;
+    margin: 0; }

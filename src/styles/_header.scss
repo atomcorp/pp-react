@@ -44,6 +44,7 @@
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 3px;
+  padding: 15px;
   a {
     text-decoration: none;
     color: $header-text;
@@ -60,16 +61,18 @@
   }
   @include responsive($small) {
     order: 2;
+    padding: 0;
   }
 }
 
 .header__navigation {
-  @include header-section();
-  display: flex;
+  display: none;
   list-style: none;
   padding: 0;
   margin: 0;
+  @include header-section();
   @include responsive($small) {
+    display: flex;
     order: 1;
   }
 }
@@ -89,6 +92,7 @@
 }
 
 .header__logout {
+  display: none;
   button {
     font-family: $primary-font;
     // border 0 cancels browser default border before we reset it
@@ -97,6 +101,9 @@
     background: transparent;
     padding: 0;
     font-weight: 700;
+    display: block;
+  }
+  @include responsive($small) {
     display: block;
   }
 }

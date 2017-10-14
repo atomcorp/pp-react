@@ -231,7 +231,7 @@ export default class FixtureList extends Component<void, Props, State> {
           {
             this.state.canPredict 
             ? (
-              <div className="predictions__submit">
+              <div className="fixtures__submit">
                 <button type="submit">Submit</button>
               </div>
             )
