@@ -146,13 +146,15 @@ export default class FixtureList extends Component<void, Props, State> {
         }
         return data;
       }).then((data) => {
+        console.log(data[1][`gameweek${gameweek}`])
         this.setState({
           fixtures: data[0][`gameweek${gameweek}`],
           gameweekInView: gameweek,
           predictions: data[1][`gameweek${gameweek}`],
           canPredict: canPredictHelper(gameweek, this.props.gameData.gameweek, this.props.gameData.canPredict),
           predictionResult: data[2] ? data[2] : null,
-          hasEditedPrediction: false
+          hasEditedPrediction: false,
+          hasSubmittedPredictions: arePredictionsValid(data[1][`gameweek${gameweek}`])
         })
       })
     }
