@@ -2,11 +2,23 @@
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  padding: 0 0 30px;
+  padding: 15px 0 15px;
   border-bottom: 1px solid #eee;
   @include responsive($small) {
     flex-wrap: nowrap;
     border-bottom: 0;
+  }
+  &.fixture--lost {
+    background: rgba($bad-colour, 0.4);
+  }
+  &.fixture--draw {
+    background: rgba($ok-colour, 0.4);
+  }
+  &.fixture--win {
+    background: rgba($good-colour, 0.4);
+  }
+  &.fixture--star {
+    background: rgba($great-colour, 0.4);
   }
 }
 
@@ -15,7 +27,7 @@
   padding: 15px 0 0;
   font-weight: 700;
   @include responsive($small) {
-    padding: 15px 0;
+    padding: 15px 0 0;
     font-weight: 400;
   }
 }
@@ -83,7 +95,7 @@
   @include responsive($small) {
     order: initial;
     flex: 1 0 auto;
-    margin: 0 15px;
+    margin: 0 5px;
   }
 }
 
@@ -91,9 +103,10 @@
   order: 2;
   font-weight: 700;
   margin: 0 15px;
-  font-size: 24px;
   @include responsive($small) {
     order: initial;
+    margin: 0 7.5px;
+    font-size: 24px;
   }
   &.fixture__result--lost {
     color: $bad-colour;

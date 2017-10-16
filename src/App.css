@@ -738,12 +738,20 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  padding: 0 0 30px;
+  padding: 15px 0 15px;
   border-bottom: 1px solid #eee; }
   @media (min-width: 768px) {
     .fixture {
       flex-wrap: nowrap;
       border-bottom: 0; } }
+  .fixture.fixture--lost {
+    background: rgba(204, 51, 64, 0.4); }
+  .fixture.fixture--draw {
+    background: rgba(204, 102, 51, 0.4); }
+  .fixture.fixture--win {
+    background: rgba(114, 152, 113, 0.4); }
+  .fixture.fixture--star {
+    background: rgba(255, 203, 44, 0.4); }
 
 .fixture__date {
   text-align: center;
@@ -751,7 +759,7 @@ body {
   font-weight: 700; }
   @media (min-width: 768px) {
     .fixture__date {
-      padding: 15px 0;
+      padding: 15px 0 0;
       font-weight: 400; } }
 
 .fixture__match {
@@ -813,16 +821,17 @@ body {
     .fixture__predictions {
       order: initial;
       flex: 1 0 auto;
-      margin: 0 15px; } }
+      margin: 0 5px; } }
 
 .fixture__result {
   order: 2;
   font-weight: 700;
-  margin: 0 15px;
-  font-size: 24px; }
+  margin: 0 15px; }
   @media (min-width: 768px) {
     .fixture__result {
-      order: initial; } }
+      order: initial;
+      margin: 0 7.5px;
+      font-size: 24px; } }
   .fixture__result.fixture__result--lost {
     color: #cc3340; }
   .fixture__result.fixture__result--draw {

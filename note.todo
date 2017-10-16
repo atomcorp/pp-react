@@ -46,8 +46,13 @@ Tasks:
   ☐ rewrite Predictions.jsx, to seperate out the fixtures from the rest of the stuff, probably need to add fixture creation to fixtures.jsx
   ✔ sign in and out now offer proper validation tips and include adding team/user names @done (17-09-11 22:24)
   ☐ if you predict 4-4 and it is 4-4, get 30 points
-  ☐ Ticks reset when you go between weeks @bug @high
+  ✔ Ticks reset when you go between weeks @bug @high @done (17-10-16 23:56)
   ☐ add a loading icon for async actions @quality of life @high
+  ☐ add dropdown for menu on mobile
+  ☐ uplift has predictions changed to player section, ala 
+  ☐ do some quick designs for leagues
+  ☐ do a quick player profile page (or just hide option)
+  ☐ Do a browser test
 
 Todo:
   ✔ Get how many 3s, 1s and 0s @done (17-08-18 22:59)

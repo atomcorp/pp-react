@@ -72,7 +72,8 @@ export default class Fixture extends Component<void, Props, State> {
   // and print the tds 
   render() {
     const fixtureData = formatDate(this.props.fixture.date);
-    const pointsColour = handlePointsResultClasses(this.props.prediction.points);
+    const pointsColour = handlePointsResultClasses(this.props.prediction.points, 'fixture__result');
+    const fixtureColour = handlePointsResultClasses(this.props.prediction.points, 'fixture');
     return (
       <section>
         { 
@@ -80,7 +81,7 @@ export default class Fixture extends Component<void, Props, State> {
           ? <div className="fixture__date">{fixtureData}</div>
           : null
         }
-        <div className="fixture">
+        <div className={'fixture ' + fixtureColour}>
           <div className="fixture__star">          
             {
                this.props.canPredict
@@ -89,7 +90,7 @@ export default class Fixture extends Component<void, Props, State> {
                       {this.props.prediction.star ? starFilled() : starUnfilled()}
                     </div> 
                   </button>)
-                : (this.props.prediction.star ? starFilled() : starUnfilled())
+                : (this.props.prediction.star ? starFilled() : null)
             }
           </div>
           <div className="fixture__match">
@@ -141,7 +142,7 @@ export default class Fixture extends Component<void, Props, State> {
             <div className="fixture__update">
             {
               this.props.prediction.points !== undefined 
-                ? <div className={pointsColour}>{this.props.prediction.points}</div> 
+                ? <div className={'fixture__result ' + pointsColour}>{this.props.prediction.points}</div> 
                 : this.state.modified
                   ? warningIcon()
                   : this.props.hasSubmittedPredictions 
@@ -208,19 +209,18 @@ function formatMinutes(time: Date): string | number {
   return minutes;
 }
 
-function handlePointsResultClasses(point) {
-  let className = 'fixture__result';
+function handlePointsResultClasses(point, className) {
   if (point === 0) {
-    return className += ' fixture__result--lost';
+    return className += '--lost';
   }
   if (point === 1) {
-    return className += ' fixture__result--draw';
+    return className += '--draw';
   }
   if (point === 3) {
-    return className += ' fixture__result--win';
+    return className += '--win';
   }
   if (point === 2 || point === 6) {
-    return className += ' fixture__result--star';
+    return className += '--star';
   }
   return className;
 }
