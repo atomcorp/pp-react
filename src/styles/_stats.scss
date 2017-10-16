@@ -1,9 +1,11 @@
 .stats {
   margin: 0 0 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   @include responsive($small) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-wrap: nowrap;
     margin: 0 0 45px;
   }
 }

@@ -65,13 +65,48 @@
 .fixture__scores {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  @include responsive($small) {
+    flex-wrap: nowrap;
+  }
 }
 
 .fixture__predictions {
   display: flex;
   align-items: center;
-  margin: 0 15px;
+  justify-content: center;
+  margin: 0 15px 15px;
   text-align: center;
+  order: 1;
+  flex: 1 0 100%;
+  @include responsive($small) {
+    order: initial;
+    flex: 1 0 auto;
+    margin: 0 15px;
+  }
+}
+
+.fixture__result {
+  order: 2;
+  font-weight: 700;
+  margin: 0 15px;
+  font-size: 24px;
+  @include responsive($small) {
+    order: initial;
+  }
+  &.fixture__result--lost {
+    color: $bad-colour;
+  }
+  &.fixture__result--draw {
+    color: $ok-colour;
+  }
+  &.fixture__result--win {
+    color: $good-colour;
+  }
+  &.fixture__result--star {
+    color: $great-colour;
+  }
 }
 
 .fixture__colon {
@@ -85,6 +120,9 @@
 
 .fixture__star {
   @include info();
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
   button {
     background: none;
     border: 0;
@@ -92,7 +130,7 @@
     padding: 0;
   }
   svg {
-    fill: $primary-colour;
+    fill: $great-colour;
   }
 }
 
@@ -102,7 +140,6 @@
   margin: 0 0 0 auto;
   svg {
     font-size: 36px;
-    fill: $primary-colour;
     margin: 0;
   }
 }
@@ -110,4 +147,16 @@
 .fixture__points {
   font-size: 24px;
   font-weight: 700;
+}
+
+.ok-fill {
+  fill: $good-colour;
+}
+
+.warning-fill {
+  fill: $ok-colour;
+}
+
+.bad-fill {
+  fill: $bad-colour;
 }

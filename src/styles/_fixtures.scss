@@ -1,20 +1,36 @@
+@mixin button() {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  background: #fff;
+  border: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: 1px solid;
+}
+
 .fixtures__submit {
   text-align: center;
   padding: 15px 0 0;
   button {
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 12px 30px;
-    background: #fff;
-    border: 0;
-    font-family: 'Source Sans Pro', sans-serif;
-    border: 1px solid $primary-colour;
-    color: $primary-colour;
+    @include button();
+    color: $good-colour;
+    border-color: $good-colour;
     cursor: pointer;
     &:hover {
-      background: $primary-colour;
+      background: $good-colour;
       color: $primary-contrast;
     }
+  }
+}
+
+.fixtures__cant-submit {
+  text-align: center;
+  padding: 15px 0 0;
+  button {
+    @include button();
+    color: lighten($system-colour, 30%);
+    background: $disabled-colour;
+    border-color: $disabled-colour;
   }
 }
 

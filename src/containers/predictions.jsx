@@ -227,7 +227,7 @@ export default class FixtureList extends Component<void, Props, State> {
                 <button type="submit">Submit</button>
               </div>
             )
-            : <div>Can't submit anymore</div>
+            : <div className="fixtures__cant-submit"><button>Submit</button></div>
           }
         </form>
 
