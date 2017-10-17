@@ -1,0 +1,43 @@
+.league {
+  padding: 15px 0;
+  margin: 0 auto;
+  max-width: 90rem;
+  @include responsive($small) {
+    padding: 30px;
+  }
+}
+
+.league__header {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0 15px 30px;
+  text-transform: uppercase;
+  @include responsive($small) {
+    font-size: 72px;
+  }
+}
+
+.league__table {
+  display: flex;
+  justify-content: center;
+}
+
+.league__table {
+  th {
+    font-size: 24px;
+    padding: 15px 30px;
+    background: #fafdfa;
+  }
+  td {
+    font-size: 24px;
+    padding: 15px 30px;
+  }
+  tr {
+    td {
+      &:last-child {
+        text-align: center;
+      }
+    }
+  }
+}

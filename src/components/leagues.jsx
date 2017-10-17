@@ -1,12 +1,14 @@
 // @flow
 
 import React, {Component} from 'react';
-
+import Player from '../components/player-info.jsx';
 import {getUsers} from '../xhr-requests.js';
-import type {PlayerType} from '../types.js'; 
+import type {PlayerType, GameType} from '../types.js'; 
 
 type Props = {
-  uid: string
+  canRender: boolean,
+  player: PlayerType,
+  game: GameType
 };
 
 type State = {
@@ -25,6 +27,7 @@ export default class Leagues extends Component<void, Props, State> {
       rows: [],
       render: false
     };
+    console.log(props);
     (this:any).handlePoints = this.handlePoints.bind(this);
     (this:any).renderRow = this.renderRow.bind(this);
   }
@@ -62,7 +65,7 @@ export default class Leagues extends Component<void, Props, State> {
   renderRow(user: PlayerType) {
     return (
       <tr key={user.id} style={
-        this.props.uid === user.id ? divStyle : null
+        this.props.player.id === user.id ? divStyle : null
       }>
         <td>{user.name}</td>
         <td>{user.team}</td>
@@ -77,25 +80,36 @@ export default class Leagues extends Component<void, Props, State> {
     }
 
     return (
-      <div>
-        <h1>Total Points</h1>
-        <table className="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Team</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.rows}
-          </tbody>
-        </table>
-      </div>
+      <section className="main">
+        <Player 
+          gameData={this.props.gameData}
+          player={this.props.player}
+        />
+        <div className="league">
+          <div className="league__header">
+            Total Points
+          </div>
+          <div className="league__table">
+            <table className="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Team</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.rows}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     );
   }
 }
 
 const divStyle = {
-  color: 'blue'
+  color: '#fff',
+  background: '#729871'
 };

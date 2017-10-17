@@ -27,7 +27,7 @@ const AuthorisedLayout = (props: Props) => {
           <Profile player={props.player} />
         </Route>
         <Route path="/app/leagues">
-          <Leagues uid={props.player.id} />
+          <Leagues player={props.player} gameData={props.game} />
         </Route>
         <Route path="/app">
           <Game player={props.player} gameData={props.game} />

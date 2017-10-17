@@ -409,6 +409,44 @@ body {
   font-size: 18px;
   color: #333; }
 
+.table {
+  background-color: white;
+  color: #363636;
+  margin-bottom: 1.5rem; }
+
+.table td,
+.table th {
+  border: 1px solid #dbdbdb;
+  border-width: 0 0 1px;
+  padding: 0.5em 0.75em;
+  vertical-align: top; }
+
+.table th {
+  color: #363636;
+  text-align: left; }
+
+.table td,
+.table.is-bordered th {
+  border-width: 1px; }
+
+.table tr:last-child td,
+.table tr:last-child th {
+  border-bottom-width: 1px; }
+
+.table thead td,
+.table thead th {
+  border-width: 0 0 2px;
+  color: #363636; }
+
+.table tfoot td,
+.table tfoot th {
+  border-width: 2px 0 0;
+  color: #363636; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
 .header {
   background: #252322;
   color: #fbfbfb;
@@ -978,3 +1016,37 @@ body {
     color: #333; }
   .stats__bar span {
     padding: 0 0 0 5px; }
+
+.league {
+  padding: 15px 0;
+  margin: 0 auto;
+  max-width: 90rem; }
+  @media (min-width: 768px) {
+    .league {
+      padding: 30px; } }
+
+.league__header {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0 15px 30px;
+  text-transform: uppercase; }
+  @media (min-width: 768px) {
+    .league__header {
+      font-size: 72px; } }
+
+.league__table {
+  display: flex;
+  justify-content: center; }
+
+.league__table th {
+  font-size: 24px;
+  padding: 15px 30px;
+  background: #fafdfa; }
+
+.league__table td {
+  font-size: 24px;
+  padding: 15px 30px; }
+
+.league__table tr td:last-child {
+  text-align: center; }

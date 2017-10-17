@@ -1,0 +1,46 @@
+// nicked of bulma framework
+
+.table {
+  background-color: white;
+  color: #363636;
+  margin-bottom: 1.5rem;
+}
+
+.table td,
+.table th {
+  border: 1px solid #dbdbdb;
+  border-width: 0 0 1px;
+  padding: 0.5em 0.75em;
+  vertical-align: top;
+}
+
+.table th {
+  color: #363636;
+  text-align: left;
+}
+
+.table td,
+.table.is-bordered th {
+  border-width: 1px;
+}
+
+.table tr:last-child td,
+.table tr:last-child th {
+  border-bottom-width: 1px;
+}
+.table thead td,
+.table thead th {
+  border-width: 0 0 2px;
+  color: #363636;
+}
+
+.table tfoot td,
+.table tfoot th {
+  border-width: 2px 0 0;
+  color: #363636;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
