@@ -2,7 +2,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import Header from '../components/header.jsx';
+import Header from '../containers/header.jsx';
 import Game from '../containers/game.jsx';
 import Profile from '../components/profile.jsx';
 import Leagues from '../components/leagues.jsx';

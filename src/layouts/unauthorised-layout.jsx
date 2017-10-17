@@ -2,7 +2,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom'
 
-import Header from '../components/header.jsx';
+import Header from '../containers/header.jsx';
 import SignIn from '../containers/sign-in.jsx';
 import SignUp from '../containers/sign-up.jsx';
 
