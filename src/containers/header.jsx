@@ -37,6 +37,17 @@ export default class Header extends Component<void, Props, State> {
     );
   }
 
+  loggedOut(menuState) {
+    return (
+      <div className={`header__user header__user--logged-out rc--menu-${this.state.menuOpen ? 'open' : 'closed'}`}>
+        <ul className="header__navigation header__navigation--logged-out">
+          <li><Link className="header__link" to="/auth/sign-up">Sign up</Link></li>
+          <li><Link className="header__link" to="/auth/sign-in">Sign in</Link></li>
+        </ul>
+      </div>
+    );
+  }
+
   menuIcon() {
     return (
       <div className="header__menu" onClick={() => this.handleClick()}>
@@ -58,7 +69,7 @@ export default class Header extends Component<void, Props, State> {
     return (
       <div className="header">
         <header className="header__container">
-          <div className="header__logo">
+          <div className={`header__logo${!this.props.isAuth ? ' header__logo--logged-out' : ''}`}>
             <Link to="/app/"><h1>44Too</h1></Link>
           </div>
           {
@@ -73,27 +84,14 @@ export default class Header extends Component<void, Props, State> {
           }
           {
             !this.props.isAuth
-              ? loggedOut(this.state.menuOpen)
+              ? this.loggedOut(this.state.menuOpen)
               : null
           }
           {
-            this.props.isAuth
-              ? this.menuIcon()
-              : null
+            this.menuIcon()
           }
         </header>
       </div>
     )
   }
-}
-
-function loggedOut() {
-  return (
-    <div className="header__user header__user--logged-out">
-      <ul className="header__list">
-        <li><Link to="/auth/sign-up">Sign up</Link></li>
-        <li><Link to="/auth/sign-in">Sign in</Link></li>
-      </ul>
-    </div>
-  );
 }

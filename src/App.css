@@ -490,7 +490,9 @@ table {
   @media (min-width: 768px) {
     .header__logo {
       order: 2;
-      padding: 0; } }
+      padding: 0; }
+      .header__logo.header__logo--logged-out {
+        margin: 0 0 0 33.33333%; } }
 
 .header__navigation {
   display: none;
@@ -513,7 +515,8 @@ table {
   border-bottom: 3px solid #252322;
   cursor: pointer;
   text-decoration: none;
-  color: #fbfbfb; }
+  color: #fbfbfb;
+  white-space: nowrap; }
   @media (min-width: 768px) {
     .header__link {
       margin: 0 15px -3px 0; }
@@ -540,6 +543,7 @@ table {
   cursor: pointer;
   text-decoration: none;
   color: #fbfbfb;
+  white-space: nowrap;
   background: transparent;
   padding: 0;
   font-weight: 700;
@@ -577,6 +581,12 @@ table {
   display: none; }
   @media (min-width: 768px) {
     .rc--menu-closed {
+      display: inherit; } }
+
+.header__navigation--logged-out {
+  display: block; }
+  @media (min-width: 768px) {
+    .header__navigation--logged-out {
       display: inherit; } }
 
 .player {
