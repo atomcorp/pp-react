@@ -12,7 +12,7 @@ type Props = {
 type State = {
   rows: ?Array<any>,
   render: boolean
-}
+};
 
 export default class Leagues extends Component<void, Props, State> {
   state: State

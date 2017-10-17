@@ -7,13 +7,17 @@
 @mixin header-link() {
   border-bottom: 3px solid $header-background;
   // negative margin is for underline
-  margin: 0 15px -3px 0;
+  
   cursor: pointer;
   text-decoration: none;
   color: $header-text;
-  &:hover {
-    border-bottom: 3px solid;
+  @include responsive($small) {
+    margin: 0 15px -3px 0;
+    &:hover {
+      border-bottom: 3px solid;
+    }
   }
+
 }
 
 .header {
@@ -23,6 +27,7 @@
 }
 
 .header__container {
+  position: relative;
   @include responsive($small) {
     display: flex;
     align-items: center;
@@ -70,10 +75,14 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  padding: 15px;
+  text-align: center;
   @include header-section();
   @include responsive($small) {
     display: flex;
     order: 1;
+    padding: 0;
+    text-align: initial;
   }
 }
 
@@ -83,16 +92,17 @@
 
 .header__user {
   @include header-section();
+  padding: 15px;
   @include responsive($small) {
     order: 3;
     text-align: right;
     display: flex;
     justify-content: flex-end;
+    padding: 0;
   }
 }
 
 .header__logout {
-  display: none;
   button {
     font-family: $primary-font;
     // border 0 cancels browser default border before we reset it
@@ -102,9 +112,37 @@
     padding: 0;
     font-weight: 700;
     display: block;
-    margin: 0;
+    margin: 0 auto;
   }
   @include responsive($small) {
     display: block;
+    margin: 0;
   }
+}
+
+.header__menu {
+  position: absolute;
+  top: 21px;
+  right: 15px;
+  cursor: pointer;
+  svg {
+    fill: $header-text;
+  }
+  @include responsive($small) {
+    display: none;
+  }
+}
+
+.rc--menu-open {
+  display: block;
+  @include responsive($small) {
+      display: inherit;
+    }
+}
+
+.rc--menu-closed {
+  display: none;
+  @include responsive($small) {
+      display: inherit;
+    }
 }

@@ -9,16 +9,16 @@
     border-bottom: 0;
   }
   &.fixture--lost {
-    background: rgba($bad-colour, 0.4);
+    background: rgba($bad-colour, 0.2);
   }
   &.fixture--draw {
-    background: rgba($ok-colour, 0.4);
+    background: rgba($ok-colour, 0.2);
   }
   &.fixture--win {
-    background: rgba($good-colour, 0.4);
+    background: rgba($good-colour, 0.2);
   }
   &.fixture--star {
-    background: rgba($great-colour, 0.4);
+    background: rgba($great-colour, 0.2);
   }
 }
 
@@ -134,8 +134,9 @@
 .fixture__star {
   @include info();
   height: 32px;
-  width: 32px;
+  width: 39px;
   cursor: pointer;
+  padding: 0 0 0 15px;
   button {
     background: none;
     border: 0;
@@ -151,6 +152,7 @@
   @include info();
   font-size: initial;
   margin: 0 0 0 auto;
+  padding: 0 15px 0 0;
   svg {
     font-size: 36px;
     margin: 0;

@@ -414,13 +414,15 @@ body {
   color: #fbfbfb;
   font-weight: 700; }
 
-@media (min-width: 768px) {
-  .header__container {
-    display: flex;
-    align-items: center;
-    padding: 15px 30px;
-    margin: 0 auto;
-    max-width: 90rem; } }
+.header__container {
+  position: relative; }
+  @media (min-width: 768px) {
+    .header__container {
+      display: flex;
+      align-items: center;
+      padding: 15px 30px;
+      margin: 0 auto;
+      max-width: 90rem; } }
 
 @media (min-width: 768px) {
   .header__section {
@@ -456,55 +458,88 @@ body {
   display: none;
   list-style: none;
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  padding: 15px;
+  text-align: center; }
   @media (min-width: 768px) {
     .header__navigation {
       width: 33.333333%; } }
   @media (min-width: 768px) {
     .header__navigation {
       display: flex;
-      order: 1; } }
+      order: 1;
+      padding: 0;
+      text-align: initial; } }
 
 .header__link {
   border-bottom: 3px solid #252322;
-  margin: 0 15px -3px 0;
   cursor: pointer;
   text-decoration: none;
   color: #fbfbfb; }
-  .header__link:hover {
-    border-bottom: 3px solid; }
-
-@media (min-width: 768px) {
-  .header__user {
-    width: 33.333333%; } }
-
-@media (min-width: 768px) {
-  .header__user {
-    order: 3;
-    text-align: right;
-    display: flex;
-    justify-content: flex-end; } }
-
-.header__logout {
-  display: none; }
-  .header__logout button {
-    font-family: "Source Sans Pro", sans-serif;
-    border: 0;
-    border-bottom: 3px solid #252322;
-    margin: 0 15px -3px 0;
-    cursor: pointer;
-    text-decoration: none;
-    color: #fbfbfb;
-    background: transparent;
-    padding: 0;
-    font-weight: 700;
-    display: block;
-    margin: 0; }
-    .header__logout button:hover {
-      border-bottom: 3px solid; }
   @media (min-width: 768px) {
-    .header__logout {
-      display: block; } }
+    .header__link {
+      margin: 0 15px -3px 0; }
+      .header__link:hover {
+        border-bottom: 3px solid; } }
+
+.header__user {
+  padding: 15px; }
+  @media (min-width: 768px) {
+    .header__user {
+      width: 33.333333%; } }
+  @media (min-width: 768px) {
+    .header__user {
+      order: 3;
+      text-align: right;
+      display: flex;
+      justify-content: flex-end;
+      padding: 0; } }
+
+.header__logout button {
+  font-family: "Source Sans Pro", sans-serif;
+  border: 0;
+  border-bottom: 3px solid #252322;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fbfbfb;
+  background: transparent;
+  padding: 0;
+  font-weight: 700;
+  display: block;
+  margin: 0 auto; }
+  @media (min-width: 768px) {
+    .header__logout button {
+      margin: 0 15px -3px 0; }
+      .header__logout button:hover {
+        border-bottom: 3px solid; } }
+
+@media (min-width: 768px) {
+  .header__logout {
+    display: block;
+    margin: 0; } }
+
+.header__menu {
+  position: absolute;
+  top: 21px;
+  right: 15px;
+  cursor: pointer; }
+  .header__menu svg {
+    fill: #fbfbfb; }
+  @media (min-width: 768px) {
+    .header__menu {
+      display: none; } }
+
+.rc--menu-open {
+  display: block; }
+  @media (min-width: 768px) {
+    .rc--menu-open {
+      display: inherit; } }
+
+.rc--menu-closed {
+  display: none; }
+  @media (min-width: 768px) {
+    .rc--menu-closed {
+      display: inherit; } }
 
 .player {
   background: #333399;
@@ -745,13 +780,13 @@ body {
       flex-wrap: nowrap;
       border-bottom: 0; } }
   .fixture.fixture--lost {
-    background: rgba(204, 51, 64, 0.4); }
+    background: rgba(204, 51, 64, 0.2); }
   .fixture.fixture--draw {
-    background: rgba(204, 102, 51, 0.4); }
+    background: rgba(204, 102, 51, 0.2); }
   .fixture.fixture--win {
-    background: rgba(114, 152, 113, 0.4); }
+    background: rgba(114, 152, 113, 0.2); }
   .fixture.fixture--star {
-    background: rgba(255, 203, 44, 0.4); }
+    background: rgba(255, 203, 44, 0.2); }
 
 .fixture__date {
   text-align: center;
@@ -848,8 +883,9 @@ body {
   align-self: center;
   font-size: 36px;
   height: 32px;
-  width: 32px;
-  cursor: pointer; }
+  width: 39px;
+  cursor: pointer;
+  padding: 0 0 0 15px; }
   .fixture__star button {
     background: none;
     border: 0;
@@ -862,7 +898,8 @@ body {
   align-self: center;
   font-size: 36px;
   font-size: initial;
-  margin: 0 0 0 auto; }
+  margin: 0 0 0 auto;
+  padding: 0 15px 0 0; }
   .fixture__state svg {
     font-size: 36px;
     margin: 0; }
