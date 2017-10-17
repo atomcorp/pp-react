@@ -959,7 +959,7 @@ table {
     .fixture__predictions {
       order: initial;
       flex: 1 0 auto;
-      margin: 0 5px; } }
+      margin: 0 15px; } }
 
 .fixture__result {
   order: 2;
@@ -979,6 +979,20 @@ table {
   .fixture__result.fixture__result--star {
     color: #ffcb2c; }
 
+.fixture__result--home {
+  margin: 0 0 0 15px; }
+  @media (min-width: 768px) {
+    .fixture__result--home {
+      order: initial;
+      margin: 0 0 0 7.5px; } }
+
+.fixture__result--away {
+  margin: 0 15px 0 0; }
+  @media (min-width: 768px) {
+    .fixture__result--away {
+      order: initial;
+      margin: 0 7.5px 0 0; } }
+
 .fixture__colon {
   margin: 0 5px; }
 
@@ -996,6 +1010,9 @@ table {
     padding: 0; }
   .fixture__star svg {
     fill: #ffcb2c; }
+
+.star__icon {
+  cursor: pointer; }
 
 .fixture__state {
   align-self: center;

@@ -48,10 +48,11 @@ Tasks:
   ☐ if you predict 4-4 and it is 4-4, get 30 points
   ✔ Ticks reset when you go between weeks @bug @high @done (17-10-16 23:56)
   ☐ add a loading icon for async actions @quality of life @high
-  ☐ add dropdown for menu on mobile
+  ✔ add dropdown for menu on mobile @done (17-10-17 22:59)
   ☐ uplift has predictions changed to player section, ala 
-  ☐ do some quick designs for leagues
+  ✔ do some quick designs for leagues @done (17-10-17 22:59)
   ☐ do a quick player profile page (or just hide option)
+  ✔ style log in/ sign up page @done (17-10-17 22:59)
   ☐ Do a browser test
 
 Todo:

@@ -31,7 +31,7 @@ export default class Header extends Component<void, Props, State> {
     return (
       <ul className={`header__navigation rc--menu-${this.state.menuOpen ? 'open' : 'closed'}`}>
         <li><Link className="header__link" to="/app/">Predictions</Link></li>
-        <li><Link className="header__link" to="/app/profile">Profile</Link></li>
+        {/*<li><Link className="header__link" to="/app/profile">Profile</Link></li>*/}
         <li><Link className="header__link" to="/app/leagues">Leagues</Link></li>
       </ul>
     );

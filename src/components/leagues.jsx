@@ -87,7 +87,7 @@ export default class Leagues extends Component<void, Props, State> {
         />
         <div className="league">
           <div className="league__header">
-            Total Points
+            Global league
           </div>
           <div className="league__table">
             <table className="table table-striped table-bordered">
