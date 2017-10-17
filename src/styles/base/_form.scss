@@ -1,0 +1,63 @@
+.form {
+  padding: 15px 0;
+  margin: 0 auto;
+  max-width: 90rem;
+  @include responsive($small) {
+    padding: 30px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  label {
+    margin: 0 0 15px;
+  }
+  input {
+    width: 100%;
+    padding: 12px 12px;
+  }
+}
+
+.form__label {
+  margin: 0 0 5px;
+}
+
+.form__header {
+  font-size: 24px;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 30px 0 60px;
+}
+
+.form__submit {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 12px 30px;
+  background: #fff;
+  border: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: 1px solid;
+  color: $good-colour;
+  border-color: $good-colour;
+  cursor: pointer;
+  margin: 15px 0 0;
+  &:hover {
+    background: $good-colour;
+    color: $primary-contrast;
+  }
+}
+
+.errors {
+  max-width: 430px;
+  margin: 0 auto 30px;
+  padding: 0 15px;
+  background: $bad-colour;
+  color: #fff;
+  @include responsive($small) {
+    padding: 30px;
+  }
+}

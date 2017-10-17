@@ -65,27 +65,32 @@ export default class SignIn extends Component<void, Props, State> {
   render() {
     const redirect = this.state.redirect;
     return (
-      <div className="sign-in">
-        {redirect ? <Router><Redirect to="/app"/></Router> : null}
-        <h1>Sign in</h1>
-        <form onSubmit={(event) => this.canSubmit(event)}>
-          <label>
-            Email:
-            <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
-          </label>
-          <label>
-            Password:
-            <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-        </form>
-        {
-          this.state.error 
-            ? <div className="errors">{this.state.message}</div>
-            : null
-        }
-        
-      </div>
+      <section className="main">
+        <div className="sign-in">
+          <div className="form">
+            {redirect ? <Router><Redirect to="/app"/></Router> : null}
+            <div className="form__header">
+              Sign in
+            </div>
+            {
+              this.state.error 
+                ? <div className="errors">{this.state.message}</div>
+                : null
+            }
+            <form onSubmit={(event) => this.canSubmit(event)}>
+              <label>
+                <div className="form__label">Email:</div>
+                <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
+              </label>
+              <label>
+                <div className="form__label">Password:</div>
+                <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
+              </label>
+              <input className="form__submit" type="submit" value="Submit" />
+            </form>
+          </div>
+        </div>
+      </section>
     );
   }
 }
