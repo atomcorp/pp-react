@@ -118,7 +118,7 @@ export default class SignUp extends Component<void, Props, State> {
                 <div className="form__label">Password:</div>
                 <input name="password" type="password" value={this.state.password} onChange={this.handleChange} />
               </label>
-              <input type="submit" value="Submit" />
+              <input className="form__submit" type="submit" value="Submit" />
             </form>
 
           </div>

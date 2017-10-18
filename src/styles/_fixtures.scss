@@ -16,9 +16,12 @@
     color: $good-colour;
     border-color: $good-colour;
     cursor: pointer;
+    box-shadow: 0 0px 5px rgba(0,0,0,.2);
+    transition: box-shadow 0.2s, color 0.2s, background 0.2s;
     &:hover {
       background: $good-colour;
       color: $primary-contrast;
+      box-shadow: 0 2px 7px rgba(0,0,0,.2);
     }
   }
 }

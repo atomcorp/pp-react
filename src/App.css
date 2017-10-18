@@ -487,10 +487,14 @@ table {
   color: #729871;
   border-color: #729871;
   cursor: pointer;
-  margin: 15px 0 0; }
+  margin: 15px 0 0;
+  box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.2s, color 0.2s, background 0.2s; }
   .form__submit:hover {
     background: #729871;
-    color: #fbfbfb; }
+    border-color: #729871;
+    color: #fbfbfb;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2); }
 
 .errors {
   max-width: 430px;
@@ -843,10 +847,13 @@ table {
     border: 1px solid;
     color: #729871;
     border-color: #729871;
-    cursor: pointer; }
+    cursor: pointer;
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.2s, color 0.2s, background 0.2s; }
     .fixtures__submit button:hover {
       background: #729871;
-      color: #fbfbfb; }
+      color: #fbfbfb;
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2); }
 
 .fixtures__cant-submit {
   text-align: center;
