@@ -30,8 +30,12 @@
     background: #fafdfa;
   }
   td {
-    font-size: 24px;
-    padding: 15px 30px;
+    font-size: 18px;
+    padding: 5px 10px;
+    @include responsive($small) {
+      font-size: 24px;
+      padding: 15px 30px;
+    }
   }
   tr {
     td {

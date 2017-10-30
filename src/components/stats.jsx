@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 export default function Stats(props) {
   let breakdown = {};
   const matches = Object.keys(props.results).length;
-  console.log(props);
   breakdown = breakDownPredictionResults(props.results);
   return (
     <div className="stats">
@@ -71,8 +70,4 @@ function breakDownPredictionResults(predictions: PredictionsType) {
     }
   }
   return result;
-}
-
-function percentage() {
-
 }

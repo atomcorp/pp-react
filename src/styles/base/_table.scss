@@ -4,6 +4,10 @@
   background-color: white;
   color: #363636;
   margin-bottom: 1.5rem;
+  width: 100%;
+  @include responsive($small) {
+    width: initial;
+  }
 }
 
 .table td,

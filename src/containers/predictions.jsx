@@ -146,7 +146,6 @@ export default class FixtureList extends Component<void, Props, State> {
         }
         return data;
       }).then((data) => {
-        console.log(data[1][`gameweek${gameweek}`])
         this.setState({
           fixtures: data[0][`gameweek${gameweek}`],
           gameweekInView: gameweek,
@@ -220,6 +219,10 @@ export default class FixtureList extends Component<void, Props, State> {
             : null
           }
         </div>
+        {this.state.predictionSubmitError
+          ?  (<div className="game__errors">There was an error submitting your predictions, please double check your predictions</div>)
+          : (<div></div>)
+        }
         <form action="prediction" onSubmit={this.onPredictionSubmit} className="fixtures">
           {fixtureElements}
           {
@@ -232,15 +235,6 @@ export default class FixtureList extends Component<void, Props, State> {
             : <div className="fixtures__cant-submit"><button>Submit</button></div>
           }
         </form>
-
-        {this.state.predictionSubmitError
-          ?  (<div>There was an error submitting your predictions, please make sure each team has been predicted</div>)
-          : (<div></div>)
-        }
-        {this.state.hasEditedPrediction
-          ?  (<div>You've made a change</div>)
-          : (<div>No changes</div>)
-        }
       </div>
     );
   }

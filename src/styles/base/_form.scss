@@ -61,7 +61,5 @@
   padding: 0 15px;
   background: $bad-colour;
   color: #fff;
-  @include responsive($small) {
-    padding: 30px;
-  }
+  padding: 30px;
 }
