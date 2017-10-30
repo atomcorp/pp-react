@@ -60,7 +60,7 @@ export default class Fixture extends Component<void, Props, State> {
     }
   }
 
-  handleStar(event: ClickEvent) {
+  handleStar(event: Event) {
     event.preventDefault();
     this.props.setStar(this.props.id);
   }
