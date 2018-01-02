@@ -103,7 +103,7 @@ export default class Fixture extends Component<void, Props, State> {
               }
               <div className="fixture__predictions">
                 {
-                  this.props.fixture.status === 'TIMED' || 'SCHEDULED'
+                  this.props.fixture.status === 'TIMED' || this.props.fixture.status === 'SCHEDULED'
                   ? <input 
                       className="fixture__input"
                       type="text" 
@@ -117,7 +117,7 @@ export default class Fixture extends Component<void, Props, State> {
                 }
                 {<div className="fixture__colon">:</div>} 
                 {
-                  this.props.fixture.status === 'TIMED' || 'SCHEDULED'
+                  this.props.fixture.status === 'TIMED' || this.props.fixture.status === 'SCHEDULED'
                   ? <input 
                       className="fixture__input"
                       type="text" 
