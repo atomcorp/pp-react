@@ -151,13 +151,14 @@
   @include info();
   height: 32px;
   width: 39px;
-  cursor: pointer;
+  
   padding: 0 0 0 15px;
   button {
     background: none;
     border: 0;
     color: inherit; 
     padding: 0;
+    cursor: pointer;
   }
   svg {
     fill: $great-colour;

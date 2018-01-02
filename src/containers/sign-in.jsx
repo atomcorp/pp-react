@@ -66,6 +66,11 @@ export default class SignIn extends Component<void, Props, State> {
     const redirect = this.state.redirect;
     return (
       <section className="main">
+        <div className="login-example">
+          To view an active account please login with: <br/><br/>
+          Username: <code>faotms+example@gmail.com</code><br/>
+          Password: <code>example</code>
+        </div>
         <div className="sign-in">
           <div className="form">
             {redirect ? <Router><Redirect to="/app"/></Router> : null}

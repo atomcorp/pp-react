@@ -506,6 +506,17 @@ table {
     .errors {
       padding: 30px; } }
 
+.login-example {
+  max-width: 460px;
+  padding: 30px;
+  margin: 0 auto;
+  background: yellow; }
+  @media (min-width: 768px) {
+    .login-example {
+      margin: 30px auto 0; } }
+  .login-example code {
+    text-decoration: underline; }
+
 .header {
   background: #252322;
   color: #fbfbfb;
@@ -1008,13 +1019,13 @@ table {
   font-size: 36px;
   height: 32px;
   width: 39px;
-  cursor: pointer;
   padding: 0 0 0 15px; }
   .fixture__star button {
     background: none;
     border: 0;
     color: inherit;
-    padding: 0; }
+    padding: 0;
+    cursor: pointer; }
   .fixture__star svg {
     fill: #ffcb2c; }
 

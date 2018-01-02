@@ -65,3 +65,16 @@
     padding: 30px;
   }
 }
+
+.login-example {
+  max-width: 460px;
+  padding: 30px;
+  margin: 0 auto;
+  background: yellow;
+  @include responsive($small) {
+    margin: 30px auto 0;
+  }
+  code {
+    text-decoration: underline;
+  }
+}
