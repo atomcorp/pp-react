@@ -8,7 +8,6 @@ import {auth, storageKey} from './firebase-connect.js';
 
 import UnauthorisedLayout from './layouts/unauthorised-layout.jsx';
 import AuthorisedLayout from './layouts/authorised-layout.jsx';
-
 // import SetFixtures from './xhr-requests/set-fixtures';
 // SetFixtures();
 
@@ -98,7 +97,10 @@ class App extends Component {
             {
               this.state.loggedIn
                 ? <Route path="/app">
-                  <AuthorisedLayout canRender={this.state.bootstrappedGame} player={this.state.player} game={this.state.game} />
+                  <AuthorisedLayout 
+                    canRender={this.state.bootstrappedGame} 
+                    player={this.state.player} 
+                    game={this.state.game} />
                 </Route>
                 : null
             }

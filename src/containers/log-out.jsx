@@ -9,10 +9,12 @@ type State = {
   redirect: boolean
 };
 
-type Props = {};
+type Props = {
+  class: string
+};
 
 export default class LogOut extends Component<void, Props, State> {
-  state: State
+  state: State;
   
   constructor(props: Props) {
     super(props);

@@ -85,7 +85,7 @@ export default class SignIn extends Component<void, Props, State> {
             <form onSubmit={(event) => this.canSubmit(event)}>
               <label>
                 <div className="form__label">Email:</div>
-                <input name="email" type="text" value={this.state.email} onChange={this.handleChange} />
+                <input name="email" type="email" value={this.state.email} onChange={this.handleChange} />
               </label>
               <label>
                 <div className="form__label">Password:</div>

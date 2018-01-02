@@ -7,13 +7,15 @@
 @mixin header-link() {
   border-bottom: 3px solid $header-background;
   // negative margin is for underline
-  
+  padding: 0 0 5px;
+  display: block;
   cursor: pointer;
   text-decoration: none;
   color: $header-text;
   white-space: nowrap;
   @include responsive($small) {
     margin: 0 15px -3px 0;
+    padding: 0;
     &:hover {
       border-bottom: 3px solid;
     }

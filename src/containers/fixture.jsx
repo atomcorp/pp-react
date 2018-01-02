@@ -27,6 +27,7 @@ export default class Fixture extends Component<void, Props, State> {
     (this:any).onScoreChange = this.onScoreChange.bind(this);
     (this:any).colour = this.colour.bind(this);
     (this:any).onFocus = this.onFocus.bind(this);
+    (this:any).handleStar = this.handleStar.bind(this);
   }
 
   colour(points: number): string {
@@ -59,6 +60,11 @@ export default class Fixture extends Component<void, Props, State> {
     }
   }
 
+  handleStar(event: Event) {
+    event.preventDefault();
+    this.props.setStar(this.props.id);
+  }
+
   onFocus(event: FocusEvent) {
     // I don't really get this, but there you go...
     // https://github.com/facebook/flow/issues/218#issuecomment-74119319
@@ -85,7 +91,7 @@ export default class Fixture extends Component<void, Props, State> {
           <div className="fixture__star">          
             {
                this.props.canPredict
-                ? (<button className="star" onClick={() => this.props.setStar(this.props.id)}>
+                ? (<button className="star" onClick={(event) => this.handleStar(event)}>
                     <div className="star__icon">
                       {this.props.prediction.star ? starFilled() : starUnfilled()}
                     </div> 
@@ -191,22 +197,12 @@ function formatDate(day: string): string {
   const dayOfTheWeek = weekday[formattedTime.getDay()];
   const date = formattedTime.getDate();
   const month = monthName[formattedTime.getMonth()];
-  const minutes = formatMinutes(formattedTime);
-  // const formattedDate = `${dayOfTheWeek} ${date}/${month} ${formattedTime.getHours()}:${minutes}`;
   const formattedDate = `${dayOfTheWeek} ${date} ${month}`;
   if (isUnique && isUnique !== formattedDate) {
     isUnique = formattedDate;
     return formattedDate;
   } 
   return '';
-}
-
-function formatMinutes(time: Date): string | number {
-  let minutes = time.getMinutes();
-  if (minutes < 9) {
-    minutes = '0' + minutes;
-  }
-  return minutes;
 }
 
 function handlePointsResultClasses(point, className) {

@@ -6,9 +6,8 @@ import {getUsers} from '../xhr-requests.js';
 import type {PlayerType, GameType} from '../types.js'; 
 
 type Props = {
-  canRender: boolean,
   player: PlayerType,
-  game: GameType
+  gameData: GameType
 };
 
 type State = {
@@ -75,6 +74,7 @@ export default class Leagues extends Component<void, Props, State> {
   }
 
   render() {
+    console.log(this.props);
     if (!this.render) {
       return;
     }

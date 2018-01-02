@@ -7,19 +7,25 @@ type Props = {
   isAuth: boolean
 };
 
+type State = {
+  menuOpen: boolean
+};
+
 export default class Header extends Component<void, Props, State> {
+  state: State;
 
   constructor(props: Props) {
     super(props);
     this.state = {
       menuOpen: false
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.loggedInAdmin = this.loggedInAdmin.bind(this);
-    this.primaryNavigation = this.primaryNavigation.bind(this);
+
+    (this:any).handleClick = this.handleClick.bind(this);
+    (this:any).loggedInAdmin = this.loggedInAdmin.bind(this);
+    (this:any).primaryNavigation = this.primaryNavigation.bind(this);
   }
 
-  loggedInAdmin(menuState) {
+  loggedInAdmin() {
     return (
       <div className={`header__user header__user--logged-in rc--menu-${this.state.menuOpen ? 'open' : 'closed'}`}>
         <LogOut class="header__logout" />
@@ -27,7 +33,7 @@ export default class Header extends Component<void, Props, State> {
     );
   }
 
-  primaryNavigation(menuState) {
+  primaryNavigation() {
     return (
       <ul className={`header__navigation rc--menu-${this.state.menuOpen ? 'open' : 'closed'}`}>
         <li><Link className="header__link" to="/app/">Predictions</Link></li>
@@ -37,7 +43,7 @@ export default class Header extends Component<void, Props, State> {
     );
   }
 
-  loggedOut(menuState) {
+  loggedOut() {
     return (
       <div className={`header__user header__user--logged-out rc--menu-${this.state.menuOpen ? 'open' : 'closed'}`}>
         <ul className="header__navigation header__navigation--logged-out">
@@ -84,7 +90,7 @@ export default class Header extends Component<void, Props, State> {
           }
           {
             !this.props.isAuth
-              ? this.loggedOut(this.state.menuOpen)
+              ? this.loggedOut()
               : null
           }
           {
